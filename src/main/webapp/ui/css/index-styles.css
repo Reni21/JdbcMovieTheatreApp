@@ -1,0 +1,266 @@
+/* 
+===========================================================================================================================
+===========================================================================================================================
+Common css ----------------------------------------------------------------------------------------------------------------
+===========================================================================================================================
+===========================================================================================================================
+*/
+
+html, body, p{
+	margin: 0;
+	padding: 0;
+	font-family: 'Muli', sans-serif;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+a{
+	text-decoration: none;
+}
+
+.wrapper{
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+header{
+	z-index: 9;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	overflow: hidden;
+}
+main {
+	padding-top: 130px;
+	overflow: auto;
+}
+
+img.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+}
+
+/* 
+-----------------------------------------------------------------------------
+First level nav bar
+-----------------------------------------------------------------------------
+*/
+
+.nav__first-lvl{
+	border-width:1px 0;
+	width: 100%;
+	padding: 22px 0;
+	background: black;
+}
+.first-lvl__bar-table{
+	width: 100%;
+}
+.first-lvl__bar-table td{
+	vertical-align: middle;
+	padding: 0;
+	line-height: 15px;
+}
+.nav__first-lvl ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+.nav__first-lvl li{
+	display: inline-block;
+}
+.nav__first-lvl li a{
+	display: block;
+	/*font-weight: 600;*/
+	color: white;
+	letter-spacing: 0.5px;
+}
+.first-lvl__main-menu a{
+	padding-right: 30px;
+	text-transform: uppercase;
+	font-size: 18px;
+}
+.first-lvl__main-menu li.active a{
+	color: #3cb4e7;
+	pointer-events:none;
+}
+
+.first-lvl__main-menu li a:hover, .first-lvl__lang-menu li a:hover{
+	color: #3cb4e7;
+}
+.first-lvl__lang-menu li.active a{
+	padding: 2px;
+	background: #3cb4e7;
+	color: black;
+	border-radius: 2px;
+	pointer-events:none;
+}
+.lang__switcher{
+	text-align: right;
+}
+.lang__switcher ul{
+	display: inline-block;
+}
+
+/* 
+-----------------------------------------------------------------------------
+Greeting
+-----------------------------------------------------------------------------
+*/
+
+@import url("https://fonts.googleapis.com/css?family=Syncopate");
+
+html, main {
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Syncopate', Helvetica, Arial;
+	text-transform: uppercase;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	display: table;
+}
+
+main {
+
+	overflow: hidden;
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+}
+
+p {
+	color: rgba(255, 255, 255, 0.0);
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 40px;
+	line-height: 2em;
+}
+i {
+	display: inline-block;
+	font-style: normal;
+	padding: 0 0.25em;
+	-webkit-transform: scale(0) translate3d(0, -2000px, 0);
+	-moz-transform: scale(0) translate3d(0, -2000px, 0);
+	-ms-transform: scale(0) translate3d(0, -2000px, 0);
+	-o-transform: scale(0) translate3d(0, -2000px, 0);
+	transform: scale(0) translate3d(0, -2000px, 0);
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+}
+i.fly-in-out {
+	-webkit-animation: fly-in-out 3s infinite ease-in-out;
+	-moz-animation: fly-in-out 3s infinite ease-in-out;
+	-o-animation: fly-in-out 3s infinite ease-in-out;
+	animation: fly-in-out 3s infinite ease-in-out;
+}
+
+@-webkit-keyframes fly-in-out {
+	0% {
+		-webkit-transform: scale(0) translate3d(0, -1000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+	15%, 85% {
+		color: rgba(255, 255, 255, 0.8);
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+		-webkit-transform: scale(1) translate3d(0, 0, 0);
+		background: transparent;
+		box-shadow: none;
+	}
+	100% {
+		color: transparent;	
+		-webkit-transform: scale(0) translate3d(0, 1000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+}
+@-moz-keyframes fly-in-out {
+	0% {
+		-moz-transform: scale(0) translate3d(0, -2000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+	15%, 85% {
+		color: rgba(255, 255, 255, 0.8);
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+		-moz-transform: scale(1) translate3d(0, 0, 0);
+		background: transparent;
+		box-shadow: none;
+	}
+	100% {
+		color: transparent;	
+		-moz-transform: scale(0) translate3d(0, 2000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+}
+@-o-keyframes fly-in-out {
+	0% {
+		-o-transform: scale(0) translate3d(0, -2000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+	15%, 85% {
+		color: rgba(255, 255, 255, 0.8);
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+		-o-transform: scale(1) translate3d(0, 0, 0);
+		background: transparent;
+		box-shadow: none;
+	}
+	100% {
+		color: transparent;	
+		-o-transform: scale(0) translate3d(0, 2000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+}
+@keyframes fly-in-out {
+	0% {
+		transform: scale(0) translate3d(0, -2000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+	15%, 85% {
+		color: rgba(255, 255, 255, 0.8);
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+		transform: scale(1) translate3d(0, 0, 0);
+		background: transparent;
+		box-shadow: none;
+	}
+	100% {
+		color: transparent;	
+		transform: scale(0) translate3d(0, 2000px, 0);
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 0 100px 100px rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+	}
+}
