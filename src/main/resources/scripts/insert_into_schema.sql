@@ -29,8 +29,8 @@ VALUES ('Eternal Sunshine of the Spotless Mind', 'Michel Gondry', 108, 'https://
        ('Her', 'Spike Jonze', 92, 'https://www.youtube.com/watch?v=dJTU48_yghs'); /*6*/
 
 INSERT INTO movie_session (movie_id, hall_id, start_at, price)
-VALUES (1,1,'2019-12-02 09:00:00', 80), /*mon*/
-       (2,1,'2019-12-02 11:00:00', 80),
+VALUES (1,1,'2019-11-11 09:00:00', 80), /*mon*/
+       (2,1,'2019-11-11 23:50:00', 80),
        (3,1,'2019-12-02 13:30:00', 80),
        (6,1,'2019-12-02 18:30:00', 120),
        (6,1,'2019-12-02 20:30:00', 120),
