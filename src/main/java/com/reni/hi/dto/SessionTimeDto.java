@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class MovieSessionTimeDto {
+public class SessionTimeDto {
     private final Integer movieSessionId;
     private final LocalTime startAt;
 }

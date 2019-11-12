@@ -1,6 +1,5 @@
 package com.reni.hi.command;
 
-import com.reni.hi.dao.DaoType;
 import com.reni.hi.dao.DaoFactory;
 
 import java.util.HashMap;
@@ -12,7 +11,7 @@ public class CommandFactory {
     private static Command defaultCommand = new NotFoundCommand();
 
     static {
-        getCommandMap.put("movie", new MovieCommand(DaoFactory.getEntityDao(DaoType.MOVIE)));
+        getCommandMap.put("movie", new MovieCommand(DaoFactory.getMovieDao()));
         getCommandMap.put("404", defaultCommand);
     }
 

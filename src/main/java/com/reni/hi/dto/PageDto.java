@@ -2,11 +2,10 @@ package com.reni.hi.dto;
 
 import lombok.*;
 
-@NoArgsConstructor
+import java.util.Optional;
+
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Setter
-@Getter
 @EqualsAndHashCode
 @ToString
 public class PageDto {
@@ -23,6 +22,10 @@ public class PageDto {
     public PageDto(@NonNull String url, String queryParams) {
         this.url = url;
         this.queryParams = queryParams;
+    }
+
+    public String getUrl() {
+        return Optional.ofNullable(queryParams).map(q -> url + "?" + q).orElse(url);
     }
 
     public boolean isRedirect() {

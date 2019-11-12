@@ -1,5 +1,6 @@
 package com.reni.hi.dao;
 
+import com.reni.hi.dao.impl.MovieSessionDaoImpl;
 import com.reni.hi.entity.MovieSession;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class MovieSessionDaoImplTest {
-    private EntityDao<MovieSession> instance;
+    private MovieSessionDao instance;
 
     @Before
     public void setUp() throws Exception {

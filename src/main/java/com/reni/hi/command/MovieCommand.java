@@ -1,7 +1,6 @@
 package com.reni.hi.command;
 
-import com.reni.hi.dao.EntityDao;
-import com.reni.hi.dao.temp1.MovieDao;
+import com.reni.hi.dao.CrudDao;
 import com.reni.hi.dto.PageDto;
 import com.reni.hi.entity.Movie;
 import lombok.Setter;
@@ -10,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 
 @Setter
 public class MovieCommand implements Command {
-    private MovieDao movieDao;
+    private CrudDao<Movie> movieDao;
 
-    public MovieCommand(EntityDao<Movie> movieDao) {
-        this.movieDao = (MovieDao) movieDao;
+    public MovieCommand(CrudDao<Movie> movieDao) {
+        this.movieDao = movieDao;
     }
 
     @Override

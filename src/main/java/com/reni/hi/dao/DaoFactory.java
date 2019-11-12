@@ -1,23 +1,18 @@
 package com.reni.hi.dao;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.reni.hi.dao.impl.MovieDaoImpl;
+import com.reni.hi.dao.impl.MovieSessionDaoImpl;
+import com.reni.hi.entity.Movie;
 
 public class DaoFactory {
-    private static Map<DaoType, EntityDao> daoMap = new HashMap<>();
+    private static final CrudDao<Movie> movieDao = new MovieDaoImpl();
+    private static final MovieSessionDao movieSessionDao = new MovieSessionDaoImpl();
 
-    static {
-        daoMap.put(DaoType.MOVIE_SESSION, new MovieSessionDaoImpl());
+    public static CrudDao<Movie> getMovieDao() {
+        return movieDao;
     }
 
-    private DaoFactory() {
-    }
-
-    public static EntityDao getEntityDao(DaoType daoType){
-        EntityDao entityDao = daoMap.get(daoType);
-        if(entityDao != null ){
-            return entityDao;
-        }
-        throw new RuntimeException("Dao with current dao-type does not exist: " + daoType.name());
+    public static MovieSessionDao getMovieSessionDao() {
+        return movieSessionDao;
     }
 }

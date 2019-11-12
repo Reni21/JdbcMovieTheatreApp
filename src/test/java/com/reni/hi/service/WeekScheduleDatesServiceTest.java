@@ -18,14 +18,14 @@ public class WeekScheduleDatesServiceTest {
     @Test
     public void shouldReturnTrueIfDateIsInRange() {
         LocalDate date = LocalDate.now();
-        boolean res = instance.validateDate(date);
+        boolean res = instance.isDateInValidRange(date);
         assertTrue(res);
     }
 
     @Test
     public void shouldReturnTrueIfDateIsNotInRange() {
         LocalDate date = LocalDate.now().plusDays(8);
-        boolean res = instance.validateDate(date);
+        boolean res = instance.isDateInValidRange(date);
         assertFalse(res);
     }
 

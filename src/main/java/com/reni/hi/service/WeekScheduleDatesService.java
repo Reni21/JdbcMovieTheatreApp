@@ -16,11 +16,8 @@ public class WeekScheduleDatesService {
         return menuDates;
     }
 
-    public boolean validateDate(LocalDate date) {
+    public boolean isDateInValidRange(LocalDate date) {
         LocalDate now = LocalDate.now();
-        if (date.isBefore(now.plusDays(7)) && date.isAfter(now.minusDays(1))) {
-            return true;
-        }
-        return false;
+        return date.isBefore(now.plusDays(7)) && date.isAfter(now.minusDays(1));
     }
 }

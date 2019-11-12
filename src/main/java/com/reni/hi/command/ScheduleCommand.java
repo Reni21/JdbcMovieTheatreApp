@@ -1,6 +1,6 @@
 package com.reni.hi.command;
 
-import com.reni.hi.dto.MovieSessionPreviewDto;
+import com.reni.hi.dto.SessionPreviewDto;
 import com.reni.hi.dto.PageDto;
 import com.reni.hi.service.MovieSessionService;
 import com.reni.hi.service.WeekScheduleDatesService;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ScheduleCommand implements Command {
@@ -24,15 +25,15 @@ public class ScheduleCommand implements Command {
     public PageDto execute(HttpServletRequest request) {
         String dateStr = request.getParameter("date");
         LocalDate date = dateStr == null ? LocalDate.now() : LocalDate.parse(dateStr);
-        weekScheduleDatesService.validateDate(date);
+        weekScheduleDatesService.isDateInValidRange(date);
         LocalDateTime searchFrom = date.atTime(LocalTime.now());
         LocalDateTime searchTo = date.atTime(23, 59, 59);
 
-        List<MovieSessionPreviewDto> currentDaySessions = sessionService.getMovieSessionsInRange(searchFrom, searchTo);
+        List<SessionPreviewDto> currentDaySessions = sessionService.getSessionsInRange(searchFrom, searchTo);
         List<LocalDate> menuDates = weekScheduleDatesService.getWeekScheduleDates();
 
         request.setAttribute("menuDates", menuDates);
         request.setAttribute("sessions", currentDaySessions);
-        return new PageDto(UrlConstants.SCHEDULE_PAGE);
+        return new PageDto(UrlConstants.SCHEDULE_PAGE, date.format(DateTimeFormatter.ISO_DATE));
     }
 }

@@ -1,7 +1,6 @@
 package com.reni.hi.dao;
 
-import com.reni.hi.dao.temp1.MovieDao;
-import com.reni.hi.dao.temp1.MovieDaoImpl;
+import com.reni.hi.dao.impl.MovieDaoImpl;
 import com.reni.hi.entity.Movie;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MovieDaoImplTest {
-    private MovieDao movieDao;
+    private CrudDao<Movie> movieDao;
 
     @Before
     public void setUp() {
@@ -19,7 +18,7 @@ public class MovieDaoImplTest {
 
     @Test
     public void shouldReturnMovie() {
-        Movie res = movieDao.getMovieById(1);
+        Movie res = movieDao.getById(1);
         System.out.println(res);
         assertNotNull(res);
     }

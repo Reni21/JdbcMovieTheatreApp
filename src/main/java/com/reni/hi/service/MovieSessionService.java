@@ -1,12 +1,12 @@
 package com.reni.hi.service;
 
-import com.reni.hi.dao.EntityDao;
-import com.reni.hi.dao.MovieSessionDaoImpl;
-import com.reni.hi.dao.temp1.MovieDao;
-import com.reni.hi.dto.MovieSessionPreviewDto;
-import com.reni.hi.dto.MovieSessionTimeDto;
+import com.reni.hi.dao.CrudDao;
+import com.reni.hi.dao.MovieSessionDao;
+import com.reni.hi.dto.SessionPreviewDto;
+import com.reni.hi.dto.SessionTimeDto;
 import com.reni.hi.entity.Movie;
 import com.reni.hi.entity.MovieSession;
+import org.apache.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -16,40 +16,43 @@ import java.util.List;
 import java.util.Map;
 
 public class MovieSessionService {
-    private final EntityDao<MovieSession> movieSessionDaoImpl;
-    private final MovieDao movieDao;
+    private static final Logger LOG = Logger.getLogger(MovieSessionService.class);
+    private final MovieSessionDao movieSessionDao;
+    private final CrudDao<Movie> movieDao;
 
-    public MovieSessionService(MovieSessionDaoImpl movieSessionDaoImpl, MovieDao movieDao) {
-        this.movieSessionDaoImpl = movieSessionDaoImpl;
+    public MovieSessionService(MovieSessionDao movieSessionDao, CrudDao<Movie> movieDao) {
+        this.movieSessionDao = movieSessionDao;
         this.movieDao = movieDao;
     }
 
-    public List<MovieSessionPreviewDto> getMovieSessionsInRange(LocalDateTime searchFrom, LocalDateTime searchTo) {
-        List<MovieSession> sessions = movieSessionDaoImpl.getAllInRange(searchFrom, searchTo);
+    public List<SessionPreviewDto> getSessionsInRange(LocalDateTime from, LocalDateTime to) {
+        LOG.info("Sessions search start from: " + from + " to: "+ to);
+        List<MovieSession> sessions = movieSessionDao.getAllInRange(from, to);
         Map<Integer, Movie> movies = new HashMap<>();
+
         sessions.forEach(session -> {
             int movieId = session.getMovieId();
-            Movie movie = movieDao.getMovieById(movieId);
+            Movie movie = movieDao.getById(movieId);
             if (movie != null && !movies.containsKey(movieId)) {
                 movies.put(movieId, movie);
             }
         });
-        return createMovieSessionPreviewDto(sessions, movies);
+        return createSessionPreviewDto(sessions, movies);
     }
 
-    private List<MovieSessionPreviewDto> createMovieSessionPreviewDto(List<MovieSession> sessions, Map<Integer, Movie> movies) {
-        List<MovieSessionPreviewDto> sessionPreviewDtos = new ArrayList<>();
+    private List<SessionPreviewDto> createSessionPreviewDto(List<MovieSession> sessions, Map<Integer, Movie> movies) {
+        List<SessionPreviewDto> sessionPreviewDtos = new ArrayList<>();
         sessions.forEach(session -> {
             Movie movie = movies.get(session.getMovieId());
-            MovieSessionPreviewDto sessionPreview = new MovieSessionPreviewDto(movie.getTitle(), movie.getDurationMinutes());
-            sessionPreview.setTrailerUrl(movie.getTrailerUrl());
-            sessionPreview.setCoverImgPath(movie.getCoverImgPath());
-            sessionPreview.setBackgroundImgPath(movie.getBackgroundImgPath());
+            SessionPreviewDto dto = new SessionPreviewDto(movie.getTitle(), movie.getDurationMinutes());
+            dto.setTrailerUrl(movie.getTrailerUrl());
+            dto.setCoverImgPath(movie.getCoverImgPath());
+            dto.setBackgroundImgPath(movie.getBackgroundImgPath());
 
             LocalTime startAt = session.getStartAt().toLocalTime();
-            MovieSessionTimeDto timeDto = new MovieSessionTimeDto(session.getSessionId(), startAt);
-            sessionPreview.addMovieSessionTimeDto(timeDto);
-            sessionPreviewDtos.add(sessionPreview);
+            SessionTimeDto timeDto = new SessionTimeDto(session.getSessionId(), startAt);
+            dto.addMovieSessionTimeDto(timeDto);
+            sessionPreviewDtos.add(dto);
         });
         return sessionPreviewDtos;
     }

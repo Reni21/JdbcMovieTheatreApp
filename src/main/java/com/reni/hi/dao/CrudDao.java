@@ -2,13 +2,11 @@ package com.reni.hi.dao;
 
 import java.util.List;
 
-public interface EntityDao<T> {
+public interface CrudDao<T> {
 
     T getById(int id);
 
     List<T> getAll();
-
-    <E> List<T> getAllInRange(E from, E to);
 
     int create(T entity);
 

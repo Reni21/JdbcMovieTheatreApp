@@ -2,7 +2,6 @@ package com.reni.hi.entity;
 
 import lombok.*;
 
-@NoArgsConstructor
 @RequiredArgsConstructor
 @Setter
 @Getter

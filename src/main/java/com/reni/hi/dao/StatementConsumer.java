@@ -4,6 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @FunctionalInterface
-public interface StatementMapper<T>{
-    void map(PreparedStatement ps) throws SQLException;
+public interface StatementConsumer<T> {
+    void accept(PreparedStatement ps) throws SQLException;
 }
