@@ -1,7 +1,7 @@
 package com.reni.hi.command;
 
 import com.reni.hi.dao.EntityDao;
-import com.reni.hi.dao.MovieDao;
+import com.reni.hi.dao.temp1.MovieDao;
 import com.reni.hi.dto.PageDto;
 import com.reni.hi.entity.Movie;
 import lombok.Setter;

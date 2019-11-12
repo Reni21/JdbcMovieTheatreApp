@@ -1,13 +1,13 @@
 package com.reni.hi.service;
 
-import com.reni.hi.dao.MovieDao;
+import com.reni.hi.dao.EntityDao;
 import com.reni.hi.dao.MovieSessionDaoImpl;
+import com.reni.hi.dao.temp1.MovieDao;
 import com.reni.hi.dto.MovieSessionPreviewDto;
 import com.reni.hi.dto.MovieSessionTimeDto;
 import com.reni.hi.entity.Movie;
 import com.reni.hi.entity.MovieSession;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MovieSessionService {
-    private final MovieSessionDaoImpl movieSessionDaoImpl;
+    private final EntityDao<MovieSession> movieSessionDaoImpl;
     private final MovieDao movieDao;
 
     public MovieSessionService(MovieSessionDaoImpl movieSessionDaoImpl, MovieDao movieDao) {
@@ -25,7 +25,7 @@ public class MovieSessionService {
     }
 
     public List<MovieSessionPreviewDto> getMovieSessionsInRange(LocalDateTime searchFrom, LocalDateTime searchTo) {
-        List<MovieSession> sessions = movieSessionDaoImpl.getAllSessionsInRange(searchFrom, searchTo);
+        List<MovieSession> sessions = movieSessionDaoImpl.getAllInRange(searchFrom, searchTo);
         Map<Integer, Movie> movies = new HashMap<>();
         sessions.forEach(session -> {
             int movieId = session.getMovieId();

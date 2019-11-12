@@ -1,5 +1,5 @@
 package com.reni.hi.dao;
 
 public enum DaoType {
-    USER,MOVIE
+    USER,MOVIE,MOVIE_SESSION;
 }

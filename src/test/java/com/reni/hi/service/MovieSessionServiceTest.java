@@ -1,9 +1,8 @@
 package com.reni.hi.service;
 
-import com.reni.hi.dao.MovieDaoImpl;
 import com.reni.hi.dao.MovieSessionDaoImpl;
+import com.reni.hi.dao.temp1.MovieDaoImpl;
 import com.reni.hi.dto.MovieSessionPreviewDto;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

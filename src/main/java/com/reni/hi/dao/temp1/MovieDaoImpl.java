@@ -1,4 +1,4 @@
-package com.reni.hi.dao;
+package com.reni.hi.dao.temp1;
 
 import com.reni.hi.persistence.DataSourceConnectionFactory;
 import com.reni.hi.entity.Movie;
