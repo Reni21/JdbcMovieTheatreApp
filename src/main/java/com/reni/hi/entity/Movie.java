@@ -17,6 +17,6 @@ public class Movie {
     @NonNull
     private Integer durationMinutes;
     private String trailerUrl;
-    private String backgroundImgPath;
-    private String coverImgPath;
+    private String backgroundImgUrl;
+    private String coverImgUrl;
 }

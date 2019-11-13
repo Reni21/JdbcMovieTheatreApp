@@ -1,0 +1,59 @@
+
+.seatSelection {
+  text-align: center;
+  padding: 5px;
+	margin: 15px;
+}
+
+.seatsChart{
+	display: inline-block;
+		vertical-align: top; 
+}
+.seatsReceipt{
+	display: inline-block;
+	vertical-align: top; 
+}
+.checkout{
+	text-align: center;
+}
+
+.seatsReceipt {text-align: center;}
+
+.seatNumber {
+	display: inline;
+	padding: 10px;
+	background-color: #5c86eb;
+	color: #FFF;
+	border-radius: 5px;
+	cursor: default;
+	height: 25px;
+	width: 25px;
+	line-height: 25px;
+	text-align: center;
+ }
+
+.seatRow {
+	padding: 10px;
+}
+
+.seatSelected {
+	background-color: lightgreen;
+	color: black;
+ }
+
+.seatUnavailable {
+	background-color: gray;
+}
+
+.seatRowNumber {
+	clear: none;
+	display: inline;
+ }
+
+.hidden {
+	display: none;
+}
+
+.seatsAmount {
+	max-width: 2em;
+}

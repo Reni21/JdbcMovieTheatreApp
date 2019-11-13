@@ -19,8 +19,8 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     private static final String DESCRIPTION = "description";
     private static final String DURATION_MIN = "duration_minutes";
     private static final String TRAILER_URL = "trailer_url";
-    private static final String BACKGROUND_IMG_PATH = "background_img_path";
-    private static final String COVER_IMG_PATH = "cover_img_path";
+    private static final String BACKGROUND_IMG_URL = "background_img_url";
+    private static final String COVER_IMG_URL = "cover_img_url";
 
     private static final EntityMapper<Movie> MOVIE_ENTITY_MAPPER = resultSet -> {
         Movie movie = new Movie(resultSet.getString(TITLE),
@@ -28,8 +28,8 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
                 resultSet.getInt(DURATION_MIN));
         movie.setDescription(resultSet.getString(DESCRIPTION));
         movie.setTrailerUrl(resultSet.getString(TRAILER_URL));
-        movie.setBackgroundImgPath(resultSet.getString(BACKGROUND_IMG_PATH));
-        movie.setCoverImgPath(resultSet.getString(COVER_IMG_PATH));
+        movie.setBackgroundImgUrl(resultSet.getString(BACKGROUND_IMG_URL));
+        movie.setCoverImgUrl(resultSet.getString(COVER_IMG_URL));
         return movie;
     };
 
@@ -54,7 +54,7 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
         String query = "INSERT INTO `movie` ("
                 + TITLE + ", " + DIRECTED_BY + ", "
                 + DESCRIPTION + ", " + DURATION_MIN + ", "
-                + TRAILER_URL + ", " + BACKGROUND_IMG_PATH + ", " + COVER_IMG_PATH
+                + TRAILER_URL + ", " + BACKGROUND_IMG_URL + ", " + COVER_IMG_URL
                 + ") VALUE (?, ?, ?, ?, ?, ?, ?)";
         System.out.println(query);
         return super.create(query, ps -> fillStatementWithCommonFields(ps, entity));
@@ -67,7 +67,7 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
         String query = "UPDATE `movie` "
                 + TITLE + " = ? , " + DIRECTED_BY + " = ? , "
                 + DESCRIPTION + " = ? , " + DURATION_MIN + " = ? , "
-                + TRAILER_URL + " = ? , " + BACKGROUND_IMG_PATH + " = ? , " + COVER_IMG_PATH + " = ? "
+                + TRAILER_URL + " = ? , " + BACKGROUND_IMG_URL + " = ? , " + COVER_IMG_URL + " = ? "
                 + "WHERE " + MOVIE_ID + " = ?";
         return super.update(query, ps -> {
             fillStatementWithCommonFields(ps, entity);
@@ -89,8 +89,8 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
             ps.setString(3, movie.getDescription());
             ps.setInt(4, movie.getDurationMinutes());
             ps.setString(5, movie.getTrailerUrl());
-            ps.setString(6, movie.getBackgroundImgPath());
-            ps.setString(7, movie.getCoverImgPath());
+            ps.setString(6, movie.getBackgroundImgUrl());
+            ps.setString(7, movie.getCoverImgUrl());
         } catch (SQLException e) {
             LOG.error("Exception while create prepared statement.", e);
         }

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -30,7 +31,9 @@ public class WeekScheduleDatesServiceTest {
     }
 
     @Test
-    public void shouldReturnScheduleForAWeek() {
-        instance.getWeekScheduleDates();
+    public void shouldReturnListWithSizeSeven() {
+        List<LocalDate> weekScheduleDates = instance.getWeekScheduleDates();
+        int res = weekScheduleDates.size();
+        assertEquals(7, res);
     }
 }

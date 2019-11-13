@@ -19,7 +19,6 @@ public class MovieDaoImplTest {
     @Test
     public void shouldReturnMovie() {
         Movie res = movieDao.getById(1);
-        System.out.println(res);
         assertNotNull(res);
     }
 }

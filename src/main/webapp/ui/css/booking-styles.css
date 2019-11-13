@@ -1,0 +1,215 @@
+/* 
+===========================================================================================================================
+===========================================================================================================================
+Букинг фильма -------------------------------------------------------------------------------------------------------------
+===========================================================================================================================
+===========================================================================================================================
+*/
+.page-title{
+	padding-top: 35px;
+	font-size: 35px;
+	line-height: 36px;
+	font-weight: 800;
+	color: black;
+	margin-bottom: 5px;
+	letter-spacing: 0.5px;
+	text-align:center;
+
+	vertical-align: middle;
+}
+
+/* 
+-----------------------------------------------------------------------------
+Serd level nav bar
+-----------------------------------------------------------------------------
+*/
+.nav__serd-lvl {
+	list-style:none;
+	margin:0;
+	padding:0;
+	padding-top: 10px;
+	text-align:center;
+}
+.nav__serd-lvl li {
+	display:inline;
+}
+.nav__serd-lvl a {
+	display:inline-block;
+	color: black;
+	font-size: 18px;
+	font-weight: 700;
+	padding: 3px 6px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.nav__serd-lvl li.active a{ 
+	color: white;
+	background: #3cb4e7;
+	border-radius: 14px;
+	pointer-events: none;
+}
+.nav__serd-lvl li a:hover{
+	color: #3cb4e7;
+}
+/*
+-----------------------------------------------------------------------------
+блок с сиденьями
+-----------------------------------------------------------------------------
+*/
+.seatSelection {
+	display: inline-block;
+	margin: 0;
+	width: 100%;
+	padding: 2rem;
+	height: 350px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.seatsChart{
+	display: inline-block;
+	vertical-align: top; 
+	box-sizing: border-box;
+	width: 430px;
+}
+.screen{
+	width: 340px;
+	color: grey;
+	font-weight: 700;
+	font-size: 13px;
+	padding-top: 10px;
+	margin: 0 65px 15px 65px;
+
+	display:block;
+	height:15px;
+	border-radius:50%;
+	border-top:7px solid #000;
+	border-color: #c4c3c2;
+}
+.seatNumber{
+	display: inline;
+	padding: 10px 10px;
+	background-color: #7747e6;
+	color: #FFF;
+	border-radius: 2px;
+	cursor: default;
+	line-height: 25px;
+	text-align: center;
+}
+.seatNumber:hover{
+	color: white;
+	background-color: black;
+	transition: 0.3s ease-in;
+}
+.seatRow {
+	color: grey;
+	font-weight: 600;
+	padding: 10px;
+}
+.seatSelected {
+	background-color: black;
+	color: white;
+}
+
+.seatUnavailable {
+	background-color: #c4c3c2;
+	pointer-events:none;
+}
+.seatRowNumber {
+	clear: none;
+	display: inline;
+}
+
+/* 
+-----------------------------------------------------------------------------
+Счет
+-----------------------------------------------------------------------------
+*/
+
+.seatsReceipt{
+	display: inline-block;
+	vertical-align: top; 
+	width: 400px;
+}
+.clear-container{
+	width: 330px;
+	color: black;
+	font-weight: 600;
+	padding-bottom: 20px;
+	margin: 0 auto 0 auto;
+}
+#btnClear{
+	border-radius: 15px;
+}
+.removeSeat{
+	border-radius: 2px;	
+}
+#btnClear, .removeSeat{
+	border-style: none;
+	padding: 2px;
+	background: black;
+	color: white;
+
+	padding: 5px 10px;
+	margin-left: 20px;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+}
+#btnClear strong, .removeSeat strong{
+	color: white;
+}
+#btnClear.btn-disabled{
+	color: white;
+	background-color: #c4c3c2;
+	pointer-events:none;
+}
+#btnClear strong.btn-disabled{
+	color: white;
+}
+#btnClear:hover, .removeSeat:hover{
+	background: #3cb4e7;
+	color: white;
+	transition: 0.3s ease-in;
+}
+#btnClear:focus {
+	outline:0;
+}
+.btn-primary{
+	background: #3cb4e7;
+	color: white;
+	font-size: 20px;
+	text-transform: capitalize;
+	margin-top: 30px;
+	padding: 15px 15px;
+	border: none;
+	width: 452px;
+	transition: 0.3s ease-in;
+	border-radius: 25px;
+}
+.seatsReceipt ul{
+	list-style-type: none;
+	padding: 0;
+}
+.nav-stacked li{
+	font-weight: 600;
+	margin-bottom: 7px;
+}
+.clear-container p{
+	font-size: 18px;
+}
+.hidden {
+	display: none;
+}
+.seatsAmount {
+	max-width: 2em;
+}
+.checkout{
+	text-align: center;
+}
+.checkout span{
+	font-size: 25px;
+}
+.btn-primary:hover {
+	background: black;
+	color: #3cb4e7;
+	transition: 0.3s ease-in;
+}

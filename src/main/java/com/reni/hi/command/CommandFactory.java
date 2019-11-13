@@ -1,6 +1,7 @@
 package com.reni.hi.command;
 
 import com.reni.hi.dao.DaoFactory;
+import com.reni.hi.service.ServiceFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +13,8 @@ public class CommandFactory {
 
     static {
         getCommandMap.put("movie", new MovieCommand(DaoFactory.getMovieDao()));
+        getCommandMap.put("schedule", new ScheduleCommand(
+                ServiceFactory.getMovieSessionService(), ServiceFactory.getWeekScheduleDatesService()));
         getCommandMap.put("404", defaultCommand);
     }
 

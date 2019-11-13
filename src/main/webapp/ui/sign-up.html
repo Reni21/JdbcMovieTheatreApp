@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cinema World</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/index-styles.css">
+	<link rel="stylesheet" href="css/login-styles.css">
+<body>
+	<header>
+		<!--
+		===============================================================================================
+		Первй уровень меню - навигвция + переключатель языков
+		===============================================================================================
+	-->
+	<div class="nav__first-lvl">
+		<div class="wrapper">
+			<table class="first-lvl__bar-table">
+				<tr>
+
+					<td>
+						<ul class="first-lvl__main-menu">
+							<li><a href="schedule.jsp">Schedule</a></li>
+							<li class="active"><a href="">Login</a></li>
+						</ul>
+					</td>
+
+					<td class="lang__switcher">
+						<ul class="first-lvl__lang-menu">
+							<li class="active">
+								<a href="">EN</a>
+							</li>
+							<li>
+								<a href="">RU</a>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+		<!--
+		===============================================================================================
+		Second level nav bar - вход в систему + регистрация
+		===============================================================================================
+	-->
+	<ul class="nav__second-lvl">
+		<li><a href="login.html">LOGIN</a></li>
+		<li class="active"><a href="/">SIGN UP</a></li>
+	</ul>
+</div>
+</header>
+
+
+<main>
+		<!--
+		===============================================================================================
+		Форма для заполения
+		===============================================================================================
+	-->
+	<div class="content-card">
+		<div class="content-card__container">
+			<div class="page-title">Sign up</div>
+
+
+			<div class="form__container">
+				<form  class="form__http-properties" action="" method="GET">
+
+					<!-- Fields -->
+
+					<p class="field-title">Username</p>
+					<input type="text" name="username" class="input" placeholder="" required="" />
+
+
+					<p class="field-title">Password</p>
+					<input type="password" name="password" class="input" placeholder="" required="" />
+
+					<p class="field-title">Email</p>
+					<input type="password" name="password" class="input" placeholder="" required="" />
+
+
+					<!-- Check box -->
+					<label class="remember">
+						<input type="checkbox">
+						<span class="checkmark"></span>
+						<p>Remember me</p>
+					</label>
+
+					<!-- Button -->
+					<button type="submit" class="signinbutton">Sign up</button>
+				</form>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+</main>
+</body>
+</html>
+
+

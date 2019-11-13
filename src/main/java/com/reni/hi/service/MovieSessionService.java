@@ -46,8 +46,8 @@ public class MovieSessionService {
             Movie movie = movies.get(session.getMovieId());
             SessionPreviewDto dto = new SessionPreviewDto(movie.getTitle(), movie.getDurationMinutes());
             dto.setTrailerUrl(movie.getTrailerUrl());
-            dto.setCoverImgPath(movie.getCoverImgPath());
-            dto.setBackgroundImgPath(movie.getBackgroundImgPath());
+            dto.setCoverImgPath(movie.getCoverImgUrl());
+            dto.setBackgroundImgPath(movie.getBackgroundImgUrl());
 
             LocalTime startAt = session.getStartAt().toLocalTime();
             SessionTimeDto timeDto = new SessionTimeDto(session.getSessionId(), startAt);

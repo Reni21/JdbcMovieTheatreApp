@@ -38,8 +38,8 @@ CREATE TABLE movie
     description TEXT,
     duration_minutes INT,
     trailer_url VARCHAR(255),
-    background_img_path VARCHAR(255) UNIQUE ,
-    cover_img_path VARCHAR(255) UNIQUE ,
+    background_img_url VARCHAR(255) UNIQUE ,
+    cover_img_url VARCHAR(255) UNIQUE ,
     PRIMARY KEY (movie_id)
 );
 
