@@ -27,9 +27,15 @@ public class ScheduleCommand implements Command {
     @Override
     public PageDto execute(HttpServletRequest request) {
         String dateStr = request.getParameter("date");
-        LocalDate date = dateStr == null ? LocalDate.now() : LocalDate.parse(dateStr);
+        LocalDate now = LocalDate.now();
+        LocalDate date = dateStr == null ? now : LocalDate.parse(dateStr);
         weekScheduleDatesService.isDateInValidRange(date);
-        LocalDateTime searchFrom = date.atTime(LocalTime.now());
+        LocalDateTime searchFrom;
+        if (now.equals(date)) {
+            searchFrom = date.atTime(LocalTime.now());
+        } else {
+            searchFrom = date.atTime(0,0,0);
+        }
         LocalDateTime searchTo = date.atTime(23, 59, 59);
 
         List<SessionPreviewDto> currentDaySessions = sessionService.getSessionsInRange(searchFrom, searchTo);

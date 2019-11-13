@@ -74,7 +74,7 @@
             <c:forEach items="${sessions}" var="session">
                 <div class="movie-card">
                     <div class="movie-card__container">
-                        <a href="#">
+                        <a href="${session.trailerUrl}" target="_blank">
                             <div class="movie-cover">
                                 <img class="play-icon" src="${pageContext.request.contextPath}/ui/img/play.png" alt="cover"/>
                                 <img class="cover-img"

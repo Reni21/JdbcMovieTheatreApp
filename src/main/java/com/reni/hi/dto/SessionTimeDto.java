@@ -17,6 +17,6 @@ public class SessionTimeDto {
     private final LocalTime startAt;
 
     public String getTimeView() {
-        return startAt.format(DateTimeFormatter.ofPattern("hh:mm"));
+        return startAt.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }
