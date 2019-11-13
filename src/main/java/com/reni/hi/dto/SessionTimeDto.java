@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 @Getter
@@ -14,4 +15,8 @@ import java.time.LocalTime;
 public class SessionTimeDto {
     private final Integer movieSessionId;
     private final LocalTime startAt;
+
+    public String getTimeView() {
+        return startAt.format(DateTimeFormatter.ofPattern("hh:mm"));
+    }
 }

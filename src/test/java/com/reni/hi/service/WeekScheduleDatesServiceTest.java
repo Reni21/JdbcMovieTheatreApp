@@ -1,5 +1,6 @@
 package com.reni.hi.service;
 
+import com.reni.hi.dto.MenuDateDto;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class WeekScheduleDatesServiceTest {
 
     @Test
     public void shouldReturnListWithSizeSeven() {
-        List<LocalDate> weekScheduleDates = instance.getWeekScheduleDates();
+        List<MenuDateDto> weekScheduleDates = instance.getWeekScheduleDates();
         int res = weekScheduleDates.size();
         assertEquals(7, res);
     }

@@ -25,7 +25,8 @@ public class PageDto {
     }
 
     public String getUrl() {
-        return Optional.ofNullable(queryParams).map(q -> url + "?" + q).orElse(url);
+        //return Optional.ofNullable(queryParams).map(q -> url + "?" + q).orElse(url);
+        return url;
     }
 
     public boolean isRedirect() {

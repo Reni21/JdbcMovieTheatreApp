@@ -10,10 +10,7 @@ import org.apache.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MovieSessionService {
     private static final Logger LOG = Logger.getLogger(MovieSessionService.class);
@@ -41,19 +38,23 @@ public class MovieSessionService {
     }
 
     private List<SessionPreviewDto> createSessionPreviewDto(List<MovieSession> sessions, Map<Integer, Movie> movies) {
-        List<SessionPreviewDto> sessionPreviewDtos = new ArrayList<>();
+        Map<Movie, SessionPreviewDto> sessionPreviewDtos = new HashMap<>();
         sessions.forEach(session -> {
-            Movie movie = movies.get(session.getMovieId());
-            SessionPreviewDto dto = new SessionPreviewDto(movie.getTitle(), movie.getDurationMinutes());
-            dto.setTrailerUrl(movie.getTrailerUrl());
-            dto.setCoverImgPath(movie.getCoverImgUrl());
-            dto.setBackgroundImgPath(movie.getBackgroundImgUrl());
-
+            Movie movie = movies.get(session.getMovieId()); //  смотри что за фильм
             LocalTime startAt = session.getStartAt().toLocalTime();
             SessionTimeDto timeDto = new SessionTimeDto(session.getSessionId(), startAt);
-            dto.addMovieSessionTimeDto(timeDto);
-            sessionPreviewDtos.add(dto);
+
+            if(sessionPreviewDtos.containsKey(movie)){
+                sessionPreviewDtos.get(movie).addMovieSessionTimeDto(timeDto);
+            } else {
+                SessionPreviewDto dto = new SessionPreviewDto(movie.getTitle(), movie.getDurationMinutes());
+                dto.setTrailerUrl(movie.getTrailerUrl());
+                dto.setCoverImgPath(movie.getCoverImgUrl());
+                dto.setBackgroundImgPath(movie.getBackgroundImgUrl());
+                dto.addMovieSessionTimeDto(timeDto);
+                sessionPreviewDtos.put(movie,dto);
+            }
         });
-        return sessionPreviewDtos;
+        return new ArrayList<SessionPreviewDto>(sessionPreviewDtos.values());
     }
 }
