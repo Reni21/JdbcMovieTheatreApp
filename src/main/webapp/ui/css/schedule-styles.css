@@ -49,7 +49,6 @@ Movie card ---------------------------------------------------------------------
 	top: 160px;
 	left: 40px;
 	z-index: 2;
-
 	display: flex; 
 	align-items: center; 
 	justify-content: center;
@@ -57,10 +56,9 @@ Movie card ---------------------------------------------------------------------
 }
 
 .play-icon{
-	height: 100px;
-	width: 100px;
-
-		position: absolute;
+	height: 150px;
+	width: 150px;
+	position: absolute;
 	overflow: hidden;
 	z-index:3;
 }
@@ -87,11 +85,11 @@ Movie card ---------------------------------------------------------------------
 	padding-left: 20px;
 	padding-top: 20px;
 	margin-left: 240px;
-	width: 520px;
+	width: 660px;
 	float: left
 }
 .movie-title{
-	font-size: 35px;
+	font-size: 34px;
 	line-height: 36px;
 	font-weight: 800;
 	color: black;

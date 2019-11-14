@@ -14,6 +14,8 @@ public class DataSourceConnectionFactory {
     //private static final Logger LOG = LogManager.getLogger(DataSourceConnectionFactory.class);
     private static final DataSourceConnectionFactory INSTANCE = new DataSourceConnectionFactory();
 
+
+
     private static DataSource dataSource;
 
     private DataSourceConnectionFactory() {
