@@ -1,8 +1,8 @@
-package com.reni.hi.command;
+package com.reni.hi.web.command;
 
 import com.reni.hi.dto.MenuDateDto;
-import com.reni.hi.dto.SessionPreviewDto;
-import com.reni.hi.dto.PageDto;
+import com.reni.hi.dto.MovieSessionsScheduleDto;
+import com.reni.hi.web.PageData;
 import com.reni.hi.service.MovieSessionService;
 import com.reni.hi.service.WeekScheduleDatesService;
 import org.apache.log4j.Logger;
@@ -25,7 +25,7 @@ public class ScheduleCommand implements Command {
     }
 
     @Override
-    public PageDto execute(HttpServletRequest request) {
+    public PageData execute(HttpServletRequest request) {
         String dateStr = request.getParameter("date");
         LocalDate now = LocalDate.now();
         LocalDate date = dateStr == null ? now : LocalDate.parse(dateStr);
@@ -38,13 +38,13 @@ public class ScheduleCommand implements Command {
         }
         LocalDateTime searchTo = date.atTime(23, 59, 59);
 
-        List<SessionPreviewDto> currentDaySessions = sessionService.getSessionsInRange(searchFrom, searchTo);
+        List<MovieSessionsScheduleDto> currentDaySessions = sessionService.getSessionsInRange(searchFrom, searchTo);
         List<MenuDateDto> menuDates = weekScheduleDatesService.getWeekScheduleDates();
         menuDates.stream().filter(dateDto -> date.isEqual(dateDto.getDate())).findFirst().get().setActive(true);
 
         LOG.info("Current day sessions number: " + currentDaySessions.size() + "\n" + currentDaySessions);
         request.setAttribute("menuDates", menuDates);
         request.setAttribute("sessions", currentDaySessions);
-        return new PageDto(UrlConstants.SCHEDULE_PAGE, date.format(DateTimeFormatter.ISO_DATE));
+        return new PageData(UrlConstants.SCHEDULE_PAGE, date.format(DateTimeFormatter.ISO_DATE));
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class SessionPreviewDto {
+public class MovieSessionsScheduleDto {
     @NonNull
     private String title;
     @NonNull

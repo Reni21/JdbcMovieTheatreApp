@@ -6,7 +6,7 @@
   Time: 8:52 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%--<%@ pageDTO contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%--<%@ pageData contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%--<html>--%>
 <%--    <head>--%>
 <%--        <title>Movie</title>--%>

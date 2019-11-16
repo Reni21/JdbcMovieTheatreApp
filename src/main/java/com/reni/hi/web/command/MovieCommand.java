@@ -1,7 +1,7 @@
-package com.reni.hi.command;
+package com.reni.hi.web.command;
 
 import com.reni.hi.dao.CrudDao;
-import com.reni.hi.dto.PageDto;
+import com.reni.hi.web.PageData;
 import com.reni.hi.entity.Movie;
 import lombok.Setter;
 
@@ -16,10 +16,10 @@ public class MovieCommand implements Command {
     }
 
     @Override
-    public PageDto execute(HttpServletRequest req) {
+    public PageData execute(HttpServletRequest req) {
         long moviesCount = movieDao.getAll().size();
         req.setAttribute("count", moviesCount);
-        return new PageDto("/ui/movie.jsp");
+        return new PageData("/ui/movie.jsp");
     }
 
 }

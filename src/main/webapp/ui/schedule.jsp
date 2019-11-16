@@ -8,14 +8,14 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Cinema World</title>
+        <title>Movies schedule</title>
         <base href="${pageContext.request.contextPath}/" />
 
         <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
               rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="ui/css/schedule-styles.css">
-        <!-- main css -->
-        <link rel="stylesheet" type="text/css" href="ui/css/index-styles.css">
+        <!-- Common css -->
+        <link rel="stylesheet" type="text/css" href="ui/css/common-styles.css">
     </head>
     <body>
         <header>
@@ -53,7 +53,7 @@
             </nav>
             <!--
             ===============================================================================================
-            Extra menu
+            Second level menu
             ===============================================================================================
         -->
             <ul class="nav__second-lvl">

@@ -1,4 +1,4 @@
-package com.reni.hi.command;
+package com.reni.hi.web.command;
 
 public class UrlConstants {
 

@@ -1,4 +1,4 @@
-package com.reni.hi.command;
+package com.reni.hi.web.command;
 
 import com.reni.hi.dao.DaoFactory;
 import com.reni.hi.service.ServiceFactory;

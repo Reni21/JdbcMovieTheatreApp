@@ -1,4 +1,4 @@
-package com.reni.hi.dto;
+package com.reni.hi.web;
 
 import lombok.*;
 
@@ -8,18 +8,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class PageDto {
+public class PageData {
     @NonNull
     private String url;
     private boolean redirect;
     private String queryParams;
 
-    public PageDto(@NonNull String url, boolean redirect) {
+    public PageData(@NonNull String url, boolean redirect) {
         this.url = url;
         this.redirect = redirect;
     }
 
-    public PageDto(@NonNull String url, String queryParams) {
+    public PageData(@NonNull String url, String queryParams) {
         this.url = url;
         this.queryParams = queryParams;
     }

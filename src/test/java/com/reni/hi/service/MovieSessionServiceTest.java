@@ -2,7 +2,7 @@ package com.reni.hi.service;
 
 import com.reni.hi.dao.impl.MovieSessionDaoImpl;
 import com.reni.hi.dao.impl.MovieDaoImpl;
-import com.reni.hi.dto.SessionPreviewDto;
+import com.reni.hi.dto.MovieSessionsScheduleDto;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class MovieSessionServiceTest {
         LocalDateTime searchFrom = LocalDateTime.parse("2019-11-11T00:14:30.266");
         LocalDateTime searchTo = LocalDateTime.parse("2019-11-11T23:59:59.0");
 
-        List<SessionPreviewDto> res = instance.getSessionsInRange(searchFrom, searchTo);
+        List<MovieSessionsScheduleDto> res = instance.getSessionsInRange(searchFrom, searchTo);
         res.forEach(out::println);
     }
 }

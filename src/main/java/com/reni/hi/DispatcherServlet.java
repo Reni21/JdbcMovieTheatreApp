@@ -1,8 +1,8 @@
 package com.reni.hi;
 
-import com.reni.hi.command.Command;
-import com.reni.hi.command.CommandFactory;
-import com.reni.hi.dto.PageDto;
+import com.reni.hi.web.command.Command;
+import com.reni.hi.web.command.CommandFactory;
+import com.reni.hi.web.PageData;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -32,11 +32,11 @@ public class DispatcherServlet extends HttpServlet {
         String path = getPath(req);
         Command command = CommandFactory.getCommand(path, req.getMethod());
 
-        PageDto pageDTO = command.execute(req);
-        if (pageDTO.isRedirect()) {
-            resp.sendRedirect(pageDTO.getUrl());
+        PageData pageData = command.execute(req);
+        if (pageData.isRedirect()) {
+            resp.sendRedirect(pageData.getUrl());
         } else {
-            req.getRequestDispatcher(pageDTO.getUrl()).forward(req, resp);
+            req.getRequestDispatcher(pageData.getUrl()).forward(req, resp);
         }
     }
 
