@@ -45,6 +45,7 @@ public class ScheduleCommand implements Command {
         LOG.info("Current day sessions number: " + currentDaySessions.size() + "\n" + currentDaySessions);
         request.setAttribute("menuDates", menuDates);
         request.setAttribute("sessions", currentDaySessions);
+        request.setAttribute("activeTab", "schedule");
         return new PageData(UrlConstants.SCHEDULE_PAGE, date.format(DateTimeFormatter.ISO_DATE));
     }
 }

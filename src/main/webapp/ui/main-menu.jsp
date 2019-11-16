@@ -1,6 +1,7 @@
 <!doctype html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="activeTab" scope="request" type="java.lang.String"/>
 
 <html lang="en">
     <head>
@@ -12,11 +13,12 @@
                         <tr>
                             <td>
                                 <ul class="first-lvl__main-menu">
-                                    <li><a href="app">Home</a>
+                                    <c:set var="name" value='${activeTab}' />
+                                    <li <c:if test="${name == 'home'}">class="active"</c:if>><a href="app">Home</a>
                                     </li>
-                                    <li><a href="app/schedule">Schedule</a>
+                                    <li <c:if test="${name == 'schedule'}">class="active"</c:if>><a href="app/schedule">Schedule</a>
                                     </li>
-                                    <li><a href="app/login">Login</a></li>
+                                    <li <c:if test="${name == 'login'}">class="active"</c:if>><a href="app/login">Login</a></li>
                                 </ul>
                             </td>
 
