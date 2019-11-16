@@ -1,0 +1,27 @@
+<nav class="nav__first-lvl">
+    <div class="wrapper">
+
+        <table class="first-lvl__bar-table">
+            <tr>
+                <td>
+                    <ul class="first-lvl__main-menu">
+                        <li class="active"><a href="app/schedule${menuDates.get(0).getIsoDate()}">Schedule</a>
+                        </li>
+                        <li><a href="app/login">Login</a></li>
+                    </ul>
+                </td>
+
+                <td class="lang__switcher">
+                    <ul class="first-lvl__lang-menu">
+                        <li class="active">
+                            <a href="#">EN</a>
+                        </li>
+                        <li>
+                            <a href="#">RU</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</nav>

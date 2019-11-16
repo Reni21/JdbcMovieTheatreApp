@@ -7,15 +7,10 @@
 
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
         <title>Movies schedule</title>
-        <base href="${pageContext.request.contextPath}/" />
-
-        <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
-              rel="stylesheet">
+        <c:import url="head-data.jsp"/>
+        <!-- Unique css -->
         <link rel="stylesheet" type="text/css" href="ui/css/schedule-styles.css">
-        <!-- Common css -->
-        <link rel="stylesheet" type="text/css" href="ui/css/common-styles.css">
     </head>
     <body>
         <header>
@@ -24,33 +19,8 @@
             Common menu
             ===============================================================================================
         -->
-            <nav class="nav__first-lvl">
-                <div class="wrapper">
-
-                    <table class="first-lvl__bar-table">
-                        <tr>
-                            <td>
-                                <ul class="first-lvl__main-menu">
-                                    <li class="active"><a href="app/schedule${menuDates.get(0).getIsoDate()}">Schedule</a>
-                                    </li>
-                                    <li><a href="app/login">Login</a></li>
-                                </ul>
-                            </td>
-
-                            <td class="lang__switcher">
-                                <ul class="first-lvl__lang-menu">
-                                    <li class="active">
-                                        <a href="#">EN</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">RU</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </nav>
+            <title>Movies schedule</title>
+            <jsp:include page="../WEB-INF/main-menu.jspf" />
             <!--
             ===============================================================================================
             Second level menu
