@@ -9,13 +9,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Cinema World</title>
-                <base href="${pageContext.request.contextPath}/" />
+        <base href="${pageContext.request.contextPath}/" />
 
         <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
               rel="stylesheet">
-        <link rel="stylesheet" href="ui/css/schedule-styles.css">
+        <link rel="stylesheet" type="text/css" href="ui/css/schedule-styles.css">
         <!-- main css -->
-        <link rel="stylesheet" href="ui/css/index-styles.css">
+        <link rel="stylesheet" type="text/css" href="ui/css/index-styles.css">
     </head>
     <body>
         <header>
