@@ -150,7 +150,7 @@ main {
 }
 
 p {
-	color: #3cb4e7;
+	color: rgba(255, 255, 255, 0.0);
 	display: table-cell;
 	text-align: center;
 	vertical-align: middle;

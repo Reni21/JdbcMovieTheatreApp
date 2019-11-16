@@ -5,7 +5,9 @@
             <tr>
                 <td>
                     <ul class="first-lvl__main-menu">
-                        <li class="active"><a href="app/schedule${menuDates.get(0).getIsoDate()}">Schedule</a>
+                        <li><a href="app">Home</a>
+                        </li>
+                        <li><a href="app/schedule">Schedule</a>
                         </li>
                         <li><a href="app/login">Login</a></li>
                     </ul>

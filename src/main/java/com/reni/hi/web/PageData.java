@@ -25,7 +25,8 @@ public class PageData {
     }
 
     public String getUrl() {
-        //return Optional.ofNullable(queryParams).map(q -> url + "?" + q).orElse(url);
+        //return url + "?date=" + queryParams;
+        // return Optional.ofNullable(queryParams).map(q -> url + "?" + q).orElse(url);
         return url;
     }
 

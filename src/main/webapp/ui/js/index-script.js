@@ -1,7 +1,7 @@
 var paragraph = document.getElementsByTagName('p')[0];
 
 function textEffect(animationName) {
-  var text = paragraph.innerHTML,
+	var text = paragraph.innerHTML,
 		chars = text.length,
 		newText = '',
 		animation = animationName,
@@ -30,5 +30,3 @@ function textEffect(animationName) {
 
 	addEffect();
 };
-
-textEffect('fly-in-out');

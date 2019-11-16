@@ -12,6 +12,7 @@ public class CommandFactory {
     private static Command defaultCommand = new NotFoundCommand();
 
     static {
+        getCommandMap.put("app", new HomeCommand());
         getCommandMap.put("movie", new MovieCommand(DaoFactory.getMovieDao()));
         getCommandMap.put("schedule", new ScheduleCommand(
                 ServiceFactory.getMovieSessionService(), ServiceFactory.getWeekScheduleDatesService()));

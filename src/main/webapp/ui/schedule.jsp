@@ -14,18 +14,10 @@
     </head>
     <body>
         <header>
-            <!--
-            ===============================================================================================
-            Common menu
-            ===============================================================================================
-        -->
-            <title>Movies schedule</title>
+            <!-- Common menu -->
             <jsp:include page="../WEB-INF/main-menu.jspf" />
-            <!--
-            ===============================================================================================
-            Second level menu
-            ===============================================================================================
-        -->
+
+            <!-- Second level menu -->
             <ul class="nav__second-lvl">
                 <c:forEach items="${menuDates}" var="menuDate">
                     <li <c:if test="${menuDate.isActive()}">class="active"</c:if>>
@@ -72,7 +64,7 @@
 
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="ui/js/script.js"></script>
+        <script type="text/javascript" src="ui/js/script.js"></script>
     </body>
 </html>
 
