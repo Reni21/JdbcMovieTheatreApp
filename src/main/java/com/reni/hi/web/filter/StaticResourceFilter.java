@@ -28,6 +28,10 @@ public class StaticResourceFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
+        if(path.equals("/")){
+            path = "/main";
+        }
+
 
         String pathToForward = APP_PATH + path;
         LOG.info("Non static resource: " + path + ". New Path: " + pathToForward);

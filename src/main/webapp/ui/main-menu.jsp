@@ -19,7 +19,7 @@
                         <td>
                             <ul class="first-lvl__main-menu">
                                 <c:set var="name" value='${activeTab}'/>
-                                <li <c:if test="${name == 'home'}">class="active"</c:if>><a href="home"><fmt:message
+                                <li <c:if test="${name == 'main'}">class="active"</c:if>><a href=""><fmt:message
                                         key="main.menu.home"/></a>
                                 </li>
                                 <li <c:if test="${name == 'schedule'}">class="active"</c:if>><a
