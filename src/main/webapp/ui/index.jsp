@@ -22,7 +22,7 @@
             <c:import url="main-menu.jsp"/>
         </header>
         <main class="title">
-            <p class="">MOVIES WORLD</p>
+            <p class=""><fmt:message key="main.animation"/></p>
         </main>
         <script type="text/javascript" src="ui/js/index-script.js"></script>
     </body>

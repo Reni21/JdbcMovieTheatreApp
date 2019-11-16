@@ -125,7 +125,7 @@ Second level nav bar
 	padding:15px;
 	font-size: 20px;
 	color: grey;
-	font-weight: 700;
+	font-weight: 500;
 }
 .nav__second-lvl li.active a{
 	display:inline-block;
