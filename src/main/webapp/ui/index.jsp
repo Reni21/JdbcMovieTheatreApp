@@ -16,7 +16,7 @@
         <img class="bg" src="https://i.pinimg.com/originals/23/97/91/239791aa7eaee867743b065dc3d3ffb7.jpg">
         <header>
             <!-- Common menu -->
-            <jsp:include page="../WEB-INF/main-menu.jspf"/>
+            <c:import url="main-menu.jsp"/>
         </header>
         <main class="title">
             <p class="">MOVIES WORLD</p>

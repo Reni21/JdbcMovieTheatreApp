@@ -15,7 +15,7 @@
     <body>
         <header>
             <!-- Common menu -->
-            <jsp:include page="../WEB-INF/main-menu.jspf" />
+            <c:import url="main-menu.jsp"/>
 
             <!-- Second level menu -->
             <ul class="nav__second-lvl">
