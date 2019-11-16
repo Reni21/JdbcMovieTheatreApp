@@ -44,6 +44,9 @@ public class DispatcherServlet extends HttpServlet {
         String requestUri = req.getRequestURI();
         int index = requestUri.lastIndexOf('/');
         String endPoint = requestUri.substring(index + 1);
+        if (endPoint.isEmpty()) {
+            endPoint = "home";
+        }
         LOG.info("Path: " + endPoint);
         return endPoint;
     }

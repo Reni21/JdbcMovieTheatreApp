@@ -14,11 +14,11 @@
                             <td>
                                 <ul class="first-lvl__main-menu">
                                     <c:set var="name" value='${activeTab}' />
-                                    <li <c:if test="${name == 'home'}">class="active"</c:if>><a href="app">Home</a>
+                                    <li <c:if test="${name == 'home'}">class="active"</c:if>><a href="home">Home</a>
                                     </li>
-                                    <li <c:if test="${name == 'schedule'}">class="active"</c:if>><a href="app/schedule">Schedule</a>
+                                    <li <c:if test="${name == 'schedule'}">class="active"</c:if>><a href="schedule">Schedule</a>
                                     </li>
-                                    <li <c:if test="${name == 'login'}">class="active"</c:if>><a href="app/login">Login</a></li>
+                                    <li <c:if test="${name == 'login'}">class="active"</c:if>><a href="login">Login</a></li>
                                 </ul>
                             </td>
 

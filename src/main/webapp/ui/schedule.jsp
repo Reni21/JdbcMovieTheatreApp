@@ -21,7 +21,7 @@
             <ul class="nav__second-lvl">
                 <c:forEach items="${menuDates}" var="menuDate">
                     <li <c:if test="${menuDate.isActive()}">class="active"</c:if>>
-                        <a href="app/schedule${menuDate.getIsoDate()}">${menuDate.getDateOfWeek()}</a></li>
+                        <a href="schedule${menuDate.getIsoDate()}">${menuDate.getDateOfWeek()}</a></li>
                 </c:forEach>
             </ul>
             </div>
