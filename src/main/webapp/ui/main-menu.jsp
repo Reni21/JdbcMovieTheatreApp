@@ -1,7 +1,8 @@
 <!doctype html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
 
@@ -18,22 +19,30 @@
                         <td>
                             <ul class="first-lvl__main-menu">
                                 <c:set var="name" value='${activeTab}'/>
-                                <li <c:if test="${name == 'home'}">class="active"</c:if>><a href="home"><fmt:message key="main.menu.home"/></a>
+                                <li <c:if test="${name == 'home'}">class="active"</c:if>><a href="home"><fmt:message
+                                        key="main.menu.home"/></a>
                                 </li>
                                 <li <c:if test="${name == 'schedule'}">class="active"</c:if>><a
                                         href="schedule"><fmt:message key="main.menu.schedule"/></a>
                                 </li>
-                                <li <c:if test="${name == 'login'}">class="active"</c:if>><a href="login"><fmt:message key="main.menu.login"/></a></li>
+                                <li <c:if test="${name == 'login'}">class="active"</c:if>><a href="login"><fmt:message
+                                        key="main.menu.login"/></a></li>
                             </ul>
                         </td>
 
                         <td class="lang__switcher">
                             <ul class="first-lvl__lang-menu">
                                 <li <c:if test="${sessionScope['locale'] == 'en'}">class="active"</c:if>>
-                                    <a href="#">EN</a>
+                                    <a href="javascript:document.getElementById('form1').submit()">EN</a>
+                                    <form action="<c:url value="/locale"/>" method="post" id="form1">
+                                        <input type="hidden" name="locale" value="en"/>
+                                    </form>
                                 </li>
                                 <li <c:if test="${sessionScope['locale'] == 'ru'}">class="active"</c:if>>
-                                    <a href="#">RU</a>
+                                    <a href="javascript:document.getElementById('form2').submit()">RU</a>
+                                    <form action="<c:url value="/locale"/>" method="post" id="form2">
+                                        <input type="hidden" name="locale" value="ru"/>
+                                    </form>
                                 </li>
                             </ul>
                         </td>

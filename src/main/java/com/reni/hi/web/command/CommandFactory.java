@@ -17,6 +17,8 @@ public class CommandFactory {
         getCommandMap.put("schedule", new ScheduleCommand(
                 ServiceFactory.getMovieSessionService(), ServiceFactory.getWeekScheduleDatesService()));
         getCommandMap.put("404", defaultCommand);
+
+        postCommandMap.put("locale", new LanguageCommand());
     }
 
     private CommandFactory() {

@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -25,20 +24,17 @@ public class LocalizationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        HttpSession session = httpServletRequest.getSession();
-
-        setLocale(session);
-        setBundle(session);
+        HttpServletRequest req = (HttpServletRequest) request;
+        setLocale(req.getSession());
+        setBundle(req.getSession());
 
         chain.doFilter(request, response);
     }
 
     private void setLocale(HttpSession session) {
-        String locale = (String) session.getAttribute(LOCALE);
-        if (locale == null) {
-            LOG.info("Set locale to session");
+        String existingLocale = (String) session.getAttribute(LOCALE);
+        if (existingLocale == null) {
+            LOG.info("Set new locale to session");
             session.setAttribute(LOCALE, defaultLocale);
         }
     }
@@ -51,17 +47,8 @@ public class LocalizationFilter implements Filter {
         }
     }
 
-
     @Override
     public void destroy() {
 
-    }
-
-    public String getDefaultLocale() {
-        return defaultLocale;
-    }
-
-    public String getDefaultBundle() {
-        return defaultBundle;
     }
 }
