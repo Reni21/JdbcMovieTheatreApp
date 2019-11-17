@@ -90,7 +90,7 @@ First level nav bar
 }
 .nav__first-lvl li a{
 	display: block;
-	font-weight: 600;
+	/*font-weight: 600;*/
 	color: white;
 	letter-spacing: 0.5px;
 }

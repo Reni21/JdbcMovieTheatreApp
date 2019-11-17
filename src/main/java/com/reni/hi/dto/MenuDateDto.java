@@ -2,7 +2,6 @@ package com.reni.hi.dto;
 
 import lombok.*;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -20,7 +19,11 @@ public class MenuDateDto {
         return "?date=" + date.format(DateTimeFormatter.ISO_DATE);
     }
 
-    public String getDateOfWeek(){
-        return date.getDayOfWeek().name().substring(0,3) + " "+ date.format(DateTimeFormatter.ofPattern("dd:MM"));
+    public String getDayOfWeek(){
+        return date.getDayOfWeek().name().substring(0,3).toLowerCase();
+    }
+
+    public String getFormatedDate(){
+        return " "+ date.format(DateTimeFormatter.ofPattern("dd:MM"));
     }
 }

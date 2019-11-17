@@ -24,7 +24,9 @@
             <ul class="nav__second-lvl">
                 <c:forEach items="${menuDates}" var="menuDate">
                     <li <c:if test="${menuDate.isActive()}">class="active"</c:if>>
-                        <a href="schedule${menuDate.getIsoDate()}">${menuDate.getDateOfWeek()}</a></li>
+                        <a href="schedule${menuDate.getIsoDate()}">
+                            <fmt:message key="week.day.${menuDate.getDayOfWeek()}"/>
+                                ${menuDate.getFormatedDate()}</a></li>
                 </c:forEach>
             </ul>
             </div>
@@ -55,7 +57,10 @@
 
                         <div class="movie-description">
                             <div class="movie-title">${session.title}</div>
-                            <p class="movie-duration">Duration: ${session.duration}min</p>
+                            <p class="movie-duration">
+                                <fmt:message key="schedule.duration"/>:
+                                    ${session.duration}<fmt:message key="schedule.min"/>
+                            </p>
 
                             <c:forEach items="${session.movieSessionTimes}" var="time">
                                 <a class="tag" href="ui/seats-booking.html">${time.getTimeView()}</a>
