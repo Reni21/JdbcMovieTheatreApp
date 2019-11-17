@@ -7,6 +7,8 @@
 <fmt:setBundle basename="${bundle}"/>
 
 <jsp:useBean id="activeTab" scope="request" type="java.lang.String"/>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate var="currentDate" value="${now}" pattern="yyyy-MM-dd" />
 
 <html lang="en">
     <head>
@@ -23,7 +25,7 @@
                                         key="main.menu.home"/></a>
                                 </li>
                                 <li <c:if test="${name == 'schedule'}">class="active"</c:if>><a
-                                        href="schedule"><fmt:message key="main.menu.schedule"/></a>
+                                        href="schedule?date=${currentDate}"><fmt:message key="main.menu.schedule"/></a>
                                 </li>
                                 <li <c:if test="${name == 'login'}">class="active"</c:if>><a href="login"><fmt:message
                                         key="main.menu.login"/></a></li>
