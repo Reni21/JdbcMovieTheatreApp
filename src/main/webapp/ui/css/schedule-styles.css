@@ -1,0 +1,113 @@
+
+/* 
+===========================================================================================================================
+===========================================================================================================================
+Movie card ----------------------------------------------------------------------------------------------------------------
+===========================================================================================================================
+===========================================================================================================================
+*/
+
+.movie-card {
+	position: relative;
+	overflow: auto;
+	padding: 10px 0;
+}
+.movie-card__container {
+	margin: 0 auto;
+	width: 960px;
+	height: 520px;
+	background: white;
+	border-radius: 5px;
+	position: relative;
+
+	border-bottom:1px solid #e1e1e1;
+	border-width:2px 0;
+}
+.movie-card__background {
+	height: 342px; 
+	margin:0;
+	position: relative;
+	overflow: hidden;
+	z-index:1;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.background-img {
+	height: auto;
+	width: 100%;
+}
+.movie-duration{
+	margin: 5px 0 15px 0;
+	font-size: 15px;
+	font-weight: 700;
+	color: #43423E;
+}
+.movie-cover {
+	width: 187px;
+	height: 282px;
+	position: absolute;
+	top: 160px;
+	left: 40px;
+	z-index: 2;
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+	overflow: hidden;
+}
+
+.play-icon{
+	height: 150px;
+	width: 150px;
+	position: absolute;
+	overflow: hidden;
+	z-index:3;
+}
+.cover-img {
+	height: 100%;
+	width: auto;
+}
+.movie-card__background{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.movie-cover:hover {
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	transition: 0.25s ease;
+}
+.movie-description {
+	bottom: 0px;
+	height: 150px;
+	font-size: 18px;
+	line-height: 26px;
+	color: #B1B0AC;
+	padding-left: 20px;
+	padding-top: 20px;
+	margin-left: 240px;
+	width: 660px;
+	float: left
+}
+.movie-title{
+	font-size: 34px;
+	line-height: 36px;
+	font-weight: 800;
+	color: black;
+	margin-bottom: 5px;
+	letter-spacing: 0.5px;
+}
+.tag {
+	background: #3cb4e7;
+	border-radius: 12px;
+	padding: 3px 6px;
+	font-size: 16px;
+	color: white;
+	margin-right: 10px;
+	line-height: 35px;
+	cursor: pointer;
+}
+.tag:hover {
+	color: white;
+	background: black;
+	transition: 0.3s ease-in;
+}

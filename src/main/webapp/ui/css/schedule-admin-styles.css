@@ -1,0 +1,142 @@
+
+/* 
+===========================================================================================================================
+===========================================================================================================================
+Movie card ----------------------------------------------------------------------------------------------------------------
+===========================================================================================================================
+===========================================================================================================================
+*/
+
+.movie-card {
+	position: relative;
+	overflow: auto;
+	padding: 10px 0;
+}
+.movie-card__container {
+	margin: 0 auto;
+	width: 960px;
+	height: 150px;
+	background: white;
+	border-radius: 5px;
+	position: relative;
+
+	padding-left: 20px;
+
+	border-bottom:1px solid #e1e1e1;
+	border-width:2px 0;
+}
+button{
+	display: inline-block;
+}
+.movie-duration{
+	margin: 5px 0 15px 0;
+	font-size: 15px;
+	font-weight: 700;
+	color: #43423E;
+}
+.movie-cover {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* 	position: absolute; */
+	top: 160px;
+	left: 40px;
+	z-index: 2;
+	float: right;
+	height: 150px;
+	width: 250px;
+}
+	.movie-title{
+		padding-top: 20px;
+		font-size: 35px;
+		line-height: 36px;
+		font-weight: 800;
+		color: black;
+		margin-bottom: 5px;
+		letter-spacing: 0.5px;
+	}
+	.tag {
+		background: #3cb4e7;
+		border-radius: 12px;
+		padding: 3px 6px;
+		font-size: 16px;
+		color: white;
+		margin-right: 10px;
+		line-height: 35px;
+		cursor: pointer;
+	}
+	.tag:hover{
+		color: white;
+		background: black;
+		transition: 0.3s ease-in;
+	}
+
+	.add{
+		background: black;
+		font-weight: 600;
+		border-radius: 12px;
+		padding: 3px 10px;
+		font-size: 16px;
+		color: white;
+		margin-right: 10px;
+		line-height: 35px;
+		cursor: pointer;
+	}
+
+	.add b{
+		font-size: 22px;
+		font-weight: 800;
+		margin-right: 7px;
+	}
+
+	.add:hover{
+		color: #3cb4e7;
+		transition: 0.3s ease-in;
+	}
+
+	.delete{
+		border: none;
+		background: #3cb4e7;
+		font-weight: 500;
+		border-radius: 25px;
+		padding: 7px 25px;
+		font-size: 18px;
+		color: white;
+		margin-right: 10px;
+		line-height: 35px;
+		cursor: pointer;
+	}
+
+	.delete:hover{
+		background: black;
+		transition: 0.3s ease-in;
+	}
+	.tag:hover{
+		/* 	background: black; */
+		transition: 0.3s ease-in;
+	}
+
+	.add-movie:hover{
+		color: white;
+		background: #3cb4e7;
+		transition: 0.3s ease-in;
+	}
+
+	.add-movie {
+		background: transparent;
+		border:3px solid #3cb4e7;
+		color: #3cb4e7;
+		font-size: 20px;
+		font-weight: 700;
+		text-transform: capitalize;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		padding: 15px 15px;
+		width: 452px;
+		border-radius: 35px;
+	}
+	.wrapper.btn{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}

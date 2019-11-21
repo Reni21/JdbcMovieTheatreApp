@@ -1,0 +1,31 @@
+package com.theatre.movie.service;
+
+import com.theatre.movie.dao.impl.MovieSessionDaoImpl;
+import com.theatre.movie.dto.MovieSessionsScheduleDto;
+import com.theatre.movie.exception.InvalidScheduleDateException;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static java.lang.System.out;
+
+public class MovieSessionsScheduleServiceTest {
+    private MovieSessionsScheduleService instance;
+
+    @Before
+    public void setUp() throws Exception {
+        instance = new MovieSessionsScheduleService(new MovieSessionDaoImpl());
+    }
+
+    @Test
+    public void shouldReturnListOfSessionPreviewDtos() throws InvalidScheduleDateException {
+        LocalDateTime searchFrom = LocalDateTime.parse("2019-11-11T00:14:30.266");
+        LocalDateTime searchTo = LocalDateTime.parse("2019-11-11T23:59:59.0");
+
+        List<MovieSessionsScheduleDto> res = instance.getMovieSessionsScheduleForDate(LocalDate.now());
+        res.forEach(out::println);
+    }
+}
