@@ -24,7 +24,7 @@ public class MovieSessionCommand implements Command {
         List<MenuDateDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(LocalDate.now());
         request.setAttribute("menuDates", menuDates);
 
-        String uri =request.getRequestURI();
+        String uri = request.getRequestURI();
         int id = Integer.parseInt(uri.substring(uri.lastIndexOf("/") + 1));
         MovieSessionDto movieSession = movieSessionService.getMovieSessionById(id);
         request.setAttribute("movieSession", movieSession);
