@@ -1,7 +1,7 @@
 package com.theatre.movie.web.command;
 
-import com.theatre.movie.dto.MenuDateDto;
-import com.theatre.movie.dto.MovieSessionsScheduleDto;
+import com.theatre.movie.dto.MenuDateViewDto;
+import com.theatre.movie.dto.MovieSessionsScheduleViewDto;
 import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.InvalidScheduleDateException;
@@ -28,8 +28,8 @@ public class ScheduleCommand implements Command {
         LocalDate now = LocalDate.now();
         LocalDate date = dateStr == null ? now : LocalDate.parse(dateStr);
         try {
-            List<MovieSessionsScheduleDto> currentDaySessions = sessionService.getMovieSessionsScheduleForDate(date);
-            List<MenuDateDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(date);
+            List<MovieSessionsScheduleViewDto> currentDaySessions = sessionService.getMovieSessionsScheduleForDate(date);
+            List<MenuDateViewDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(date);
 
             LOG.info("Current day sessions number: " + currentDaySessions.size() + "\n" + currentDaySessions);
             request.setAttribute("menuDates", menuDates);

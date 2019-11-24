@@ -27,6 +27,7 @@ public class CommandFactory {
         postCommandMap.put("locale", new LanguageCommand());
         postCommandMap.put("login", new LoginPostCommand(ServiceFactory.getUserService()));
         postCommandMap.put("sign-up", new SignUpPostCommand(ServiceFactory.getUserService()));
+        postCommandMap.put("booking", new BookingCommand(ServiceFactory.getBookingService()));
     }
 
     private CommandFactory() {

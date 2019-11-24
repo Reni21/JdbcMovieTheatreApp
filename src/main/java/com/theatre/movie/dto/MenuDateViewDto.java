@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class MenuDateDto {
+public class MenuDateViewDto {
     @NonNull
     private LocalDate date;
     @Setter

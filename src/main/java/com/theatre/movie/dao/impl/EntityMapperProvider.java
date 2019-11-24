@@ -65,14 +65,14 @@ public class EntityMapperProvider {
         return user;
     };
 
-    public static final EntityMapper<Booking> BOOKING_ENTITY_MAPPER = rs -> {
-        Booking booking = new Booking(rs.getTimestamp(BookingTable.CREATED_AT).toLocalDateTime(),
-                rs.getInt(BookingTable.USER_ID),
-                rs.getInt(BookingTable.SEAT_ID),
-                rs.getInt(BookingTable.MOVIE_SESSION_ID));
-
-        booking.setBookingId(rs.getInt(BookingTable.BOOKING_ID));
-        booking.setBookingStatus(BookingStatus.valueOf(rs.getString(BookingTable.STATUS)));
-        return booking;
-    };
+//    public static final EntityMapper<Booking> BOOKING_ENTITY_MAPPER = rs -> {
+//        Booking booking = new Booking(rs.getTimestamp(BookingTable.CREATED_AT).toLocalDateTime(),
+//                rs.getInt(BookingTable.USER_ID),
+//                rs.getInt(BookingTable.SEAT_ID),
+//                rs.getInt(BookingTable.MOVIE_SESSION_ID));
+//
+//        booking.setBookingId(rs.getInt(BookingTable.BOOKING_ID));
+//        booking.setBookingStatus(BookingStatus.valueOf(rs.getString(BookingTable.STATUS)));
+//        return booking;
+//    };
 }

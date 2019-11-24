@@ -1,7 +1,9 @@
-package com.theatre.movie.entity;
+package com.theatre.movie.dto;
 
 import com.theatre.movie.entity.BookingStatus;
+import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.entity.Seat;
+import com.theatre.movie.entity.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -11,16 +13,20 @@ import java.time.LocalDateTime;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Booking {
+public class BookingDto {
     private Integer bookingId;
     @NonNull
     private LocalDateTime createdAt;
     @NonNull
-    private Integer userId;
+    private User userId;
     @NonNull
-    private Integer bookedSeatId;
+    private Seat bookedSeat;
+
+    private String movieName;
+
+
     @NonNull
-    private Integer movieSessionId;
+    private MovieSession movieSession;
 
     private BookingStatus bookingStatus = BookingStatus.BOOKED;
 }

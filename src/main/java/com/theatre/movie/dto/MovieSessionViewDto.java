@@ -15,17 +15,18 @@ import java.util.Map;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class MovieSessionDto {
+public class MovieSessionViewDto {
     @NonNull
     private Integer sessionId;
     private String movieTitle;
     private Integer movieDuration;
     private String hallName;
-    private Map<Integer, List<BookedSeatDto>> bookedSeats = new HashMap<>();
+    private Map<Integer, List<BookedSeatViewDto>> bookedSeats = new HashMap<>();
+    private Integer bookedSeatsCount;
     private LocalDateTime startAt;
     private Double price;
 
-    public MovieSessionDto(MovieSession movieSession, Map<Integer, List<BookedSeatDto>> bookedSeats) {
+    public MovieSessionViewDto(MovieSession movieSession, Map<Integer, List<BookedSeatViewDto>> bookedSeats) {
         this.sessionId = movieSession.getSessionId();
         this.movieTitle = movieSession.getMovie().getTitle();
         this.movieDuration = movieSession.getMovie().getDurationMinutes();
@@ -44,11 +45,11 @@ public class MovieSessionDto {
         return startAt.format(DateTimeFormatter.ofPattern("dd.MM"));
     }
 
-    public void addSeatDto(Integer row, BookedSeatDto seat) {
+    public void addSeatDto(Integer row, BookedSeatViewDto seat) {
         if (bookedSeats.containsKey(row)){
             bookedSeats.get(row).add(seat);
         } else {
-            List<BookedSeatDto> seats = new ArrayList<>();
+            List<BookedSeatViewDto> seats = new ArrayList<>();
             seats.add(seat);
             bookedSeats.put(row, seats);
         }

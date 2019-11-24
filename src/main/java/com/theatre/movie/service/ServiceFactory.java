@@ -13,6 +13,7 @@ public class ServiceFactory {
     private static final MovieSessionService MOVIE_SESSIONS_SERVICE = new MovieSessionService(
             DaoFactory.getMovieSessionDao(), DaoFactory.getBookingDao()
     );
+    private static final BookingService BOOKING_SERVICE = new BookingService(DaoFactory.getBookingDao());
 
 
     public static MovieSessionsScheduleService getMovieSessionService() {
@@ -29,5 +30,9 @@ public class ServiceFactory {
 
     public static MovieSessionService getMovieSessionsScheduleService() {
         return MOVIE_SESSIONS_SERVICE;
+    }
+
+    public static BookingService getBookingService() {
+        return BOOKING_SERVICE;
     }
 }

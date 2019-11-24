@@ -59,7 +59,7 @@ Serd level nav bar
 	margin-right: 10px;
 	cursor: pointer;
 }
-.nav__serd-lvl li.active a{ 
+.nav__serd-lvl li.active a{
 	color: white;
 	background: #3cb4e7;
 	border-radius: 14px;
@@ -84,7 +84,7 @@ Serd level nav bar
 }
 .seatsChart{
 	display: inline-block;
-	vertical-align: top; 
+	vertical-align: top;
 	box-sizing: border-box;
 	width: 430px;
 }
@@ -102,7 +102,8 @@ Serd level nav bar
 	border-top:7px solid #000;
 	border-color: #c4c3c2;
 }
-.seatNumber{
+
+div .seatNumber{
 	display: inline-block;
 	padding: 10px 2px;
 	background-color: #7747e6;
@@ -113,6 +114,11 @@ Serd level nav bar
 	text-align: center;
 	min-width: 25px;
 }
+.seatUnavailable {
+	background-color: #c4c3c2 !important;
+	pointer-events: none !important;
+}
+
 .seatNumber:hover{
 	color: white;
 	background-color: black;
@@ -124,14 +130,10 @@ Serd level nav bar
 	padding: 2px;
 }
 .seatSelected {
-	background-color: black;
-	color: white;
+	background-color: black !important;
+	color: white !important;
 }
 
-.seatUnavailable div{
-	background-color: #c4c3c2;
-	pointer-events:none;
-}
 .seatRowNumber {
 	clear: none;
 	display: inline;
@@ -145,7 +147,7 @@ Serd level nav bar
 
 .seatsReceipt{
 	display: inline-block;
-	vertical-align: top; 
+	vertical-align: top;
 	width: 400px;
 }
 .clear-container{

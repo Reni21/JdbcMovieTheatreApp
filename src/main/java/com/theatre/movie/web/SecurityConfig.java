@@ -13,7 +13,7 @@ public class SecurityConfig {
 
     static {
         securityPages.put(Role.ADMIN, Arrays.asList("/admin", "/account"));
-        securityPages.put(Role.USER, Arrays.asList("/user", "/account"));
+        securityPages.put(Role.USER, Arrays.asList("/user", "/account", "/booking"));
     }
 
     public static boolean isSecurePage(String page) {

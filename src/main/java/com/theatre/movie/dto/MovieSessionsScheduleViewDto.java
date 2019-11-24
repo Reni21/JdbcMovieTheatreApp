@@ -9,13 +9,13 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class MovieSessionsScheduleDto {
+public class MovieSessionsScheduleViewDto {
     @NonNull
     private String title;
     @NonNull
     private Integer duration;
     @Setter
-    private List<SessionTimeDto> movieSessionTimes = new ArrayList<>();
+    private List<MovieSessionTimeViewDto> movieSessionTimes = new ArrayList<>();
     @Setter
     private String trailerUrl;
     @Setter
@@ -23,7 +23,7 @@ public class MovieSessionsScheduleDto {
     @Setter
     private String coverImgPath;
 
-    public void addMovieSessionTimeDto(SessionTimeDto timeDto){
+    public void addMovieSessionTimeDto(MovieSessionTimeViewDto timeDto){
         movieSessionTimes.add(timeDto);
     }
 

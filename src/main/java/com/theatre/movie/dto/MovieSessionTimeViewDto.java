@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class SessionTimeDto {
+public class MovieSessionTimeViewDto {
     private final Integer movieSessionId;
     private final LocalTime startAt;
 

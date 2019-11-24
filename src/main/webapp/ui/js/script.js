@@ -11,6 +11,7 @@ $(".seatNumber").click(
                 $(this).removeClass("seatSelected");
                 $('#seatsList .' + thisId).remove();
                 // Calling functions to update checkout total and seat counter.
+                $("#" + "checkbox_" + thisId).prop('checked', false);
                 removeFromCheckout(price);
                 refreshCounter();
                 setDisabledClass();
@@ -31,6 +32,7 @@ $(".seatNumber").click(
                 $("#seatsList").append('<li value=' + $(this).attr('value') + ' class=' + thisId + '>' + seatDetails + "  " +
                     "<button id='remove:" + thisId + "' class='btn btn-default btn-sm removeSeat' value='" + $(this).attr('value') + "'><strong>X</strong></button></li>");
                 $(this).addClass("seatSelected");
+                $("#" + "checkbox_" + thisId).prop('checked', true);
 
                 addToCheckout(price);
                 refreshCounter();
@@ -45,6 +47,7 @@ $(document).on('click', ".removeSeat", function () {
         // var price = parseFloat(buf);
         $('#seatsList .' + id[1]).remove();
         $("#" + id[1] + ".seatNumber").removeClass("seatSelected");
+        $("#" + "checkbox_" + id[1]).prop('checked', false);
         removeFromCheckout(price);
         refreshCounter();
     }
@@ -96,6 +99,7 @@ $("#btnClear").click(
         $('.txtSubTotal').text(0);
         $(".seatsAmount").text(0);
         $('.seatSelected').removeClass('seatSelected');
+        $('.booked_seats_checkbox').prop('checked', false);
         $('#seatsList li').remove();
 
         setDisabledClass();

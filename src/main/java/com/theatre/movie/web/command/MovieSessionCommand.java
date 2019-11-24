@@ -1,7 +1,7 @@
 package com.theatre.movie.web.command;
 
-import com.theatre.movie.dto.MenuDateDto;
-import com.theatre.movie.dto.MovieSessionDto;
+import com.theatre.movie.dto.MenuDateViewDto;
+import com.theatre.movie.dto.MovieSessionViewDto;
 import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
 import com.theatre.movie.web.PageData;
@@ -21,12 +21,12 @@ public class MovieSessionCommand implements Command {
     @Override
     public PageData execute(HttpServletRequest request) {
         request.setAttribute("activeTab", "null");
-        List<MenuDateDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(LocalDate.now());
+        List<MenuDateViewDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(LocalDate.now());
         request.setAttribute("menuDates", menuDates);
 
         String uri = request.getRequestURI();
         int id = Integer.parseInt(uri.substring(uri.lastIndexOf("/") + 1));
-        MovieSessionDto movieSession = movieSessionService.getMovieSessionById(id);
+        MovieSessionViewDto movieSession = movieSessionService.getMovieSessionById(id);
         request.setAttribute("movieSession", movieSession);
         LOG.info("Extracted movie session:\n" + movieSession);
         return new PageData(UrlConstants.MOVIE_SESSION_PAGE);

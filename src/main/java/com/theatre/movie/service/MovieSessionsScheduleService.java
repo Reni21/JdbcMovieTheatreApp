@@ -1,8 +1,8 @@
 package com.theatre.movie.service;
 
 import com.theatre.movie.dao.MovieSessionDao;
-import com.theatre.movie.dto.MovieSessionsScheduleDto;
-import com.theatre.movie.dto.SessionTimeDto;
+import com.theatre.movie.dto.MovieSessionsScheduleViewDto;
+import com.theatre.movie.dto.MovieSessionTimeViewDto;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.exception.InvalidScheduleDateException;
@@ -24,7 +24,7 @@ public class MovieSessionsScheduleService {
         this.movieSessionDao = movieSessionDao;
     }
 
-    public List<MovieSessionsScheduleDto> getMovieSessionsScheduleForDate(LocalDate date)
+    public List<MovieSessionsScheduleViewDto> getMovieSessionsScheduleForDate(LocalDate date)
             throws InvalidScheduleDateException {
 
         checkScheduleDateInValidRange(date);
@@ -40,11 +40,11 @@ public class MovieSessionsScheduleService {
         return sessionsByMovie.entrySet().stream()
                 .map(movieListEntry -> {
                     Movie movie = movieListEntry.getKey();
-                    MovieSessionsScheduleDto scheduleDto = new MovieSessionsScheduleDto(movie.getTitle(), movie.getDurationMinutes());
+                    MovieSessionsScheduleViewDto scheduleDto = new MovieSessionsScheduleViewDto(movie.getTitle(), movie.getDurationMinutes());
                     scheduleDto.setTrailerUrl(movie.getTrailerUrl());
                     scheduleDto.setBackgroundImgPath(movie.getBackgroundImgUrl());
                     scheduleDto.setCoverImgPath(movie.getCoverImgUrl());
-                    List<SessionTimeDto> timeDtos = mapMovieSessionTimeDtos(movieListEntry.getValue());
+                    List<MovieSessionTimeViewDto> timeDtos = mapMovieSessionTimeDtos(movieListEntry.getValue());
                     scheduleDto.setMovieSessionTimes(timeDtos);
                     return scheduleDto;
                 }).collect(Collectors.toList());
@@ -58,9 +58,9 @@ public class MovieSessionsScheduleService {
         }
     }
 
-    private List<SessionTimeDto> mapMovieSessionTimeDtos(List<MovieSession> movieSessions) {
+    private List<MovieSessionTimeViewDto> mapMovieSessionTimeDtos(List<MovieSession> movieSessions) {
         return movieSessions.stream()
-                .map(session -> new SessionTimeDto(
+                .map(session -> new MovieSessionTimeViewDto(
                         session.getSessionId(),
                         session.getStartAt().toLocalTime()))
                 .collect(Collectors.toList());

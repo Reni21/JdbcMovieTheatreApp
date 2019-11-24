@@ -1,6 +1,6 @@
 package com.theatre.movie.service;
 
-import com.theatre.movie.dto.MenuDateDto;
+import com.theatre.movie.dto.MenuDateViewDto;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class WeekScheduleDatesServiceTest {
 
     @Test
     public void shouldReturnProperScheduleDatesList() {
-        List<MenuDateDto> weekScheduleDates = instance.getWeekScheduleDates(LocalDate.now());
+        List<MenuDateViewDto> weekScheduleDates = instance.getWeekScheduleDates(LocalDate.now());
         int res = weekScheduleDates.size();
         assertEquals(7, res);
         assertTrue(weekScheduleDates.get(0).isActive());

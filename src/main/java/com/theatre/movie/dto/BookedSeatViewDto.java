@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class BookedSeatDto {
+public class BookedSeatViewDto {
     @NonNull
     private Integer seatId;
     @NonNull

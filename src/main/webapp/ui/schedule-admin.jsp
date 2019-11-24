@@ -56,6 +56,29 @@
                     <a class="add" href="#"><b>+</b> SESSION</a>
                 </div>
             </div>
+            <!--
+        ===============================================================================================
+        карточка с фильмами
+        ===============================================================================================
+    -->
+            <div class="movie-card">
+                <div class="movie-card__container">
+                    <div class="movie-cover"/>
+                    <button class="btn delete">Remove movie</button>
+                </div>
+
+                <div class="movie-description">
+                    <div class="movie-title">The Battle of the Five Armies</div>
+                    <p class="movie-duration">Duration: 120min</p>
+
+                    <a class="tag" href="movie-session">9:00</a>
+                    <a class="tag" href="movie-session">13:30</a>
+                    <a class="tag" href="movie-session">16:00</a>
+                    <a class="tag" href="movie-session">18:00</a>
+                    <a class="tag" href="movie-session">20:30</a>
+
+                    <a class="add" href="#"><b>+</b> SESSION</a>
+                </div>
             </div>
             <!--
         ===============================================================================================
@@ -81,33 +104,6 @@
                     <a class="add" href="#"><b>+</b> SESSION</a>
                 </div>
             </div>
-            </div>
-            <!--
-        ===============================================================================================
-        карточка с фильмами
-        ===============================================================================================
-    -->
-            <div class="movie-card">
-                <div class="movie-card__container">
-                    <div class="movie-cover"/>
-                    <button class="btn delete">Remove movie</button>
-                </div>
-
-                <div class="movie-description">
-                    <div class="movie-title">The Battle of the Five Armies</div>
-                    <p class="movie-duration">Duration: 120min</p>
-
-                    <a class="tag" href="movie-session">9:00</a>
-                    <a class="tag" href="movie-session">13:30</a>
-                    <a class="tag" href="movie-session">16:00</a>
-                    <a class="tag" href="movie-session">18:00</a>
-                    <a class="tag" href="movie-session">20:30</a>
-
-                    <a class="add" href="#"><b>+</b> SESSION</a>
-                </div>
-            </div>
-            </div>
-
             <!--
     ===============================================================================================
     карточка с фильмами
@@ -131,7 +127,6 @@
 
                     <a class="add" href="#"><b>+</b> SESSION</a>
                 </div>
-            </div>
             </div>
         </main>
     </body>
