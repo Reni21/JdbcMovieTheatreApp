@@ -2,17 +2,25 @@ package com.theatre.movie.web.command;
 
 import javax.servlet.http.HttpSession;
 
+import com.theatre.movie.dto.BookingViewDto;
 import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
+import com.theatre.movie.service.BookingService;
+import com.theatre.movie.service.ServiceFactory;
 import com.theatre.movie.web.PageData;
+import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import static com.theatre.movie.web.command.UrlConstants.NOT_FOUND_PAGE;
 
+@AllArgsConstructor
 public class AccountCommand implements Command {
     private static final Logger LOG = Logger.getLogger(AccountCommand.class);
+    private BookingService bookingService = ServiceFactory.getBookingService();
 
     @Override
     public PageData execute(HttpServletRequest request) {
@@ -23,7 +31,10 @@ public class AccountCommand implements Command {
         LOG.info("User role=" + role);
         if (Role.ADMIN.equals(role)) {
             return new PageData(UrlConstants.ADMIN_ACCOUNT_PAGE);
-        } else if(Role.USER.equals(role)){
+        } else if (Role.USER.equals(role)) {
+            List<BookingViewDto> bookings = bookingService.getActualUsersBookingById(user.getId());
+            LOG.info("Extracted bookings:\n" + bookings);
+            request.setAttribute("bookings" , bookings);
             return new PageData(UrlConstants.USER_ACCOUNT_PAGE);
         }
         return new PageData(NOT_FOUND_PAGE); // todo: throw exception?

@@ -1,7 +1,7 @@
 package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.BookingDao;
-import com.theatre.movie.dto.BookingDto;
+import com.theatre.movie.dto.BookingViewDto;
 import com.theatre.movie.entity.Booking;
 import com.theatre.movie.entity.BookingStatus;
 import com.theatre.movie.persistence.DataSourceConnectionFactory;
@@ -9,22 +9,13 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import static com.theatre.movie.dao.impl.DbTablesConstants.BookingTable;
+import static com.theatre.movie.dao.impl.DbTablesConstants.*;
 
-public class BookingDaoImpl extends AbstractDao<BookingDto> implements BookingDao {
+public class BookingDaoImpl extends AbstractDao<BookingViewDto> implements BookingDao {
     private static final Logger LOG = Logger.getLogger(BookingDaoImpl.class);
-
-
-//    @Override
-//    public List<Booking> getAllByMovieSessionId(int movieSessionId) {
-//        LOG.info("Get Seat by hall id: " + BookingTable.MOVIE_SESSION_ID + "=" + movieSessionId);
-//        String query = "SELECT * FROM `booking` WHERE " + BookingTable.MOVIE_SESSION_ID + " = ?";
-//        return super.getAll(query,
-//                ps -> ps.setInt(1, movieSessionId),
-//                EntityMapperProvider.BOOKING_ENTITY_MAPPER);
-//    }
 
     @Override
     public Set<Integer> getAllBookedSeatsIdByMovieSessionId(int movieSessionId) {
@@ -49,14 +40,24 @@ public class BookingDaoImpl extends AbstractDao<BookingDto> implements BookingDa
     }
 
 
-//    @Override
-//    public List<Booking> getAllActualByUserId(int userId) {
-//        String query = "SELECT b.* FROM `booking` b INNER JOIN `movie_session` s ON b." + BookingTable.MOVIE_SESSION_ID + " = s.session_id" +
-//                "WHERE s.start_at >= CURRENT_TIMESTAMP() AND b." + BookingTable.USER_ID + " = ?;";
-//        return super.getAll(query,
-//                ps -> ps.setInt(1, userId),
-//                EntityMapperProvider.BOOKING_ENTITY_MAPPER);
-//    }
+    @Override
+    public List<BookingViewDto> getAllActualBookingByUserId(int userId) {
+        String query =
+                "SELECT b." + BookingTable.BOOKING_ID + ", s." + MovieSessionTable.START_AT +
+                        ", m." + MovieTable.TITLE + ", m." + MovieTable.DURATION_MIN + ", h." + HallTable.NAME +
+                        ", s2." + SeatTable.SEAT_ROW + ", s2." + SeatTable.PLACE +
+                        " FROM `booking` b" +
+                        " JOIN `movie_session` s ON b." + BookingTable.MOVIE_SESSION_ID + " = s." + MovieSessionTable.SESSION_ID +
+                        " JOIN `movie` m on s." + MovieSessionTable.MOVIE_ID + " = m." + MovieTable.MOVIE_ID +
+                        " JOIN `hall` h on s." + MovieSessionTable.HALL_ID + " = h." + HallTable.HALL_ID +
+                        " JOIN `seat` s2 on b." + BookingTable.SEAT_ID + " = s2." + SeatTable.SEAT_ID +
+                        " WHERE s." + MovieSessionTable.START_AT + " >= CURRENT_TIMESTAMP()" +
+                        " AND b." + BookingTable.USER_ID + " = ?";
+
+        return super.getAll(query,
+                ps -> ps.setInt(1, userId),
+                EntityMapperProvider.BOOKING_VIEW_ENTITY_MAPPER);
+    }
 
     @Override
     public Booking create(Booking booking) {

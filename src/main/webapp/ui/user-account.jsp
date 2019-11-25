@@ -23,17 +23,29 @@
             </ul>
         </header>
         <main>
-            <div class="movie-card">
-                <div class="movie-card__container">
-                    <div class="movie-description">
-                        <div class="movie-cover"/>
-                        <div><h2><p class="booking_number">№23123</p></h2></div>
+
+            <%--            <c:if test="${allPages ne null}">--%>
+            <%--                <c:forEach var="i" begin="1" end="${allPages}">--%>
+            <%--                    <li><a href="?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>--%>
+            <%--                </c:forEach>--%>
+            <%--            </c:if>--%>
+            <c:set value="${requestScope['bookings']}" var="bookings"/>
+            <c:if test="${bookings!= null && !bookings.isEmpty()}">
+                <c:forEach items="${bookings}" var="booking">
+                    <div class="movie-card">
+                        <div class="movie-card__container">
+                            <div class="movie-description">
+                                <div class="movie-cover"/>
+                                <h2 class="booking_number">№${booking.bookingId}</h2>
+                            </div>
+                            <div class="movie-title">${booking.movieName}</div>
+                            <p class="movie-duration">Duration: ${booking.movieDuration}min</p>
+                            <h3>| Date: ${booking.getFormattedDate()} &nbsp;&nbsp;&nbsp;&nbsp;| Start at: ${booking.getTimeView()} &nbsp;&nbsp;&nbsp;&nbsp;| Hall: ${booking.hallName} &nbsp;&nbsp;&nbsp;&nbsp;|Row: ${booking.row}&nbsp;&nbsp;&nbsp;&nbsp;| Seat: ${booking.place}</h3>
+                        </div>
                     </div>
-                    <div class="movie-title">The Battle of the Five Armies</div>
-                    <p class="movie-duration">Duration: 120min</p>
-                    <h3>| Date: 21.10 &nbsp;&nbsp;&nbsp;&nbsp;| Start at: 9:00 &nbsp;&nbsp;&nbsp;&nbsp;|Seat: 12 &nbsp;&nbsp;&nbsp;&nbsp;| Row:2</h3>
-                </div>
-            </div>
+                </c:forEach>
+            </c:if>
+
         </main>
     </body>
 </html>

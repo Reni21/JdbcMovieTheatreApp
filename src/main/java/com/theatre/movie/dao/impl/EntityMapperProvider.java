@@ -1,6 +1,7 @@
 package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.EntityMapper;
+import com.theatre.movie.dto.BookingViewDto;
 import com.theatre.movie.entity.*;
 
 import static com.theatre.movie.dao.impl.DbTablesConstants.*;
@@ -53,6 +54,19 @@ public class EntityMapperProvider {
                 Role.valueOf(rs.getString(UserTable.ROLE)));
         user.setId(rs.getInt(UserTable.USER_ID));
         return user;
+    };
+
+        public static final EntityMapper<BookingViewDto> BOOKING_VIEW_ENTITY_MAPPER = rs -> {
+            BookingViewDto bookingViewDto = new BookingViewDto(
+                    rs.getInt(BookingTable.BOOKING_ID),
+                   rs.getString(MovieTable.TITLE),
+                    rs.getInt(MovieTable.DURATION_MIN),
+                    rs.getTimestamp(MovieSessionTable.START_AT).toLocalDateTime(),
+                    rs.getString(HallTable.NAME),
+                    rs.getInt(SeatTable.SEAT_ROW),
+                    rs.getInt(SeatTable.PLACE)
+            );
+        return bookingViewDto;
     };
 
 //    public static final EntityMapper<Booking> BOOKING_ENTITY_MAPPER = rs -> {

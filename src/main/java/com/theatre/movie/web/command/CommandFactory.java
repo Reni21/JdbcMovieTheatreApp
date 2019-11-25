@@ -19,7 +19,7 @@ public class CommandFactory {
         getCommandMap.put("404", defaultCommand);
         getCommandMap.put("login", new LoginGetCommand());
         getCommandMap.put("sign-up", new SignUpGetCommand());
-        getCommandMap.put("account", new AccountCommand());
+        getCommandMap.put("account", new AccountCommand(ServiceFactory.getBookingService()));
         getCommandMap.put("logout", new LogOutCommand());
         getCommandMap.put("movie-session", new MovieSessionCommand(
                 ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionService()));
