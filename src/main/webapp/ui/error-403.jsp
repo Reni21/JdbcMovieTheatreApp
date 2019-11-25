@@ -1,7 +1,9 @@
-<!doctype html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isErrorPage="true" %>
+
+<!doctype html>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
 
@@ -18,13 +20,13 @@
         <main>
             <div class="content-card">
                 <div class="content-card__container">
-                    <div class="page-title">${requestScope["javax.servlet.error.status_code"]} NOT FOUND</div>
+                    <div class="page-title">403 FORBIDDEN</div>
                     <div class="form__container">
                         <p class="error-msg" style="font-size: 18px;font-weight: 600;color: grey;text-align: center;">
-                            <c:if test="${not empty error}">${error}</c:if>
+                            Error message for 403 page is here
                         </p>
                         <a href="">
-                            <button class="signinbutton">Home page</button>
+                            <button class="signinbutton">Go to home page</button>
                         </a>
                     </div>
                 </div>
