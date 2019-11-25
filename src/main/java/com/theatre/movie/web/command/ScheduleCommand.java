@@ -44,7 +44,7 @@ public class ScheduleCommand implements Command {
             return new PageData(UrlConstants.SCHEDULE_PAGE);
         } catch (InvalidScheduleDateException e) {
             LOG.warn("Get movie schedule request failed: " + e.getMessage());
-            return new PageData(UrlConstants.NOT_FOUND_PAGE);
+            return new PageData(request.getContextPath() + "/404-error", true);
         }
 
     }

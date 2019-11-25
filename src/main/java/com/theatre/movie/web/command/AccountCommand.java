@@ -37,6 +37,6 @@ public class AccountCommand implements Command {
             request.setAttribute("bookings" , bookings);
             return new PageData(UrlConstants.USER_ACCOUNT_PAGE);
         }
-        return new PageData(NOT_FOUND_PAGE); // todo: throw exception?
+        return new PageData(request.getContextPath() + "/403-error", true);
     }
 }
