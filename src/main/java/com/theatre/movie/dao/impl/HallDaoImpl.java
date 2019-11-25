@@ -3,7 +3,7 @@ package com.theatre.movie.dao.impl;
 import com.theatre.movie.dao.HallDao;
 import com.theatre.movie.entity.Hall;
 import com.theatre.movie.entity.Seat;
-import com.theatre.movie.persistence.DataSourceConnectionFactory;
+import com.theatre.movie.persistence.ConnectionFactory;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -11,10 +11,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.theatre.movie.dao.impl.DbTablesConstants.*;
+import static com.theatre.movie.dao.impl.DbTablesConstants.HallTable;
+import static com.theatre.movie.dao.impl.DbTablesConstants.SeatTable;
 
 public class HallDaoImpl extends AbstractDao<Hall> implements HallDao {
     private static final Logger LOG = Logger.getLogger(HallDaoImpl.class);
+
+    public HallDaoImpl(ConnectionFactory connectionFactory) {
+        super(connectionFactory);
+    }
 
     @Override
     public Hall getHallById(int id) {
@@ -24,7 +29,7 @@ public class HallDaoImpl extends AbstractDao<Hall> implements HallDao {
                 " LEFT JOIN seat s on h." + HallTable.HALL_ID + " = s." + SeatTable.HALL_ID +
                 " WHERE h." + HallTable.HALL_ID + " = ?";
 
-        try (Connection conn = DataSourceConnectionFactory.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
 

@@ -2,16 +2,21 @@ package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.MovieSessionDao;
 import com.theatre.movie.entity.MovieSession;
+import com.theatre.movie.persistence.ConnectionFactory;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.theatre.movie.dao.impl.DbTablesConstants.*;
+import static com.theatre.movie.dao.impl.DbTablesConstants.MovieSessionTable;
 
 public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements MovieSessionDao {
     private static final Logger LOG = Logger.getLogger(MovieSessionDaoImpl.class);
+
+    public MovieSessionDaoImpl(ConnectionFactory connectionFactory) {
+        super(connectionFactory);
+    }
 
     @Override
     public List<MovieSession> getAllInRange(LocalDateTime from, LocalDateTime to) {

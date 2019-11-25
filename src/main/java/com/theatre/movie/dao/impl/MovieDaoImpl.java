@@ -2,18 +2,22 @@ package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.MovieDao;
 import com.theatre.movie.entity.Movie;
+import com.theatre.movie.persistence.ConnectionFactory;
 import org.apache.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.theatre.movie.dao.impl.DbTablesConstants.*;
+import static com.theatre.movie.dao.impl.DbTablesConstants.MovieTable;
 
 
 public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     private static final Logger LOG = Logger.getLogger(MovieDaoImpl.class);
 
+    public MovieDaoImpl(ConnectionFactory connectionFactory) {
+        super(connectionFactory);
+    }
 
     @Override
     public Movie getById(int id) {

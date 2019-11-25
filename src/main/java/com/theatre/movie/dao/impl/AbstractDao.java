@@ -2,20 +2,24 @@ package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.EntityMapper;
 import com.theatre.movie.dao.StatementConsumer;
-import com.theatre.movie.persistence.DataSourceConnectionFactory;
+import com.theatre.movie.persistence.ConnectionFactory;
+import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 public abstract class AbstractDao<T> {
     private static final Logger LOG = Logger.getLogger(AbstractDao.class);
+
+    private ConnectionFactory connectionFactory;
 
     public T getById(String query, StatementConsumer<T> statementConsumer, EntityMapper<T> mapper) {
         T result = null;
 
-        try (Connection conn = DataSourceConnectionFactory.getConnection();
+        try (Connection conn = connectionFactory.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             statementConsumer.accept(preparedStatement);
 
@@ -35,7 +39,7 @@ public abstract class AbstractDao<T> {
     public boolean checkIfDataExists(String query, StatementConsumer<T> statementConsumer) {
         int result = 0;
 
-        try (Connection conn = DataSourceConnectionFactory.getConnection();
+        try (Connection conn = connectionFactory.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             statementConsumer.accept(preparedStatement);
 
@@ -58,7 +62,7 @@ public abstract class AbstractDao<T> {
     public List<T> getAll(String query, StatementConsumer<T> statementConsumer, EntityMapper<T> mapper) {
         List<T> result = new ArrayList<>();
 
-        try (Connection conn = DataSourceConnectionFactory.getConnection();
+        try (Connection conn = connectionFactory.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             if (statementConsumer != null) {
                 statementConsumer.accept(preparedStatement);
@@ -77,7 +81,7 @@ public abstract class AbstractDao<T> {
     }
 
     public int create(String query, StatementConsumer<T> statementConsumer) {
-        try (Connection conn = DataSourceConnectionFactory.getConnection();
+        try (Connection conn = connectionFactory.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statementConsumer.accept(preparedStatement);
 
@@ -121,8 +125,12 @@ public abstract class AbstractDao<T> {
         return false;
     }
 
+    protected Connection getConnection() {
+        return connectionFactory.getConnection();
+    }
+
     private boolean updateRemove(String query, StatementConsumer<T> statementConsumer) throws SQLException {
-        try (Connection conn = DataSourceConnectionFactory.getConnection();
+        try (Connection conn = connectionFactory.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             statementConsumer.accept(preparedStatement);
 

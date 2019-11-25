@@ -2,12 +2,17 @@ package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.UserDao;
 import com.theatre.movie.entity.User;
+import com.theatre.movie.persistence.ConnectionFactory;
 import org.apache.log4j.Logger;
 
 import java.util.List;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
+
+    public UserDaoImpl(ConnectionFactory connectionFactory) {
+        super(connectionFactory);
+    }
 
     @Override
     public User create(User entity) {

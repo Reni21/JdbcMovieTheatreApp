@@ -4,7 +4,7 @@ import com.theatre.movie.dao.BookingDao;
 import com.theatre.movie.dto.BookingViewDto;
 import com.theatre.movie.entity.Booking;
 import com.theatre.movie.entity.BookingStatus;
-import com.theatre.movie.persistence.DataSourceConnectionFactory;
+import com.theatre.movie.persistence.ConnectionFactory;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -17,13 +17,17 @@ import static com.theatre.movie.dao.impl.DbTablesConstants.*;
 public class BookingDaoImpl extends AbstractDao<BookingViewDto> implements BookingDao {
     private static final Logger LOG = Logger.getLogger(BookingDaoImpl.class);
 
+    public BookingDaoImpl(ConnectionFactory connectionFactory) {
+        super(connectionFactory);
+    }
+
     @Override
     public Set<Integer> getAllBookedSeatsIdByMovieSessionId(int movieSessionId) {
         String query = "SELECT seat_id FROM `booking` WHERE " + BookingTable.MOVIE_SESSION_ID + " = ?" +
                 " AND (" + BookingTable.STATUS + " = 'BOOKED' OR " + BookingTable.STATUS + " = 'PAID')";
         Set<Integer> result = new HashSet<>();
 
-        try (Connection conn = DataSourceConnectionFactory.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, movieSessionId);
 

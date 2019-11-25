@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DataSourceConnectionFactory {
+public class DataSourceConnectionFactory implements ConnectionFactory{
     //private static final Logger LOG = LogManager.getLogger(DataSourceConnectionFactory.class);
     private static final DataSourceConnectionFactory INSTANCE = new DataSourceConnectionFactory();
 
@@ -43,7 +43,7 @@ public class DataSourceConnectionFactory {
         return INSTANCE;
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
