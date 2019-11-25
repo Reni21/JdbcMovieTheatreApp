@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import static com.theatre.movie.dao.impl.DbTablesConstants.*;
+
 
 public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     private static final Logger LOG = Logger.getLogger(MovieDaoImpl.class);
@@ -32,9 +34,9 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
         LOG.debug("Create movie: + " + entity);
 
         String query = "INSERT INTO `movie` ("
-                + DbTablesConstants.MovieTable.TITLE + ", " + DbTablesConstants.MovieTable.DIRECTED_BY + ", "
-                + DbTablesConstants.MovieTable.DESCRIPTION + ", " + DbTablesConstants.MovieTable.DURATION_MIN + ", "
-                + DbTablesConstants.MovieTable.TRAILER_URL + ", " + DbTablesConstants.MovieTable.BACKGROUND_IMG_URL + ", " + DbTablesConstants.MovieTable.COVER_IMG_URL
+                + MovieTable.TITLE + ", " + MovieTable.DIRECTED_BY + ", "
+                + MovieTable.DESCRIPTION + ", " + MovieTable.DURATION_MIN + ", "
+                + MovieTable.TRAILER_URL + ", " + MovieTable.BACKGROUND_IMG_URL + ", " + MovieTable.COVER_IMG_URL
                 + ") VALUE (?, ?, ?, ?, ?, ?, ?)";
         System.out.println(query);
         return super.create(query, ps -> fillStatementWithCommonFields(ps, entity));
@@ -45,10 +47,10 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
         LOG.debug("Update movie: " + entity);
 
         String query = "UPDATE `movie` "
-                + DbTablesConstants.MovieTable.TITLE + " = ? , " + DbTablesConstants.MovieTable.DIRECTED_BY + " = ? , "
-                + DbTablesConstants.MovieTable.DESCRIPTION + " = ? , " + DbTablesConstants.MovieTable.DURATION_MIN + " = ? , "
-                + DbTablesConstants.MovieTable.TRAILER_URL + " = ? , " + DbTablesConstants.MovieTable.BACKGROUND_IMG_URL + " = ? , " + DbTablesConstants.MovieTable.COVER_IMG_URL + " = ? "
-                + "WHERE " + DbTablesConstants.MovieTable.MOVIE_ID + " = ?";
+                + MovieTable.TITLE + " = ? , " + MovieTable.DIRECTED_BY + " = ? , "
+                + MovieTable.DESCRIPTION + " = ? , " + MovieTable.DURATION_MIN + " = ? , "
+                + MovieTable.TRAILER_URL + " = ? , " + MovieTable.BACKGROUND_IMG_URL + " = ? , " + MovieTable.COVER_IMG_URL + " = ? "
+                + "WHERE " + MovieTable.MOVIE_ID + " = ?";
         return super.update(query, ps -> {
             fillStatementWithCommonFields(ps, entity);
             ps.setInt(8, entity.getMovieId());

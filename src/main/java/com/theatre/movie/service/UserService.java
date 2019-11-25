@@ -4,7 +4,7 @@ import com.theatre.movie.dao.UserDao;
 import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.UserAlreadyExistException;
-import com.theatre.movie.web.dto.CreateUserRequest;
+import com.theatre.movie.web.dto.CreateUserRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -21,14 +21,14 @@ public class UserService {
         return userDao.getUserByCredential(login, password);
     }
 
-    public User addUser(CreateUserRequest userRequest) throws UserAlreadyExistException {
+    public User addUser(CreateUserRequestDto userRequest) throws UserAlreadyExistException {
         validateUserRequest(userRequest);
         //todo: add pass hashing
         User user = new User(userRequest.getLogin(), userRequest.getPassword(), userRequest.getEmail(), Role.USER);
         return userDao.create(user);
     }
 
-    private void validateUserRequest(CreateUserRequest userRequest) throws UserAlreadyExistException {
+    private void validateUserRequest(CreateUserRequestDto userRequest) throws UserAlreadyExistException {
         if (isEmpty(userRequest.getLogin()) || isEmpty(userRequest.getPassword()) || isEmpty(userRequest.getEmail())) {
             throw new IllegalArgumentException("Required data is empty.");
         }

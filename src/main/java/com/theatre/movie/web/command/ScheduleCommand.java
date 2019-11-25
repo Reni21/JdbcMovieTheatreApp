@@ -5,7 +5,7 @@ import com.theatre.movie.dto.MovieSessionsScheduleViewDto;
 import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.InvalidScheduleDateException;
-import com.theatre.movie.service.MovieSessionsScheduleService;
+import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
 import com.theatre.movie.web.PageData;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ScheduleCommand implements Command {
     private static final Logger LOG = Logger.getLogger(ScheduleCommand.class);
-    private MovieSessionsScheduleService sessionService;
+    private MovieSessionService sessionService;
     private WeekScheduleDatesService weekScheduleDatesService;
 
     @Override

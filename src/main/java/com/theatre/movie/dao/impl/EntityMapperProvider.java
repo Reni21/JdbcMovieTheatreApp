@@ -7,23 +7,13 @@ import static com.theatre.movie.dao.impl.DbTablesConstants.*;
 
 public class EntityMapperProvider {
 
-    public static final EntityMapper<MovieSession> MOVIE_SESSION_SIMPLE_MAPPER = rs -> {
-        Movie movie = new Movie(
-                rs.getString(DbTablesConstants.MovieTable.TITLE),
-                rs.getString(DbTablesConstants.MovieTable.DIRECTED_BY),
-                rs.getInt(DbTablesConstants.MovieTable.DURATION_MIN));
-        movie.setMovieId(rs.getInt(MovieTable.MOVIE_ID));
-        movie.setDescription(rs.getString(DbTablesConstants.MovieTable.DESCRIPTION));
-        movie.setTrailerUrl(rs.getString(DbTablesConstants.MovieTable.TRAILER_URL));
-        movie.setBackgroundImgUrl(rs.getString(DbTablesConstants.MovieTable.BACKGROUND_IMG_URL));
-        movie.setCoverImgUrl(rs.getString(DbTablesConstants.MovieTable.COVER_IMG_URL));
-
+    public static final EntityMapper<MovieSession> MOVIE_SESSION_ENTITY_MAPPER = rs -> {
         MovieSession session = new MovieSession(
-                movie,
-                null,
-                rs.getTimestamp(DbTablesConstants.MovieSessionTable.START_AT).toLocalDateTime(),
-                rs.getDouble(DbTablesConstants.MovieSessionTable.PRICE));
-        session.setSessionId(rs.getInt(DbTablesConstants.MovieSessionTable.SESSION_ID));
+                rs.getInt(MovieSessionTable.MOVIE_ID),
+                rs.getInt(MovieSessionTable.HALL_ID),
+                rs.getTimestamp(MovieSessionTable.START_AT).toLocalDateTime(),
+                rs.getDouble(MovieSessionTable.PRICE));
+        session.setSessionId(rs.getInt(MovieSessionTable.SESSION_ID));
         return session;
     };
 
@@ -75,4 +65,8 @@ public class EntityMapperProvider {
 //        booking.setBookingStatus(BookingStatus.valueOf(rs.getString(BookingTable.STATUS)));
 //        return booking;
 //    };
+
+    public static EntityMapper<Hall> getHallEntityMapper(){
+        return HALL_ENTITY_MAPPER;
+    }
 }

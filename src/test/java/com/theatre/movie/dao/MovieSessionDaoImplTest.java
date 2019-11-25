@@ -27,8 +27,8 @@ public class MovieSessionDaoImplTest {
     @Test
     public void shouldReturnMovieSession() {
         MovieSession res = instance.getById(1);
-        System.out.println(res.getMovie());
-        System.out.println(res.getHall());
+//        System.out.println(res.getMovieId());
+//        System.out.println(res.getHall());
         assertNotNull(res);
     }
 

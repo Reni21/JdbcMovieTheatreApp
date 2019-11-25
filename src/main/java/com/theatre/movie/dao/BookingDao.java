@@ -12,5 +12,5 @@ public interface BookingDao {
 
 //    List<Booking> getAllActualByUserId(int userId);
 
-    int create(Booking booking);
+    Booking create(Booking booking);
 }

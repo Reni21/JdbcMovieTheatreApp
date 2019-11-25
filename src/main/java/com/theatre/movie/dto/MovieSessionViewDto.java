@@ -26,11 +26,15 @@ public class MovieSessionViewDto {
     private LocalDateTime startAt;
     private Double price;
 
-    public MovieSessionViewDto(MovieSession movieSession, Map<Integer, List<BookedSeatViewDto>> bookedSeats) {
+    public MovieSessionViewDto(MovieSession movieSession,
+                               String movieTitle,
+                               Integer movieDuration,
+                               String hallName,
+                               Map<Integer, List<BookedSeatViewDto>> bookedSeats) {
         this.sessionId = movieSession.getSessionId();
-        this.movieTitle = movieSession.getMovie().getTitle();
-        this.movieDuration = movieSession.getMovie().getDurationMinutes();
-        this.hallName = movieSession.getHall().getHallName();
+        this.movieTitle = movieTitle;
+        this.movieDuration = movieDuration;
+        this.hallName = hallName;
         this.bookedSeats = bookedSeats;
         this.startAt = movieSession.getStartAt();
         this.price = movieSession.getPrice();

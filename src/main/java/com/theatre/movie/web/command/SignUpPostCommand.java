@@ -4,7 +4,7 @@ import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.UserAlreadyExistException;
 import com.theatre.movie.service.UserService;
 import com.theatre.movie.web.PageData;
-import com.theatre.movie.web.dto.CreateUserRequest;
+import com.theatre.movie.web.dto.CreateUserRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -23,7 +23,7 @@ public class SignUpPostCommand implements Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        CreateUserRequest userRequest = new CreateUserRequest(login, password, email);
+        CreateUserRequestDto userRequest = new CreateUserRequestDto(login, password, email);
         try {
             User user = userService.addUser(userRequest);
             if (user == null) {

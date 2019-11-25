@@ -3,6 +3,7 @@ package com.theatre.movie.web.command;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.service.BookingService;
 import com.theatre.movie.web.PageData;
+import com.theatre.movie.web.dto.CreateBookingRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -20,8 +21,9 @@ public class BookingCommand implements Command {
         User user = (User) httpSession.getAttribute("user");
         int movieSessionId = Integer.parseInt(request.getParameter("movieSessionId"));
         String[] bookedSeatsId = request.getParameterValues("bookedSeats");
+        CreateBookingRequestDto createBookingRequest = new CreateBookingRequestDto(user.getId(),movieSessionId,bookedSeatsId);
         try {
-            bookingService.createBooking(user, movieSessionId, bookedSeatsId);
+            bookingService.createBooking(createBookingRequest);
         } catch (Exception ex){
             LOG.info("Booking creation failed: " + ex.getMessage());
             request.setAttribute("error", ex.getMessage());

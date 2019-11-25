@@ -5,18 +5,17 @@ import com.theatre.movie.dao.DaoFactory;
 
 public class ServiceFactory {
 
-    private static final MovieSessionsScheduleService MOVIE_SESSION_SERVICE = new MovieSessionsScheduleService(
-            DaoFactory.getMovieSessionDao()
+    private static final MovieSessionService MOVIE_SESSION_SERVICE = new MovieSessionService(
+            DaoFactory.getMovieSessionDao(),
+            DaoFactory.getBookingDao(),
+            DaoFactory.getHallDao(),
+            DaoFactory.getMovieDao()
     );
     private static final WeekScheduleDatesService WEEK_SCHEDULE_DATES_SERVICE = new WeekScheduleDatesService();
     private static final UserService USER_SERVICE = new UserService(DaoFactory.getUserDao());
-    private static final MovieSessionService MOVIE_SESSIONS_SERVICE = new MovieSessionService(
-            DaoFactory.getMovieSessionDao(), DaoFactory.getBookingDao()
-    );
     private static final BookingService BOOKING_SERVICE = new BookingService(DaoFactory.getBookingDao());
 
-
-    public static MovieSessionsScheduleService getMovieSessionService() {
+    public static MovieSessionService getMovieSessionService() {
         return MOVIE_SESSION_SERVICE;
     }
 
@@ -26,10 +25,6 @@ public class ServiceFactory {
 
     public static UserService getUserService() {
         return USER_SERVICE;
-    }
-
-    public static MovieSessionService getMovieSessionsScheduleService() {
-        return MOVIE_SESSIONS_SERVICE;
     }
 
     public static BookingService getBookingService() {

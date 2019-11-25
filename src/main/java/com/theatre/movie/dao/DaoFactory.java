@@ -1,9 +1,6 @@
 package com.theatre.movie.dao;
 
-import com.theatre.movie.dao.impl.BookingDaoImpl;
-import com.theatre.movie.dao.impl.MovieDaoImpl;
-import com.theatre.movie.dao.impl.MovieSessionDaoImpl;
-import com.theatre.movie.dao.impl.UserDaoImpl;
+import com.theatre.movie.dao.impl.*;
 import lombok.Getter;
 
 @Getter
@@ -12,6 +9,7 @@ public class DaoFactory {
     private static final MovieSessionDao MOVIE_SESSION_DAO = new MovieSessionDaoImpl();
     private static final UserDao USER_DAO = new UserDaoImpl();
     private static final BookingDao BOOKING_DAO = new BookingDaoImpl();
+    private static final HallDao HALL_DAO = new HallDaoImpl();
 
     public static MovieDao getMovieDao() {
         return MOVIE_DAO;
@@ -27,5 +25,9 @@ public class DaoFactory {
 
     public static BookingDao getBookingDao() {
         return BOOKING_DAO;
+    }
+
+    public static HallDao getHallDao() {
+        return HALL_DAO;
     }
 }

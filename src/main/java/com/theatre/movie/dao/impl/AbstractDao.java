@@ -28,6 +28,7 @@ public abstract class AbstractDao<T> {
         } catch (SQLException e) {
             LOG.error("Exception while getting all entities", e);
         }
+        LOG.info("Extracted entity:\n" + result);
         return result;
     }
 

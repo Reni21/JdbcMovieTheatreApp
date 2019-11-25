@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @ToString
 public class MovieSession {
     private Integer sessionId;
-    private Movie movie;
-    private Hall hall;
+    private Integer movieId;
+    private Integer hallId;
     private LocalDateTime startAt;
     private Double price;
 
@@ -19,9 +19,9 @@ public class MovieSession {
         this.sessionId = sessionId;
     }
 
-    public MovieSession(Movie movie, Hall hall, LocalDateTime startAt, Double price) {
-        this.movie = movie;
-        this.hall = hall;
+    public MovieSession(Integer movieId, Integer hallId, LocalDateTime startAt, Double price) {
+        this.movieId = movieId;
+        this.hallId = hallId;
         this.startAt = startAt;
         this.price = price;
     }

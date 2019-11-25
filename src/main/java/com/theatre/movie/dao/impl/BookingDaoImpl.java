@@ -1,8 +1,8 @@
 package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.BookingDao;
-import com.theatre.movie.entity.Booking;
 import com.theatre.movie.dto.BookingDto;
+import com.theatre.movie.entity.Booking;
 import com.theatre.movie.entity.BookingStatus;
 import com.theatre.movie.persistence.DataSourceConnectionFactory;
 import org.apache.log4j.Logger;
@@ -59,7 +59,7 @@ public class BookingDaoImpl extends AbstractDao<BookingDto> implements BookingDa
 //    }
 
     @Override
-    public int create(Booking booking) {
+    public Booking create(Booking booking) {
         LOG.debug("Create booking: + " + booking);
 
         String query = "INSERT INTO `booking` ("
@@ -68,12 +68,14 @@ public class BookingDaoImpl extends AbstractDao<BookingDto> implements BookingDa
                 + BookingTable.STATUS
                 + ") VALUE (?, ?, ?, ?, ?)";
         System.out.println(query);
-        return super.create(query, ps -> {
+        int id = super.create(query, ps -> {
             ps.setTimestamp(1, Timestamp.valueOf(booking.getCreatedAt()));
             ps.setInt(2, booking.getUserId());
             ps.setInt(3, booking.getBookedSeatId());
             ps.setInt(4, booking.getMovieSessionId());
             ps.setString(5, BookingStatus.BOOKED.toString());
         });
+        booking.setBookingId(id);
+        return booking;
     }
 }

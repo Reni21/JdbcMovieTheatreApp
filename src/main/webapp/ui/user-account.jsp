@@ -11,25 +11,27 @@
         <title>Login Movies World</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
-        <link rel="stylesheet" href="ui/css/login-styles.css">
+        <link rel="stylesheet" type="text/css" href="ui/css/schedule-admin-styles.css">
     </head>
     <body>
         <header>
             <!-- Common menu -->
             <c:import url="main-menu.jsp"/>
             <!-- Second level menu -->
+            <ul class="nav__second-lvl">
+                <li class="active"><a href="#">MY TICKETS</a></li>
+            </ul>
         </header>
         <main>
-            <!--
-            ===============================================================================================
-            Форма для заполения
-            ===============================================================================================
-        -->
-            <div class="content-card">
-                <div class="content-card__container">
-                    <div class="page-title">Hello user: ${sessionScope['user'].login}</div>
-                    <div class="form__container">
+            <div class="movie-card">
+                <div class="movie-card__container">
+                    <div class="movie-description">
+                        <div class="movie-cover"/>
+                        <div><h2><p class="booking_number">№23123</p></h2></div>
                     </div>
+                    <div class="movie-title">The Battle of the Five Armies</div>
+                    <p class="movie-duration">Duration: 120min</p>
+                    <h3>| Date: 21.10 &nbsp;&nbsp;&nbsp;&nbsp;| Start at: 9:00 &nbsp;&nbsp;&nbsp;&nbsp;|Seat: 12 &nbsp;&nbsp;&nbsp;&nbsp;| Row:2</h3>
                 </div>
             </div>
         </main>

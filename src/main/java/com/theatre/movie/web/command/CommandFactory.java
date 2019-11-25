@@ -22,7 +22,7 @@ public class CommandFactory {
         getCommandMap.put("account", new AccountCommand());
         getCommandMap.put("logout", new LogOutCommand());
         getCommandMap.put("movie-session", new MovieSessionCommand(
-                ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionsScheduleService()));
+                ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionService()));
 
         postCommandMap.put("locale", new LanguageCommand());
         postCommandMap.put("login", new LoginPostCommand(ServiceFactory.getUserService()));
