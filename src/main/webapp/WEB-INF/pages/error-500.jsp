@@ -12,30 +12,26 @@
         <title>Error</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
-        <link rel="stylesheet" href="ui/css/login-styles.css">
+        <link rel="stylesheet" href="static/css/login-styles.css">
     </head>
     <body>
-        <div id="js-particles" style="position: fixed;width: 100%;height: auto;z-index: 0;"></div>
         <header>
         </header>
         <main>
-            <div style="z-index: 1;">
-                <div style="margin: 0 auto;width: 960px;height: auto;position: relative;">
-                    <div class="page-title" style="font-size: 125px;margin-bottom: 35px">404</div>
-                    <div class="page-title">SORRY! NOT FOUND</div>
+            <div class="content-card">
+                <div class="content-card__container">
+                    <div class="page-title">500 SOMETHING WENT WRONG</div>
                     <div class="form__container">
                         <p class="error-msg" style="font-size: 18px;font-weight: 600;color: grey;text-align: center;">
-                            Error message for 404 page is here
+                            Error message for 500 page is here
                         </p>
                         <a href="">
-                            <button class="signinbutton">Home page</button>
+                            <button class="signinbutton">Go to home page</button>
                         </a>
                     </div>
                 </div>
             </div>
         </main>
-        <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
-        <script type="text/javascript" src="ui/js/particles.js"></script>
     </body>
 </html>
 

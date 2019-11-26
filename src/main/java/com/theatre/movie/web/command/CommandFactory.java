@@ -12,7 +12,7 @@ public class CommandFactory {
     private static Command defaultCommand = new NotFoundCommand();
 
     static {
-        getCommandMap.put("main", new HomeCommand());
+        getCommandMap.put("index", new HomeCommand());
         getCommandMap.put("schedule", new ScheduleCommand(
                 ServiceFactory.getMovieSessionService(), ServiceFactory.getWeekScheduleDatesService()));
         getCommandMap.put("404", defaultCommand);

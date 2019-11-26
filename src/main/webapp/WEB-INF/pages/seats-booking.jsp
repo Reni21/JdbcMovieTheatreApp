@@ -14,7 +14,7 @@
         <title>${movieSession.movieTitle}</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
-        <link rel="stylesheet" type="text/css" href="ui/css/booking-styles.css">
+        <link rel="stylesheet" type="text/css" href="static/css/booking-styles.css">
 
     </head>
     <body>
@@ -45,7 +45,7 @@
                     <div class="hall-title">${session.getFormattedDate()} ${session.getFormattedTime()} <img
                             class="clock"
                             aria-hidden="true"
-                            src="ui/img/clock.png"
+                            src="static/img/clock.png"
                             alt="Italian"
                             height="20"> ${session.movieDuration}
                         <fmt:message key="schedule.min"/></div>
@@ -126,7 +126,7 @@
         </main>
         <c:if test="${user == null || user.getRole().toString() == 'USER'}">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-            <script type="text/javascript" src="ui/js/script.js"></script>
+            <script type="text/javascript" src="static/js/script.js"></script>
         </c:if>
     </body>
 </html>

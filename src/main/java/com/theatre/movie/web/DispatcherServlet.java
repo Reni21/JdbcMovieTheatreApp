@@ -29,25 +29,32 @@ public class DispatcherServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = getPath(req);
+        LOG.info("Will get command py path: " + path);
         Command command = CommandFactory.getCommand(path, req.getMethod());
 
         PageData pageData = command.execute(req);
+
         if (pageData.isRedirect()) {
-            resp.sendRedirect(pageData.getUrl());
+            String url = pageData.getUrl();
+            LOG.info("Request redirect into new url: " + url);
+            resp.sendRedirect(url);
+
         } else {
-            req.getRequestDispatcher(pageData.getUrl()).forward(req, resp);
+            String modifiedPath = "/WEB-INF/pages/" + pageData.getUrl();
+            LOG.info("Request forward into modified path: " + modifiedPath);
+            req.getRequestDispatcher(modifiedPath).forward(req, resp);
         }
     }
 
     private String getPath(HttpServletRequest req) {
         String requestUri = req.getRequestURI();
-        int indexFrom = requestUri.lastIndexOf("app/") + 4;
-        String endPoint = requestUri.substring(indexFrom);
+        int cutFromIndex = requestUri.lastIndexOf("app/") + 4;
+        String endPoint = requestUri.substring(cutFromIndex);
+
         if (endPoint.contains("/")) {
-            int indexTo = endPoint.lastIndexOf('/');
-            endPoint = endPoint.substring(0, indexTo);
+            int cutToIndex = endPoint.lastIndexOf('/');
+            endPoint = endPoint.substring(0, cutToIndex);
         }
-        LOG.info("Path: " + endPoint);
         return endPoint;
     }
 }

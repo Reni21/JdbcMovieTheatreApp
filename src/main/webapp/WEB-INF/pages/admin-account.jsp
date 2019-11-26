@@ -11,7 +11,7 @@
         <title>Login Movies World</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
-        <link rel="stylesheet" href="ui/css/login-styles.css">
+        <link rel="stylesheet" href="static/css/login-styles.css">
     </head>
     <body>
         <header>

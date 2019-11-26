@@ -10,7 +10,7 @@
         <title>Sign-up Cinema World</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
-        <link rel="stylesheet" href="ui/css/login-styles.css">
+        <link rel="stylesheet" href="static/css/login-styles.css">
     <body>
         <header>
             <!-- Common menu -->
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </main>
-        <script type="text/javascript" src="ui/js/validate-forms-script.js"></script>
+        <script type="text/javascript" src="static/js/validate-forms-script.js"></script>
     </body>
 </html>
 

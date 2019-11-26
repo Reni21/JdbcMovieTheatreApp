@@ -13,7 +13,7 @@
         <title>Movies schedule</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
-        <link rel="stylesheet" type="text/css" href="ui/css/schedule-styles.css">
+        <link rel="stylesheet" type="text/css" href="static/css/schedule-styles.css">
     </head>
     <body>
         <header>
@@ -46,7 +46,7 @@
                     <div class="movie-card__container">
                         <a href="${session.trailerUrl}" target="_blank">
                             <div class="movie-cover">
-                                <img class="play-icon" src="ui/img/play.png" alt="cover"/>
+                                <img class="play-icon" src="static/img/play.png" alt="cover"/>
                                 <img class="cover-img"
                                      src="${session.coverImgPath}"
                                      alt="cover"/>
