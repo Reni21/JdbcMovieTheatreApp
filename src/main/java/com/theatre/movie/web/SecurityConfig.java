@@ -12,8 +12,8 @@ public class SecurityConfig {
     private static Map<Role, List<String>> securityPages = new HashMap<>();
 
     static {
-        securityPages.put(Role.ADMIN, Arrays.asList("/admin", "/account"));
-        securityPages.put(Role.USER, Arrays.asList("/user", "/account", "/booking"));
+        securityPages.put(Role.ROLE_ADMIN, Arrays.asList("/admin", "/account"));
+        securityPages.put(Role.ROLE_USER, Arrays.asList("/user", "/account", "/booking"));
     }
 
     public static boolean isSecurePage(String page) {

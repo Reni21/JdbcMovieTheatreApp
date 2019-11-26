@@ -81,7 +81,7 @@
                             <div class="clear-container">
                                 <c:set var="user" value="${sessionScope['user']}"/>
                                 <c:choose>
-                                    <c:when test="${user == null || user.getRole().toString() == 'USER'}">
+                                    <c:when test="${user == null || user.getRole().toString() == 'ROLE_USER'}">
                                         <p>Hall ${session.hallName} | Selected: <span class="seatsAmount">0 </span>
                                             <button id="btnClear" class="btn btn-disabled">CLEAR ALL &ensp; <strong
                                                     class="btn-disabled">X</strong></button>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="checkout col-lg-offset-6">
-                        <c:if test="${user == null || user.getRole().toString() == 'USER'}">
+                        <c:if test="${user == null || user.getRole().toString() == 'ROLE_USER'}">
                             <span>Total price: </span><span class="txtSubTotal">0.00</span><br/>
                         </c:if>
                         <c:choose>
@@ -107,7 +107,7 @@
                                 <h3 style="text-align: center; color: gray; margin: 0; padding-top: 15px;">
                                     Log in to book tickets</h3>
                             </c:when>
-                            <c:when test="${user != null && user.getRole().toString() == 'ADMIN'}">
+                            <c:when test="${user != null && user.getRole().toString() == 'ROLE_ADMIN'}">
                                 <button id="btnCheckout" name="btnCheckout" class="btn btn-primary primary-active"
                                         onclick="location.href='movie-session'">Delete movie session
                                 </button>
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </main>
-        <c:if test="${user == null || user.getRole().toString() == 'USER'}">
+        <c:if test="${user == null || user.getRole().toString() == 'ROLE_USER'}">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
             <script type="text/javascript" src="static/js/script.js"></script>
         </c:if>

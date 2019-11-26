@@ -3,6 +3,7 @@ package com.theatre.movie.dao.impl;
 import com.theatre.movie.dao.UserDao;
 import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
+import com.theatre.movie.persistence.DataSourceConnectionFactoryWithPool;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class UserDaoImplTest {
 
     @Before
     public void setUp() {
-        instance = new UserDaoImpl();
+        instance = new UserDaoImpl(DataSourceConnectionFactoryWithPool.getInstance());
     }
 
     @Test
@@ -32,7 +33,7 @@ public class UserDaoImplTest {
     public void shouldReturnNotNullUserWithRoleAdmin() {
         User user = instance.getById(1);
         Role res = user.getRole();
-        assertEquals(Role.ADMIN, res);
+        assertEquals(Role.ROLE_ADMIN, res);
     }
 
     @Test

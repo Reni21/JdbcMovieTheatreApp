@@ -15,10 +15,6 @@ public class MovieSession {
     private LocalDateTime startAt;
     private Double price;
 
-    public MovieSession(Integer sessionId) {
-        this.sessionId = sessionId;
-    }
-
     public MovieSession(Integer movieId, Integer hallId, LocalDateTime startAt, Double price) {
         this.movieId = movieId;
         this.hallId = hallId;

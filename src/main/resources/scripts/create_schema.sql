@@ -7,7 +7,7 @@ CREATE TABLE user
     user_id  INT NOT NULL AUTO_INCREMENT,
     login    VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role     ENUM ("ADMIN", "USER"),
+    role     ENUM ("ROLE_ADMIN", "ROLE_USER"),
     email    VARCHAR(255) UNIQUE,
     PRIMARY KEY (user_id)
 );

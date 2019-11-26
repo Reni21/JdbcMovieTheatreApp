@@ -38,7 +38,7 @@ public class ScheduleCommand implements Command {
 
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
-            if (user != null && Role.ADMIN.equals(user.getRole())) {
+            if (user != null && Role.ROLE_ADMIN.equals(user.getRole())) {
                 return new PageData(UrlConstants.ADMIN_SCHEDULE_PAGE);
             }
             return new PageData(UrlConstants.SCHEDULE_PAGE);

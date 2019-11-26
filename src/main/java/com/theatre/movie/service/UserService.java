@@ -24,7 +24,7 @@ public class UserService {
     public User addUser(CreateUserRequestDto userRequest) throws UserAlreadyExistException {
         validateUserRequest(userRequest);
         //todo: add pass hashing
-        User user = new User(userRequest.getLogin(), userRequest.getPassword(), userRequest.getEmail(), Role.USER);
+        User user = new User(userRequest.getLogin(), userRequest.getPassword(), userRequest.getEmail(), Role.ROLE_USER);
         return userDao.create(user);
     }
 
