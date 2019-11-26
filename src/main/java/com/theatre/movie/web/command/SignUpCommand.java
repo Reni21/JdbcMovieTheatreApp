@@ -12,12 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @AllArgsConstructor
-public class SignUpPostCommand implements Command {
-    private static final Logger LOG = Logger.getLogger(SignUpPostCommand.class);
+public class SignUpCommand extends MultipleMethodCommand {
+    private static final Logger LOG = Logger.getLogger(SignUpCommand.class);
     private UserService userService;
 
+
     @Override
-    public PageData execute(HttpServletRequest request) {
+    protected PageData performGet(HttpServletRequest request) {
+        request.setAttribute("activeTab", "account");
+        return new PageData(UrlConstants.SIGN_UP_PAGE);
+    }
+
+    @Override
+    protected PageData performPost(HttpServletRequest request) {
         request.setAttribute("activeTab", "account");
 
         String login = request.getParameter("login");

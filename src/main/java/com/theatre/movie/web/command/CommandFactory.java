@@ -13,20 +13,19 @@ public class CommandFactory {
 
     static {
         getCommandMap.put("main", new HomeCommand());
-        getCommandMap.put("movie", new MovieCommand(DaoFactory.getMovieDao()));
         getCommandMap.put("schedule", new ScheduleCommand(
                 ServiceFactory.getMovieSessionService(), ServiceFactory.getWeekScheduleDatesService()));
         getCommandMap.put("404", defaultCommand);
-        getCommandMap.put("login", new LoginGetCommand());
-        getCommandMap.put("sign-up", new SignUpGetCommand());
+        getCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
+        getCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));
         getCommandMap.put("account", new AccountCommand(ServiceFactory.getBookingService()));
         getCommandMap.put("logout", new LogOutCommand());
         getCommandMap.put("movie-session", new MovieSessionCommand(
                 ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionService()));
 
         postCommandMap.put("locale", new LanguageCommand());
-        postCommandMap.put("login", new LoginPostCommand(ServiceFactory.getUserService()));
-        postCommandMap.put("sign-up", new SignUpPostCommand(ServiceFactory.getUserService()));
+        postCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
+        postCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));
         postCommandMap.put("booking", new BookingCommand(ServiceFactory.getBookingService()));
     }
 

@@ -10,12 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @AllArgsConstructor
-public class LoginPostCommand implements Command {
-    private static final Logger LOG = Logger.getLogger(LoginPostCommand.class);
+public class LoginCommand extends MultipleMethodCommand {
+    private static final Logger LOG = Logger.getLogger(LoginCommand.class);
     private UserService userService;
 
     @Override
-    public PageData execute(HttpServletRequest request) {
+    protected PageData performGet(HttpServletRequest request) {
+        request.setAttribute("activeTab", "account");
+        return new PageData(UrlConstants.LOGIN_PAGE);
+    }
+
+    @Override
+    protected PageData performPost(HttpServletRequest request) {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         request.setAttribute("activeTab", "account");
