@@ -5,6 +5,8 @@
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
 
+<jsp:useBean id="sessions" scope="request" type="java.util.List"/>
+
 <html lang="en">
     <head>
         <title>Movies schedule</title>
@@ -32,30 +34,25 @@
             <div class="wrapper btn">
                 <button type="submit" class="add-movie">Add movie</button>
             </div>
-            <!--
-            ===============================================================================================
-            карточка с фильмами
-            ===============================================================================================
-        -->
-            <div class="movie-card">
-                <div class="movie-card__container">
-                    <div class="movie-cover"/>
-                    <button class="btn delete">Remove movie</button>
+
+            <c:forEach items="${sessions}" var="session">
+                <div class="movie-card">
+                    <div class="movie-card__container">
+                        <div class="movie-cover"/>
+                        <button class="btn delete">Remove movie</button>
+                    </div>
+
+                    <div class="movie-description">
+                        <div class="movie-title">${session.title}</div>
+                        <p class="movie-duration">Duration: ${session.duration}min</p>
+                        <c:forEach items="${session.movieSessionTimes}" var="time">
+                            <a class="tag" href="movie-session/${time.getMovieSessionId()}">${time.getTimeView()}</a>
+                        </c:forEach>
+
+                        <a class="add" href="#"><b>+</b> SESSION</a>
+                    </div>
                 </div>
-
-                <div class="movie-description">
-                    <div class="movie-title">The Battle of the Five Armies</div>
-                    <p class="movie-duration">Duration: 120min</p>
-
-                    <a class="tag" href="movie-session/2">9:00</a>
-                    <a class="tag" href="movie-session/3">13:30</a>
-                    <a class="tag" href="movie-session/9">16:00</a>
-                    <a class="tag" href="movie-session/4">18:00</a>
-                    <a class="tag" href="movie-session/4">20:30</a>
-
-                    <a class="add" href="#"><b>+</b> SESSION</a>
-                </div>
-            </div>
+            </c:forEach>
         </main>
     </body>
 </html>

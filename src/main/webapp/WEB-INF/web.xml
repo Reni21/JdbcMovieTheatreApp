@@ -91,7 +91,7 @@
     <error-page>
         <!-- Uncaught exception -->
         <error-code>500</error-code>
-        <location>/ui/error-404.jsp</location>
+        <location>/ui/error-500.jsp</location>
     </error-page>
     <error-page>
         <!-- Unsupported servlet method -->

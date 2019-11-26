@@ -126,7 +126,7 @@
         </main>
         <c:if test="${user == null || user.getRole().toString() == 'USER'}">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-            <script type="text/javascript" src="ui/js/script.js" class="${session.price}"></script>
+            <script type="text/javascript" src="ui/js/script.js"></script>
         </c:if>
     </body>
 </html>
