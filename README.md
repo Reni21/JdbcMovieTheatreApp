@@ -1,6 +1,6 @@
 # JDBC Movie Theatre App
 
-Tема: "Система Кинотеатр"
+Tема: "Система Кинотеатр" 
 
 ТЗ: Интернет витрина маленького Кинотеатра. В нем есть Расписание показа фильмов на все 7 дней недели 
 с 9:00 до 22:00 (начало последнего фильма). Незарегистрированный пользователь может видеть: расписание, свободные
@@ -8,6 +8,24 @@ Tема: "Система Кинотеатр"
 билет на выбранное место. Администратор может: внести в расписание новый фильм, отменить фильм,
 просматривать посещаемость зала.
 Уровни доступа: аноним, USER, ADMIN.
+
+## Технологии
+- DB - MySql
+- Java version up 8.
+- Maven
+
+## Установка и запуск проекта
+
+1. Clone project with "git clone" command
+2. Install plugin for Lombok library
+3. Run create_schema.sql from resources/script folder
+4. Run insert_into_schema.sql from resources/script folder
+5. Set required number of additional days to correct the movie session dates in movie_session table in update_schema.sql file from resources/script folder and run script.
+5. Update DB login and password in db.properties
+6. Run in terminal command "mvn clean tomcat7:run"
+7. Go to link localhost:8080/theatre
+
+## Доступный функционал
 
 - #### Уровень доступа - любой:
 
