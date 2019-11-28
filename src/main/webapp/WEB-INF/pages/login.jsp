@@ -35,11 +35,11 @@
                         <form class="form__http-properties" name="loginForm" action="login" method="POST" onsubmit="return validateLoginForm()">
                             <!-- Fields -->
                             <p class="field-title">Username*</p>
-                            <input type="text" name="login" class="input" placeholder="" required=""/>
+                            <input type="text" name="login" class="input" placeholder="" maxlength="15" required=""/>
 
 
                             <p class="field-title">Password*</p>
-                            <input type="password" name="password" class="input" placeholder="" required=""/>
+                            <input type="password" name="password" class="input" placeholder="" maxlength="15" required=""/>
 
                             <c:if test="${not empty error}">
                                 <h4 style="text-align: center; color: red">${error}</h4>

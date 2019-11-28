@@ -1,1 +1,1 @@
-UPDATE movie_session SET start_at = DATE_ADD(start_at, INTERVAL 1 DAY);
+UPDATE movie_session SET start_at = DATE_ADD(start_at, INTERVAL 2 DAY);

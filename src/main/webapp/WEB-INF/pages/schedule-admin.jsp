@@ -13,6 +13,7 @@
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
         <link rel="stylesheet" type="text/css" href="static/css/schedule-admin-styles.css">
+        <link rel="stylesheet" type="text/css" href="static/css/modal-styles.css">
     </head>
     <body>
         <header>
@@ -32,8 +33,39 @@
         <main>
             <!-- Button -->
             <div class="wrapper btn">
-                <button type="submit" class="add-movie">Add movie</button>
+                <button type="submit" class="myBtn add-movie">Add movie</button>
             </div>
+
+            <!-- The Modal for movies-->
+            <div id="myModal" class="modal">
+                <div class="content">
+                    <div class="page-title">Login</div>
+                    <!-- Modal content -->
+                    <div class="modal-content">
+
+                        <form id="selectedMovies" method="post" action="movie">
+                            <label class="container">One
+                                <input class="remember" type='checkbox' name='movie_ids[]' value='1'id='checkbox_1' />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Two
+                                <input class="remember" type='checkbox' name='movie_ids[]' value='2'id='checkbox_2' />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Three
+                                <input class="remember" type='checkbox' name='movie_ids[]' value='3'id='checkbox_3' />
+                                <span class="checkmark"></span>
+                            </label>
+                        </form>
+                    </div>
+
+                    <button id="btnCheckout" name="confirm" class="signinbutton"
+                            type="submit" form="selectedMovies" onclick="submit_form();">Confirm</button>
+                    <button class="close">Cancel and close</button>
+                </div>
+            </div>
+
+
 
             <c:forEach items="${sessions}" var="session">
                 <div class="movie-card">
@@ -45,15 +77,19 @@
                     <div class="movie-description">
                         <div class="movie-title">${session.title}</div>
                         <p class="movie-duration">Duration: ${session.duration}min</p>
+                        <form action="/action_page.php" class="session-form">
+                            <input class="session-field" type="number" name="FirstName" placeholder="hh" maxlength="2" min="9" max="22">
+                            <input class="session-field" type="number" name="FirstName" placeholder="mm" maxlength="2" min="0" max="60">
+                            <input type="submit" value="Add session" class="add">
+                        </form>
                         <c:forEach items="${session.movieSessionTimes}" var="time">
                             <a class="tag" href="movie-session/${time.getMovieSessionId()}">${time.getTimeView()}</a>
                         </c:forEach>
-
-                        <a class="add" href="#"><b>+</b> SESSION</a>
                     </div>
                 </div>
             </c:forEach>
         </main>
+        <script type="text/javascript" src="static/js//modal-script.js"></script>
     </body>
 </html>
 

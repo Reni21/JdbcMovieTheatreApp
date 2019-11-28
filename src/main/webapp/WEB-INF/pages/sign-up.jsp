@@ -40,13 +40,13 @@
                             <!-- Fields -->
 
                             <p class="field-title">Username*</p>
-                            <input type="text" name="login" class="input" placeholder="" required=""/>
+                            <input type="text" name="login" class="input" placeholder="" maxlength="15" required=""/>
 
                             <p class="field-title">Password*</p>
-                            <input type="password" name="password" class="input" placeholder="" required=""/>
+                            <input type="password" name="password" class="input" placeholder="" maxlength="15" required=""/>
 
                             <p class="field-title">Email*</p>
-                            <input type="text" name="email" class="input" placeholder="" required=""/>
+                            <input type="email" name="email" class="input" placeholder="" maxlength="25" required=""/>
 
                             <c:if test="${not empty error}">
                                 <h4 style="text-align: center; color: red">${error}</h4>
