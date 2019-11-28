@@ -14,7 +14,9 @@ public class CommandFactory {
     static {
         getCommandMap.put("index", new HomeCommand());
         getCommandMap.put("schedule", new ScheduleCommand(
-                ServiceFactory.getMovieSessionService(), ServiceFactory.getWeekScheduleDatesService()));
+                ServiceFactory.getMovieSessionService(),
+                ServiceFactory.getWeekScheduleDatesService(),
+                ServiceFactory.getHallService()));
         getCommandMap.put("404", defaultCommand);
         getCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
         getCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));
@@ -27,6 +29,10 @@ public class CommandFactory {
         postCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
         postCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));
         postCommandMap.put("booking", new BookingCommand(ServiceFactory.getBookingService()));
+        postCommandMap.put("schedule", new ScheduleCommand(
+                ServiceFactory.getMovieSessionService(),
+                ServiceFactory.getWeekScheduleDatesService(),
+                ServiceFactory.getHallService()));
     }
 
     private CommandFactory() {

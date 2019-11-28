@@ -13,6 +13,7 @@ import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.entity.Seat;
 import com.theatre.movie.exception.InvalidScheduleDateException;
+import com.theatre.movie.web.dto.CreateMovieSessionRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -101,5 +102,12 @@ public class MovieSessionService {
             }
             return dto;
         }).collect(Collectors.groupingBy(BookedSeatViewDto::getRow));
+    }
+
+    public boolean createMovieSession(CreateMovieSessionRequestDto movieSessionDto) {
+        LOG.info("Create new movie session for data: " + movieSessionDto);
+
+
+        return true;
     }
 }

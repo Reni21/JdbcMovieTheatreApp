@@ -1,5 +1,6 @@
 package com.theatre.movie.dao.impl;
 
+import com.theatre.movie.dao.EntityMapper;
 import com.theatre.movie.dao.HallDao;
 import com.theatre.movie.entity.Hall;
 import com.theatre.movie.entity.Seat;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import static com.theatre.movie.dao.impl.DbTablesConstants.HallTable;
 import static com.theatre.movie.dao.impl.DbTablesConstants.SeatTable;
@@ -24,7 +26,6 @@ public class HallDaoImpl extends AbstractDao<Hall> implements HallDao {
     @Override
     public Hall getHallById(int id) {
         LOG.info("Get hall by id=" + id);
-//        String query = "SELECT * FROM `hall` WHERE " + HallTable.HALL_ID + " = ?";
         String query = "SELECT * FROM hall h" +
                 " LEFT JOIN seat s on h." + HallTable.HALL_ID + " = s." + SeatTable.HALL_ID +
                 " WHERE h." + HallTable.HALL_ID + " = ?";
@@ -53,4 +54,11 @@ public class HallDaoImpl extends AbstractDao<Hall> implements HallDao {
 //                ps -> ps.setInt(1, id),
 //                EntityMapperProvider.HALL_ENTITY_MAPPER);
     }
+
+    @Override
+    public List<Hall> getAll() {
+        String query = "SELECT * FROM `hall`";
+        return super.getAll(query, EntityMapperProvider.HALL_ENTITY_MAPPER);
+    }
+
 }

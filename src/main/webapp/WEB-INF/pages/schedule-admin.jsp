@@ -45,26 +45,26 @@
 
                         <form id="selectedMovies" method="post" action="movie">
                             <label class="container">One
-                                <input class="remember" type='checkbox' name='movie_ids[]' value='1'id='checkbox_1' />
+                                <input class="remember" type='checkbox' name='movie_ids[]' value='1' id='checkbox_1'/>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="container">Two
-                                <input class="remember" type='checkbox' name='movie_ids[]' value='2'id='checkbox_2' />
+                                <input class="remember" type='checkbox' name='movie_ids[]' value='2' id='checkbox_2'/>
                                 <span class="checkmark"></span>
                             </label>
                             <label class="container">Three
-                                <input class="remember" type='checkbox' name='movie_ids[]' value='3'id='checkbox_3' />
+                                <input class="remember" type='checkbox' name='movie_ids[]' value='3' id='checkbox_3'/>
                                 <span class="checkmark"></span>
                             </label>
                         </form>
                     </div>
 
                     <button id="btnCheckout" name="confirm" class="signinbutton"
-                            type="submit" form="selectedMovies" onclick="submit_form();">Confirm</button>
+                            type="submit" form="selectedMovies" onclick="submit_form();">Confirm
+                    </button>
                     <button class="close">Cancel and close</button>
                 </div>
             </div>
-
 
 
             <c:forEach items="${sessions}" var="session">
@@ -77,9 +77,13 @@
                     <div class="movie-description">
                         <div class="movie-title">${session.title}</div>
                         <p class="movie-duration">Duration: ${session.duration}min</p>
-                        <form action="/action_page.php" class="session-form">
-                            <input class="session-field" type="number" name="FirstName" placeholder="hh" maxlength="2" min="9" max="22">
-                            <input class="session-field" type="number" name="FirstName" placeholder="mm" maxlength="2" min="0" max="60">
+                        <form action="schedule<c:if test="${param.get('date') != null}">?date=${param.get('date')}</c:if>"
+                              class="session-form" method="post">
+                            <input type="hidden" name="movieTitle" value="${session.title}"/>
+                            <input class="session-field" type="number" name="hours" placeholder="hh" maxlength="2"
+                                   min="9" max="22" style="padding: 8px 5px">
+                            <input class="session-field" type="number" name="minutes" placeholder="mm" maxlength="2"
+                                   min="0" max="60" style="padding: 8px 5px">
                             <input type="submit" value="Add session" class="add">
                         </form>
                         <c:forEach items="${session.movieSessionTimes}" var="time">
@@ -89,7 +93,7 @@
                 </div>
             </c:forEach>
         </main>
-        <script type="text/javascript" src="static/js//modal-script.js"></script>
+        <script type="text/javascript" src="static/js/modal-script.js"></script>
     </body>
 </html>
 

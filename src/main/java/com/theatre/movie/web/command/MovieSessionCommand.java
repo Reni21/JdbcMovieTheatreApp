@@ -13,13 +13,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
-public class MovieSessionCommand implements Command {
+public class MovieSessionCommand extends MultipleMethodCommand {
     private static final Logger LOG = Logger.getLogger(MovieSessionCommand.class);
     private WeekScheduleDatesService weekScheduleDatesService;
     private MovieSessionService movieSessionService;
 
     @Override
-    public PageData execute(HttpServletRequest request) {
+    protected PageData performGet(HttpServletRequest request) {
         request.setAttribute("activeTab", "null");
         List<MenuDateViewDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(LocalDate.now());
         request.setAttribute("menuDates", menuDates);
@@ -30,5 +30,11 @@ public class MovieSessionCommand implements Command {
         request.setAttribute("movieSession", movieSession);
         LOG.info("Extracted movie session:\n" + movieSession);
         return new PageData(UrlConstants.MOVIE_SESSION_PAGE);
+    }
+
+    @Override
+    protected PageData performPost(HttpServletRequest request) {
+
+        return null;
     }
 }

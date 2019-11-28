@@ -147,10 +147,10 @@ button{
 }
 
 .session-field{
-	width: 40px;
+	width: 80px;
 	border:1px solid black;
 	border-radius: 2px;
-	height: 25px;
-	padding: 3px 10px;
+	/*height: 25px;*/
+	padding: 7px 10px;
 	margin-bottom: 15px;
 }
