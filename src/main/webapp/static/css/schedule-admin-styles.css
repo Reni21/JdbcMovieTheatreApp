@@ -75,19 +75,14 @@ button{
 	background: black;
 	font-weight: 500;
 	border-radius: 3px 18px 18px 3px;
-	border: 0;
-	padding: 3px 15px 3px 10px;
+	border: none;
+	outline: 0 none;
+	padding: 3px 15px 5px 10px;
 	font-size: 16px;
 	color: white;
-	line-height: 26px;
+	line-height: 24px;
 	cursor: pointer;
 }
-
-/* 	.add b{
-		font-size: 22px;
-		font-weight: 800;
-		margin-right: 7px;
-	} */
 
 .add:hover{
 	color: #3cb4e7;
@@ -105,6 +100,7 @@ button{
 	margin-right: 10px;
 	line-height: 35px;
 	cursor: pointer;
+	outline: 0 none;
 }
 
 .delete:hover{
@@ -150,7 +146,6 @@ button{
 	width: 80px;
 	border:1px solid black;
 	border-radius: 2px;
-	/*height: 25px;*/
 	padding: 7px 10px;
 	margin-bottom: 15px;
 }

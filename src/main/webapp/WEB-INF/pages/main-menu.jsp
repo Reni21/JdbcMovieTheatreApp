@@ -35,7 +35,7 @@
                                 </li>
 
                                 <c:if test="${not empty user}">
-                                    <li ><a href="logout">Log out</a>
+                                    <li ><a href="logout"><fmt:message key="main.menu.logout"/></a>
                                     </li>
                                 </c:if>
                             </ul>
