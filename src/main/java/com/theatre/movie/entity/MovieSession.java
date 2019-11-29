@@ -4,21 +4,20 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+
+@RequiredArgsConstructor
 @Setter
 @Getter
 @EqualsAndHashCode
 @ToString
 public class MovieSession {
     private Integer sessionId;
+    @NonNull
     private Integer movieId;
+    @NonNull
     private Integer hallId;
+    @NonNull
     private LocalDateTime startAt;
+    @NonNull
     private Double price;
-
-    public MovieSession(Integer movieId, Integer hallId, LocalDateTime startAt, Double price) {
-        this.movieId = movieId;
-        this.hallId = hallId;
-        this.startAt = startAt;
-        this.price = price;
-    }
 }

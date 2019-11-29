@@ -23,3 +23,31 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
+// Send new session data
+$(function() {
+  $('form').submit(function(e) {
+    var $form = $(this);
+    var hours = $form.find('input[name="hours"]').val();
+    var minutes = $form.find('input[name="minutes"]').val();
+    var movieId = $form.find('input[name="movieId"]').val();
+
+    $.ajax({
+      type: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    }).done(function(data) {
+      var sessionId = data;
+      console.log('success');
+      $form.find('input[name="hours"]').val('');
+      $form.find('input[name="price"]').val('');
+      $form.find('input[name="minutes"]').val('');
+      $('#movie_' + movieId).append($('<a class="tag" href="movie-session/' + sessionId + '">'+ hours + ':' + minutes + '</a>'));
+    }).fail(function() {
+      console.log('fail');
+    });
+    //отмена действия по умолчанию для кнопки submit
+    e.preventDefault();
+  });
+});

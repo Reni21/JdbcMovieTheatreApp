@@ -4,7 +4,6 @@ import com.theatre.movie.dto.MenuDateViewDto;
 import com.theatre.movie.dto.MovieSessionViewDto;
 import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
-import com.theatre.movie.web.PageData;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -19,7 +18,7 @@ public class MovieSessionCommand extends MultipleMethodCommand {
     private MovieSessionService movieSessionService;
 
     @Override
-    protected PageData performGet(HttpServletRequest request) {
+    protected PageResponse performGet(HttpServletRequest request) {
         request.setAttribute("activeTab", "null");
         List<MenuDateViewDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(LocalDate.now());
         request.setAttribute("menuDates", menuDates);
@@ -29,11 +28,11 @@ public class MovieSessionCommand extends MultipleMethodCommand {
         MovieSessionViewDto movieSession = movieSessionService.getMovieSessionById(id);
         request.setAttribute("movieSession", movieSession);
         LOG.info("Extracted movie session:\n" + movieSession);
-        return new PageData(UrlConstants.MOVIE_SESSION_PAGE);
+        return new PageResponse(UrlConstants.MOVIE_SESSION_PAGE);
     }
 
     @Override
-    protected PageData performPost(HttpServletRequest request) {
+    protected PageResponse performPost(HttpServletRequest request) {
 
         return null;
     }

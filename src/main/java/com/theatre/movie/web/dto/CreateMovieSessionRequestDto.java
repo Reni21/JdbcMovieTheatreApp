@@ -10,8 +10,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class CreateMovieSessionRequestDto {
-    String movieTitle;
-//    String hallName;
+    String movieId;
+    String hallId;
+    String date;
     String hours;
     String minutes;
+    String price;
 }

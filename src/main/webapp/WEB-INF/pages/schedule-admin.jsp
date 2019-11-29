@@ -74,16 +74,17 @@
                         <button class="btn delete">Remove movie</button>
                     </div>
 
-                    <div class="movie-description">
+                    <div id="movie_${session.movieId}" class="movie-description">
                         <div class="movie-title">${session.title}</div>
                         <p class="movie-duration">Duration: ${session.duration}min</p>
                         <form action="schedule<c:if test="${param.get('date') != null}">?date=${param.get('date')}</c:if>"
                               class="session-form" method="post">
-                            <input type="hidden" name="movieTitle" value="${session.title}"/>
-                            <input class="session-field" type="number" name="hours" placeholder="hh" maxlength="2"
+                            <input id="movieId_${session.movieId}" type="hidden" name="movieId" value="${session.movieId}"/>
+                            <input id="hours_${session.movieId}" class="session-field" type="number" name="hours" placeholder="hh" maxlength="2"
                                    min="9" max="22" style="padding: 8px 5px">
-                            <input class="session-field" type="number" name="minutes" placeholder="mm" maxlength="2"
+                            <input id="minutes_${session.movieId}"class="session-field" type="number" name="minutes" placeholder="mm" maxlength="2"
                                    min="0" max="60" style="padding: 8px 5px">
+                            <input class="session-field" type="number" name="price" placeholder="Price 0.0" style="padding: 8px 5px">
                             <input type="submit" value="Add session" class="add">
                         </form>
                         <c:forEach items="${session.movieSessionTimes}" var="time">
@@ -93,6 +94,7 @@
                 </div>
             </c:forEach>
         </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/modal-script.js"></script>
     </body>
 </html>

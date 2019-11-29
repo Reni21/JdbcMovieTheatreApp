@@ -3,7 +3,6 @@ package com.theatre.movie.web.command;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.UserAlreadyExistException;
 import com.theatre.movie.service.UserService;
-import com.theatre.movie.web.PageData;
 import com.theatre.movie.web.dto.CreateUserRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -18,13 +17,13 @@ public class SignUpCommand extends MultipleMethodCommand {
 
 
     @Override
-    protected PageData performGet(HttpServletRequest request) {
+    protected PageResponse performGet(HttpServletRequest request) {
         request.setAttribute("activeTab", "account");
-        return new PageData(UrlConstants.SIGN_UP_PAGE);
+        return new PageResponse(UrlConstants.SIGN_UP_PAGE);
     }
 
     @Override
-    protected PageData performPost(HttpServletRequest request) {
+    protected PageResponse performPost(HttpServletRequest request) {
         request.setAttribute("activeTab", "account");
 
         String login = request.getParameter("login");
@@ -38,13 +37,13 @@ public class SignUpCommand extends MultipleMethodCommand {
             }
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            return new PageData(request.getContextPath() + "/account", true);
+            return new PageResponse(request.getContextPath() + "/account", true);
         } catch (UserAlreadyExistException | IllegalArgumentException ex) {
             LOG.warn("Sign up failed for new user:" + userRequest);
             LOG.warn("Error msg:" + ex.getMessage());
             LOG.info("Forward to: " + UrlConstants.SIGN_UP_PAGE);
             request.setAttribute("error", ex.getMessage());
-            return new PageData(UrlConstants.SIGN_UP_PAGE);
+            return new PageResponse(UrlConstants.SIGN_UP_PAGE);
         }
     }
 }

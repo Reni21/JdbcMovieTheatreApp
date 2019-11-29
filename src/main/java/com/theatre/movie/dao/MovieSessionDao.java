@@ -11,4 +11,6 @@ public interface MovieSessionDao {
 
     MovieSession getById(int id);
 
+    MovieSession create(MovieSession movieSession);
+
 }

@@ -17,6 +17,7 @@ import com.theatre.movie.web.dto.CreateMovieSessionRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -69,6 +70,7 @@ public class MovieSessionService {
                     Integer movieId = movieListEntry.getKey();
                     Movie movie = movieDao.getById(movieId);
                     MovieSessionsScheduleViewDto scheduleDto = new MovieSessionsScheduleViewDto(movie.getTitle(), movie.getDurationMinutes());
+                    scheduleDto.setMovieId(movieId);
                     scheduleDto.setTrailerUrl(movie.getTrailerUrl());
                     scheduleDto.setBackgroundImgPath(movie.getBackgroundImgUrl());
                     scheduleDto.setCoverImgPath(movie.getCoverImgUrl());
@@ -104,10 +106,24 @@ public class MovieSessionService {
         }).collect(Collectors.groupingBy(BookedSeatViewDto::getRow));
     }
 
-    public boolean createMovieSession(CreateMovieSessionRequestDto movieSessionDto) {
+    public MovieSession addMovieSession(CreateMovieSessionRequestDto movieSessionDto) {
         LOG.info("Create new movie session for data: " + movieSessionDto);
+        validateMovieSessionRequestDto(movieSessionDto);
 
 
-        return true;
+        LocalDate date = LocalDate.parse(movieSessionDto.getDate(),DateTimeFormatter.ISO_DATE);
+        LocalTime time = LocalTime.of(Integer.parseInt(movieSessionDto.getHours()),Integer.parseInt(movieSessionDto.getMinutes()));
+        LocalDateTime startAt = LocalDateTime.of(date,time);
+        MovieSession movieSession = new MovieSession(
+                Integer.parseInt(movieSessionDto.getMovieId()),
+                Integer.parseInt(movieSessionDto.getHallId()),
+                startAt,
+                Double.parseDouble(movieSessionDto.getPrice()));
+        LOG.info("Create movieSession with id=" + movieSession.getSessionId());
+        return movieSessionDao.create(movieSession);
+    }
+
+    private void validateMovieSessionRequestDto(CreateMovieSessionRequestDto movieSessionDto) {
+
     }
 }

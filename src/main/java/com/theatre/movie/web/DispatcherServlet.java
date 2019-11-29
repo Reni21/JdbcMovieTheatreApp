@@ -1,7 +1,6 @@
 package com.theatre.movie.web;
 
-import com.theatre.movie.web.command.Command;
-import com.theatre.movie.web.command.CommandFactory;
+import com.theatre.movie.web.command.*;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(value = "/app/*")
 public class DispatcherServlet extends HttpServlet {
@@ -32,17 +32,34 @@ public class DispatcherServlet extends HttpServlet {
         LOG.info("Will get command py path: " + path);
         Command command = CommandFactory.getCommand(path, req.getMethod());
 
-        PageData pageData = command.execute(req);
+        CommandResponse commandResponse = command.execute(req);
 
-        if (pageData.isRedirect()) {
-            String url = pageData.getUrl();
-            LOG.info("Request redirect into new url: " + url);
-            resp.sendRedirect(url);
+        switch (commandResponse.getResponseType()) {
+            case PAGE: {
+                PageResponse pageResponse = (PageResponse) commandResponse;
+                if (pageResponse.isRedirect()) {
+                    String url = pageResponse.getUrl();
+                    LOG.info("Request redirect into new url: " + url);
+                    resp.sendRedirect(url);
 
-        } else {
-            String modifiedPath = "/WEB-INF/pages/" + pageData.getUrl();
-            LOG.info("Request forward into modified path: " + modifiedPath);
-            req.getRequestDispatcher(modifiedPath).forward(req, resp);
+                } else {
+                    String modifiedPath = "/WEB-INF/pages/" + pageResponse.getUrl();
+                    LOG.info("Request forward into modified path: " + modifiedPath);
+                    req.getRequestDispatcher(modifiedPath).forward(req, resp);
+                }
+                break;
+            }
+            case PAYLOAD: {
+                PayloadResponse payloadResponse = (PayloadResponse) commandResponse;
+                PrintWriter out = resp.getWriter();
+                //resp.setContentType("application/json");
+                resp.setCharacterEncoding("UTF-8");
+                out.print(payloadResponse.getPayload());
+                out.flush();
+                break;
+            }
+            default:
+                throw new IllegalStateException("Unknown command response type");
         }
     }
 

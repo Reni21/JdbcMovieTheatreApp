@@ -2,14 +2,13 @@ package com.theatre.movie.web.command;
 
 import com.theatre.movie.dto.MenuDateViewDto;
 import com.theatre.movie.dto.MovieSessionsScheduleViewDto;
-import com.theatre.movie.entity.Hall;
+import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.InvalidScheduleDateException;
 import com.theatre.movie.service.HallService;
 import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
-import com.theatre.movie.web.PageData;
 import com.theatre.movie.web.dto.CreateMovieSessionRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -27,7 +26,7 @@ public class ScheduleCommand extends MultipleMethodCommand {
     private HallService hallService;
 
     @Override
-    protected PageData performGet(HttpServletRequest request) {
+    protected PageResponse performGet(HttpServletRequest request) {
         String dateStr = request.getParameter("date");
         LocalDate now = LocalDate.now();
         LocalDate date = dateStr == null ? now : LocalDate.parse(dateStr);
@@ -43,29 +42,33 @@ public class ScheduleCommand extends MultipleMethodCommand {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             if (user != null && Role.ROLE_ADMIN.equals(user.getRole())) {
-                return new PageData(UrlConstants.ADMIN_SCHEDULE_PAGE);
+                return new PageResponse(UrlConstants.ADMIN_SCHEDULE_PAGE);
             }
-            return new PageData(UrlConstants.SCHEDULE_PAGE);
+            return new PageResponse(UrlConstants.SCHEDULE_PAGE);
         } catch (InvalidScheduleDateException e) {
             LOG.warn("Get movie schedule request failed: " + e.getMessage());
-            return new PageData(request.getContextPath() + "/404-error", true);
+            return new PageResponse(request.getContextPath() + "/404-error", true);
         }
     }
 
     @Override
-    protected PageData performPost(HttpServletRequest request) {
-        String movieTitle =  request.getParameter("movieTitle");
+    protected PayloadResponse performPost(HttpServletRequest request) {
+        String movieId = request.getParameter("movieId");
         String hours = request.getParameter("hours");
         String minutes = request.getParameter("minutes");
-
+        String date = request.getParameter("date");
+        String price = request.getParameter("price");
+        MovieSession movieSession = null;
         try {
-            if (!movieSessionService.createMovieSession(new CreateMovieSessionRequestDto(movieTitle, hours, minutes))) {
+            CreateMovieSessionRequestDto dto = new CreateMovieSessionRequestDto(movieId, "1", date, hours, minutes, price);
+             movieSession = movieSessionService.addMovieSession(dto);
+            if (movieSession == null) {
                 request.setAttribute("error", "Something went wrong.");
             }
         } catch (Exception ex) {
             request.setAttribute("error", ex.getMessage());
         }
         request.setAttribute("activeTab", "schedule");
-        return new PageData(request.getContextPath() + "/schedule", true);
+        return new PayloadResponse(movieSession.getSessionId() + "");
     }
 }

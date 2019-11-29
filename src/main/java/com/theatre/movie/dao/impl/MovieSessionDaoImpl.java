@@ -40,4 +40,23 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
                 EntityMapperProvider.MOVIE_SESSION_ENTITY_MAPPER);
     }
 
+    @Override
+    public MovieSession create(MovieSession movieSession) {
+        LOG.debug("Create movie-session: + " + movieSession);
+
+        String query = "INSERT INTO `movie_session` ("
+                + MovieSessionTable.MOVIE_ID + ", " + MovieSessionTable.HALL_ID + ", "
+                + MovieSessionTable.START_AT + ", " + MovieSessionTable.PRICE
+                + ") VALUE (?, ?, ?, ?)";
+        System.out.println(query);
+        int res = super.create(query, ps -> {
+            ps.setInt(1, movieSession.getMovieId());
+            ps.setInt(2,movieSession.getHallId());
+            ps.setTimestamp(3, Timestamp.valueOf(movieSession.getStartAt()));
+            ps.setDouble(4, movieSession.getPrice());
+        });
+        movieSession.setSessionId(res);
+        return movieSession;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.theatre.movie.web;
+package com.theatre.movie.web.command;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class PageData {
+public class PageResponse implements CommandResponse {
     @NonNull
     private String url;
     private boolean redirect;
@@ -17,5 +17,10 @@ public class PageData {
 
     public boolean isRedirect() {
         return redirect;
+    }
+
+    @Override
+    public CommandResponseType getResponseType() {
+        return CommandResponseType.PAGE;
     }
 }
