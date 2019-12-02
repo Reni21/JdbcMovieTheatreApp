@@ -1,12 +1,14 @@
 package com.theatre.movie.dao.impl;
 
 import com.theatre.movie.dao.MovieDao;
+import com.theatre.movie.dto.MovieSimpleViewDto;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.persistence.ConnectionFactory;
 import org.apache.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.theatre.movie.dao.impl.DbTablesConstants.MovieTable;
@@ -31,6 +33,18 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     public List<Movie> getAll() {
         String query = "SELECT * FROM `movie`";
         return super.getAll(query, EntityMapperProvider.MOVIE_ENTITY_MAPPER);
+    }
+
+    @Override
+    public List<MovieSimpleViewDto> getAllPreview() {
+        String query = "SELECT * FROM `movie`";
+        List<Movie> movies = super.getAll(query, EntityMapperProvider.MOVIE_ENTITY_MAPPER);
+        List<MovieSimpleViewDto> movieSimple = new ArrayList<>(movies.size());
+        movies.forEach(movie -> {
+            MovieSimpleViewDto dto = new MovieSimpleViewDto(movie.getMovieId(),movie.getTitle());
+            movieSimple.add(dto);
+        });
+        return movieSimple;
     }
 
     @Override

@@ -1,5 +1,5 @@
 package com.theatre.movie.web.command;
 
 public enum CommandResponseType {
-    PAGE, PAYLOAD
+    PAGE, PAYLOAD, ERROR
 }

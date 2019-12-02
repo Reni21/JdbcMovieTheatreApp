@@ -13,6 +13,7 @@ public class CommandFactory {
 
     static {
         getCommandMap.put("index", new HomeCommand());
+        getCommandMap.put("movies", new MovieCommand(ServiceFactory.getMovieService()));
         getCommandMap.put("schedule", new ScheduleCommand(
                 ServiceFactory.getMovieSessionService(),
                 ServiceFactory.getWeekScheduleDatesService(),
@@ -26,6 +27,7 @@ public class CommandFactory {
                 ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionService()));
 
         postCommandMap.put("locale", new LanguageCommand());
+        postCommandMap.put("movies", new MovieCommand(ServiceFactory.getMovieService()));
         postCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
         postCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));
         postCommandMap.put("booking", new BookingCommand(ServiceFactory.getBookingService()));

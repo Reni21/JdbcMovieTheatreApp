@@ -16,14 +16,14 @@
 }
 
 .content { 
-  width: 960px;
+  /*width: 960px;*/
   z-index: 1050; /* Sit on top */
   background-color: #fefefe;
   margin: auto;
   padding: 0px 45px 10px 45px;
   border: 1px solid #888;
   border-radius: 6px;
-  width: 55%;
+  width: 800px;
   height: 600px;
 
 }
@@ -175,7 +175,7 @@ label {
     transition: 0.3s ease-in;
   }
 
-  label.error{
+  label.error, span.error{
     background: transparent;
     padding: 0px;
     margin: 10px 25px 0 10px;

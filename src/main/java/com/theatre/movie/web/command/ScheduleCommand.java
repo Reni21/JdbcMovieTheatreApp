@@ -1,11 +1,14 @@
 package com.theatre.movie.web.command;
 
+import com.google.gson.Gson;
 import com.theatre.movie.dto.MenuDateViewDto;
+import com.theatre.movie.dto.MovieSessionTimeViewDto;
 import com.theatre.movie.dto.MovieSessionsScheduleViewDto;
 import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.InvalidScheduleDateException;
+import com.theatre.movie.exception.MovieSessionCreationException;
 import com.theatre.movie.service.HallService;
 import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
@@ -14,6 +17,7 @@ import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
@@ -52,23 +56,24 @@ public class ScheduleCommand extends MultipleMethodCommand {
     }
 
     @Override
-    protected PayloadResponse performPost(HttpServletRequest request) {
+    protected CommandResponse performPost(HttpServletRequest request) {
         String movieId = request.getParameter("movieId");
         String hours = request.getParameter("hours");
         String minutes = request.getParameter("minutes");
         String date = request.getParameter("date");
         String price = request.getParameter("price");
-        MovieSession movieSession = null;
         try {
             CreateMovieSessionRequestDto dto = new CreateMovieSessionRequestDto(movieId, "1", date, hours, minutes, price);
-             movieSession = movieSessionService.addMovieSession(dto);
-            if (movieSession == null) {
-                request.setAttribute("error", "Something went wrong.");
-            }
-        } catch (Exception ex) {
-            request.setAttribute("error", ex.getMessage());
+            MovieSession movieSession = movieSessionService.addMovieSession(dto);
+            MovieSessionTimeViewDto movieSessionTime = new MovieSessionTimeViewDto(
+                    movieSession.getSessionId(), movieSession.getStartAt().toLocalTime());
+
+            Gson gson = new Gson();
+            String json = gson.toJson(movieSessionTime);
+            return new SuccessResponse(json);
+        } catch (MovieSessionCreationException ex) {
+            LOG.error("Failed to create new movie session:" + ex);
+            return new ErrorResponse(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
         }
-        request.setAttribute("activeTab", "schedule");
-        return new PayloadResponse(movieSession.getSessionId() + "");
     }
 }

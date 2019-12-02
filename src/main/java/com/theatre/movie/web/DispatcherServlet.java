@@ -50,11 +50,19 @@ public class DispatcherServlet extends HttpServlet {
                 break;
             }
             case PAYLOAD: {
-                PayloadResponse payloadResponse = (PayloadResponse) commandResponse;
+                SuccessResponse successResponse = (SuccessResponse) commandResponse;
                 PrintWriter out = resp.getWriter();
-                //resp.setContentType("application/json");
                 resp.setCharacterEncoding("UTF-8");
-                out.print(payloadResponse.getPayload());
+                out.print(successResponse.getPayload());
+                out.flush();
+                break;
+            }
+            case ERROR: {
+                ErrorResponse errorResponse = (ErrorResponse) commandResponse;
+                resp.setStatus(errorResponse.getHttpStatus());
+                PrintWriter out = resp.getWriter();
+                resp.setCharacterEncoding("UTF-8");
+                out.print(errorResponse.getErrorMsg());
                 out.flush();
                 break;
             }

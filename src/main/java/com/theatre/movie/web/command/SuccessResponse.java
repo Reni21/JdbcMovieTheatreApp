@@ -1,15 +1,13 @@
 package com.theatre.movie.web.command;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
-public class PayloadResponse implements CommandResponse {
+@Getter
+public class SuccessResponse implements CommandResponse {
 
     private String payload;
-
-    public String getPayload() {
-        return payload;
-    }
 
     @Override
     public CommandResponseType getResponseType() {

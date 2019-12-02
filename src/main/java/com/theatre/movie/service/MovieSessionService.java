@@ -13,11 +13,11 @@ import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.entity.Seat;
 import com.theatre.movie.exception.InvalidScheduleDateException;
+import com.theatre.movie.exception.MovieSessionCreationException;
 import com.theatre.movie.web.dto.CreateMovieSessionRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -106,14 +106,14 @@ public class MovieSessionService {
         }).collect(Collectors.groupingBy(BookedSeatViewDto::getRow));
     }
 
-    public MovieSession addMovieSession(CreateMovieSessionRequestDto movieSessionDto) {
+    public MovieSession addMovieSession(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
         LOG.info("Create new movie session for data: " + movieSessionDto);
         validateMovieSessionRequestDto(movieSessionDto);
 
 
-        LocalDate date = LocalDate.parse(movieSessionDto.getDate(),DateTimeFormatter.ISO_DATE);
-        LocalTime time = LocalTime.of(Integer.parseInt(movieSessionDto.getHours()),Integer.parseInt(movieSessionDto.getMinutes()));
-        LocalDateTime startAt = LocalDateTime.of(date,time);
+        LocalDate date = LocalDate.parse(movieSessionDto.getDate(), DateTimeFormatter.ISO_DATE);
+        LocalTime time = LocalTime.of(Integer.parseInt(movieSessionDto.getHours()), Integer.parseInt(movieSessionDto.getMinutes()));
+        LocalDateTime startAt = LocalDateTime.of(date, time);
         MovieSession movieSession = new MovieSession(
                 Integer.parseInt(movieSessionDto.getMovieId()),
                 Integer.parseInt(movieSessionDto.getHallId()),
@@ -123,7 +123,7 @@ public class MovieSessionService {
         return movieSessionDao.create(movieSession);
     }
 
-    private void validateMovieSessionRequestDto(CreateMovieSessionRequestDto movieSessionDto) {
-
+    private void validateMovieSessionRequestDto(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
+        //throw new MovieSessionCreationException("Oopd");
     }
 }
