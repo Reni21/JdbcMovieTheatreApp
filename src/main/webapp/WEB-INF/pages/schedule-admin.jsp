@@ -42,7 +42,7 @@
             <div class="page-title">Login</div>
             <!-- Modal content -->
             <div class="modal-content">
-                <form id="selectedMovies" method="post" action="movie">
+                <form id="selectedMovies" method="post">
                 </form>
             </div>
 
@@ -56,41 +56,48 @@
     <!-- - - - - - - - The Modal for movies - - - - - - - -->
 
     <c:forEach items="${sessions}" var="session">
-        <div class="wrapper">
-            <div id="errors_${session.movieId}" class="errors"
-                 style="font-size: 15px;color: red;margin: 0 auto;position: relative;"></div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-card__container" style="margin-bottom: 10px;">
-                <div class="movie-cover"/>
-                <button class="btn delete">Remove movie</button>
+        <div id="#${session.movieId}">
+            <div class="wrapper">
+                <div id="errors_${session.movieId}" class="errors"
+                     style="font-size: 15px;color: red;margin: 0 auto;position: relative;"></div>
             </div>
+            <div class="movie-card">
+                <div class="movie-card__container" style="margin-bottom: 10px;">
+                    <div class="movie-cover"/>
+                    <!-- Delete pin movie button -->
+                    <button class="btn delete" onclick="removePinHandler('${session.movieId}')">
+                        Remove movie
+                    </button>
+                </div>
 
-            <div id="movie_${session.movieId}" class="movie-description">
-                <div class="movie-title">${session.title}</div>
-                <p class="movie-duration"><fmt:message key="schedule.duration"/>: ${session.duration}<fmt:message
-                        key="schedule.min"/></p>
-                <form action="schedule<c:if test="${param.get('date') != null}">?date=${param.get('date')}</c:if>"
-                      class="session-form" name="session-form" id="session-form_${session.movieId}" method="post">
-                    <input id="movieId_${session.movieId}" type="hidden" name="movieId" value="${session.movieId}"/>
-                    <input id="hours_${session.movieId}" class="session-field" type="number" name="hours"
-                           placeholder="<fmt:message key="admin.input.hh"/>" min="9" max="22" style="padding: 8px 5px">
-                    <input id="minutes_${session.movieId}" class="session-field" type="number" name="minutes"
-                           placeholder="<fmt:message key="admin.input.mm"/>" min="0" max="59" style="padding: 8px 5px">
-                    <input class="session-field" type="text" name="price"
-                           placeholder="<fmt:message key="admin.input.price"/> 0.0" style="padding: 8px 5px">
-                    <input type="submit" value="<fmt:message key="admin.add.session"/>" class="add">
-                </form>
-                <c:forEach items="${session.movieSessionTimes}" var="time">
-                    <a class="tag" href="movie-session/${time.getMovieSessionId()}">${time.getTimeView()}</a>
-                </c:forEach>
-
+                <div id="movie_${session.movieId}" class="movie-description">
+                    <div class="movie-title">${session.title}</div>
+                    <p class="movie-duration"><fmt:message key="schedule.duration"/>: ${session.duration}<fmt:message
+                            key="schedule.min"/></p>
+                    <form action="schedule<c:if test="${param.get('date') != null}">?date=${param.get('date')}</c:if>"
+                          class="session-form" name="session-form" id="session-form_${session.movieId}" method="post">
+                        <input id="movieId_${session.movieId}" type="hidden" name="movieId" value="${session.movieId}"/>
+                        <input id="hours_${session.movieId}" class="session-field" type="number" name="hours"
+                               placeholder="<fmt:message key="admin.input.hh"/>" min="9" max="22"
+                               style="padding: 8px 5px">
+                        <input id="minutes_${session.movieId}" class="session-field" type="number" name="minutes"
+                               placeholder="<fmt:message key="admin.input.mm"/>" min="0" max="59"
+                               style="padding: 8px 5px">
+                        <input class="session-field" type="text" name="price"
+                               placeholder="<fmt:message key="admin.input.price"/> 0.0" style="padding: 8px 5px">
+                        <input type="submit" value="<fmt:message key="admin.add.session"/>" class="add">
+                    </form>
+                    <c:forEach items="${session.movieSessionTimes}" var="time">
+                        <a class="tag" href="movie-session/${time.getMovieSessionId()}">${time.getTimeView()}</a>
+                    </c:forEach>
+                </div>
             </div>
         </div>
     </c:forEach>
 </main>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="static/js/movies.js"></script>
 <script type="text/javascript" src="static/js/modal-script.js"></script>
 <script type="text/javascript">
     var errorsDictionary = new Map([

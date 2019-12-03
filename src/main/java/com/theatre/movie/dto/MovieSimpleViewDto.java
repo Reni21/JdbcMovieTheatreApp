@@ -10,4 +10,5 @@ import lombok.*;
 public class MovieSimpleViewDto {
     private Integer movieId;
     private String title;
+    private Integer duration;
 }

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,9 +32,17 @@ public class ScheduleCommand extends MultipleMethodCommand {
 
     @Override
     protected PageResponse performGet(HttpServletRequest request) {
+        LOG.info("Get for /schedule");
         String dateStr = request.getParameter("date");
-        LocalDate now = LocalDate.now();
-        LocalDate date = dateStr == null ? now : LocalDate.parse(dateStr);
+        if (dateStr == null) {
+            LOG.info("Date param is null. Send redirect.");
+            return new PageResponse(
+                    request.getContextPath() + "/schedule?date=" + LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                    true
+            );
+        }
+
+        LocalDate date = LocalDate.parse(dateStr);
         try {
             List<MovieSessionsScheduleViewDto> currentDaySessions = movieSessionService.getMovieSessionsScheduleForDate(date);
             List<MenuDateViewDto> menuDates = weekScheduleDatesService.getWeekScheduleDates(date);

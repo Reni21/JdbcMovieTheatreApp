@@ -41,7 +41,7 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
         List<Movie> movies = super.getAll(query, EntityMapperProvider.MOVIE_ENTITY_MAPPER);
         List<MovieSimpleViewDto> movieSimple = new ArrayList<>(movies.size());
         movies.forEach(movie -> {
-            MovieSimpleViewDto dto = new MovieSimpleViewDto(movie.getMovieId(),movie.getTitle());
+            MovieSimpleViewDto dto = new MovieSimpleViewDto(movie.getMovieId(), movie.getTitle(), movie.getDurationMinutes());
             movieSimple.add(dto);
         });
         return movieSimple;
