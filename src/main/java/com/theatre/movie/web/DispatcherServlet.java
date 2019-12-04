@@ -31,6 +31,7 @@ public class DispatcherServlet extends HttpServlet {
         String path = getPath(req);
         LOG.info("Will get command py path: " + path);
         Command command = CommandFactory.getCommand(path, req.getMethod());
+        LOG.info("Extracted command " + command + command.getClass());
 
         CommandResponse commandResponse = command.execute(req);
 

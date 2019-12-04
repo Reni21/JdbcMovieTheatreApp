@@ -59,4 +59,11 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
         return movieSession;
     }
 
+    @Override
+    public boolean remove(int id) {
+        LOG.debug("Delete movie session with id= " + id);
+        String query = "DELETE FROM `movie_session` WHERE " + MovieSessionTable.SESSION_ID + " = ?";
+        return super.remove(query, ps -> ps.setInt(1, id));
+    }
+
 }

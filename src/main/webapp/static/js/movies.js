@@ -35,6 +35,7 @@ function pinMovie(form, event, moviesToPin, submitFormHandler) {
             '</form>' +
             '</div>' +
             '</div>' +
+            '</div>' +
             '</div>';
         $('main').append($(link));
         $('form').submit(submitFormHandler);
@@ -48,6 +49,25 @@ function removePinHandler(movieId) {
     if (timesArr.length === 0) {
         $('#' + movieId).remove();
     } else {
-        alert("This movie have sessions on this date")
+
+        var sessionsIds = timesArr.map(function () {
+            return this.id;
+        }).get();
+
+        var jsonData = {sessionsIds:sessionsIds};
+        console.log(JSON.stringify(sessionsIds));
+        $.ajax({
+            type: 'post',
+            url: 'delete-sessions-set',
+            data: {sessionsIds: JSON.stringify(sessionsIds)}
+        }).done(function (resp) {
+            $('#' + movieId).remove();
+        }).fail(function (jqXHR) {
+            var msg = jqXHR.responseText;
+            var er = '<span class="error">' + '| ' + msg + '</span>';
+            $('#errors_' + movieId).html(er);
+            $('.errors').css('display', 'block');
+            console.log(jqXHR.status + ' ' + jqXHR.responseText);
+        });
     }
 }

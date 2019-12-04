@@ -12,6 +12,7 @@ import com.theatre.movie.entity.Hall;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.entity.Seat;
+import com.theatre.movie.exception.CanNotRemoveMovieScheduleException;
 import com.theatre.movie.exception.InvalidScheduleDateException;
 import com.theatre.movie.exception.MovieSessionCreationException;
 import com.theatre.movie.web.dto.CreateMovieSessionRequestDto;
@@ -125,5 +126,16 @@ public class MovieSessionService {
 
     private void validateMovieSessionRequestDto(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
         //throw new MovieSessionCreationException("Oopd");
+    }
+
+    // transactional
+    public void deleteMovieSessionById(List<Integer> sessionsIds) throws CanNotRemoveMovieScheduleException {
+        for (Integer id : sessionsIds) {
+            boolean res = bookingDao.isBookingForMovieSessionExist(id);
+            if(res){
+                throw new CanNotRemoveMovieScheduleException("Movie card can not be deleted. Some sessions already have reservations.");
+            }
+        }
+        sessionsIds.forEach(movieSessionDao::remove);
     }
 }

@@ -2,11 +2,13 @@ package com.theatre.movie.web.command;
 
 import com.theatre.movie.dao.DaoFactory;
 import com.theatre.movie.service.ServiceFactory;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandFactory {
+    private static final Logger LOG = Logger.getLogger(CommandFactory.class);
     private static Map<String, Command> getCommandMap = new HashMap<>();
     private static Map<String, Command> postCommandMap = new HashMap<>();
     private static Command defaultCommand = new NotFoundCommand();
@@ -27,6 +29,7 @@ public class CommandFactory {
                 ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionService()));
 
         postCommandMap.put("locale", new LanguageCommand());
+        postCommandMap.put("delete-sessions-set", new DeleteMovieSessionsSetCommand(ServiceFactory.getMovieSessionService()));
         postCommandMap.put("movies", new MovieCommand(ServiceFactory.getMovieService()));
         postCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
         postCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));
@@ -41,6 +44,7 @@ public class CommandFactory {
     }
 
     public static Command getCommand(String path, String type) {
+        LOG.info("Extract command " + type + " for path=" + path);
         return "GET".equals(type)
                 ? getCommand(path)
                 : postCommand(path);

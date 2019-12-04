@@ -13,4 +13,6 @@ public interface MovieSessionDao {
 
     MovieSession create(MovieSession movieSession);
 
+    boolean remove(int movieSessionId);
+
 }

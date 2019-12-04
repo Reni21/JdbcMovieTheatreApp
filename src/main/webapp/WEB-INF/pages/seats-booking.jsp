@@ -108,8 +108,10 @@
                                     Log in to book tickets</h3>
                             </c:when>
                             <c:when test="${user != null && user.getRole().toString() == 'ROLE_ADMIN'}">
-                                <button id="btnCheckout" name="btnCheckout" class="btn btn-primary primary-active"
-                                        onclick="location.href='movie-session'">Delete movie session
+                                <!-- Remove movie-session button -->
+                                <input id="context" type="hidden" value="${pageContext.request.contextPath}">
+                                <button id="btnDelete" name="btnCheckout" class="btn btn-primary primary-active"
+                                        onclick="removeMovieSessionHandler('${session.sessionId}')">Delete movie session
                                 </button>
                             </c:when>
                             <c:otherwise>
@@ -125,10 +127,11 @@
                 </div>
             </div>
         </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <c:if test="${user == null || user.getRole().toString() == 'ROLE_USER'}">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
             <script type="text/javascript" src="static/js/script.js"></script>
         </c:if>
+        <script type="text/javascript" src="static/js/delete.js"></script>
     </body>
 </html>
 

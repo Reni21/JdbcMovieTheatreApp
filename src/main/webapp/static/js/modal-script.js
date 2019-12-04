@@ -113,7 +113,7 @@ function createAndDisplayNewMovieSession(form, event) {
         form.find('input[name="hours"]').val('');
         form.find('input[name="price"]').val('');
         form.find('input[name="minutes"]').val('');
-        var link = '<a class="tag" href="movie-session/' + movieSessionTimeDto.movieSessionId + '">' + movieSessionTimeDto.timeView + '</a>';
+        var link = '<a class="tag" href="movie-session/' + movieSessionTimeDto.movieSessionId + '" id="' + movieSessionTimeDto.movieSessionId + '">' + movieSessionTimeDto.timeView + '</a>';
         $('#movie_' + movieId).append($(link));
     }).fail(function (jqXHR) {
         var msg = jqXHR.responseText;
@@ -126,7 +126,6 @@ function createAndDisplayNewMovieSession(form, event) {
     event.preventDefault();
 }
 
-// Send new session data
 $(function () {
     $('form').submit(submitFormHandler);
 });

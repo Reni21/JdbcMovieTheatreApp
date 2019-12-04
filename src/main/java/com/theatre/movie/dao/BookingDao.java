@@ -13,4 +13,6 @@ public interface BookingDao {
     List<BookingViewDto> getAllActualBookingByUserId(int userId);
 
     Booking create(Booking booking);
+
+    boolean isBookingForMovieSessionExist(Integer movieSessionId);
 }
