@@ -49,7 +49,6 @@ function removePinHandler(movieId) {
     if (timesArr.length === 0) {
         $('#' + movieId).remove();
     } else {
-
         var sessionsIds = timesArr.map(function () {
             return this.id;
         }).get();
@@ -71,3 +70,4 @@ function removePinHandler(movieId) {
         });
     }
 }
+

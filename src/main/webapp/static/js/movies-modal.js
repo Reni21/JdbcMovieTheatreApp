@@ -110,7 +110,7 @@ function createAndDisplayNewMovie(form, event) {
             '<div class="movie-description">' +
             '<div class="movie-title">' + movie.title + '</div>' +
             '<p class="movie-duration">' + 'Duration:' + movie.durationMinutes + 'min</p>' +
-            '<a class="tag" href="movie?id=' + movie.movieId + '"' +
+            '<a class="tag" href="movie?id=' + movie.movieId + '" onclick="deleteMovieHandler(' + movie.movieId + ')"' +
             ' style="border-radius: 25px;padding: 10px 25px;font-size: 18px;line-height: 28px;float: right;">Remove movie</a>' +
             '</div>' +
             '</div>' +
@@ -129,3 +129,17 @@ function createAndDisplayNewMovie(form, event) {
 $(function () {
     $('form').submit(submitFormHandler);
 });
+
+function deleteMovieHandler(movieId) {
+    $.ajax({
+        type: 'post',
+        url: 'movie?id=' + movieId
+    }).done(function (resp) {
+        $('#card_' + movieId).remove();
+    }).fail(function (jqXHR) {
+        var msg = jqXHR.responseText;
+        alert(msg);
+        console.log(jqXHR.status + ' ' + jqXHR.responseText);
+    });
+
+}

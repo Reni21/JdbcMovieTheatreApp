@@ -91,7 +91,7 @@
     ===============================================================================================
 -->
     <c:forEach items="${movies}" var="movie">
-        <div class="movie-card">
+        <div id="card_${movie.movieId}" class="movie-card">
             <div class="movie-card__container">
                 <a href="${movie.trailerUrl}" target="_blank">
                     <div class="movie-cover">
@@ -111,7 +111,7 @@
                         <fmt:message key="schedule.duration"/>:
                             ${movie.durationMinutes}<fmt:message key="schedule.min"/>
                     </p>
-                    <a class="tag" href="movie?id=${movie.movieId}"
+                    <a class="tag" onclick="deleteMovieHandler(${movie.movieId})"
                        style="border-radius: 25px;padding: 10px 25px;font-size: 18px;line-height: 28px;float: right;">Remove movie</a>
                 </div>
             </div>

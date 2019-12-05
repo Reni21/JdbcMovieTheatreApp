@@ -87,9 +87,21 @@ public class BookingDaoImpl extends AbstractDao<BookingViewDto> implements Booki
     @Override
     public boolean isBookingForMovieSessionExist(Integer movieSessionId) {
         LOG.info("Check is booking for movie session exist session id=" + movieSessionId);
-        String query = "SELECT 1 FROM `booking` WHERE " + BookingTable.MOVIE_SESSION_ID + " = ?";
+        String query = "SELECT 1 FROM `booking` b" +
+                " JOIN `movie_session` ms ON b." + BookingTable.MOVIE_SESSION_ID + " = ms." + MovieSessionTable.SESSION_ID +
+                " WHERE b." + BookingTable.MOVIE_SESSION_ID + " = ? AND ms." + MovieSessionTable.START_AT + " >= CURRENT_TIMESTAMP()";
         return super.checkIfDataExists(query,
                 ps -> ps.setInt(1, movieSessionId));
 
+    }
+
+    @Override
+    public boolean isBookingForMovieExist(Integer movieId) {
+        LOG.info("Check is booking for movie  exist movie id=" + movieId);
+        String query = "SELECT 1 FROM `booking` b" +
+                " JOIN `movie_session` ms ON b." + BookingTable.MOVIE_SESSION_ID + " = ms." + MovieSessionTable.SESSION_ID +
+                " WHERE ms." + MovieTable.MOVIE_ID + " = ? AND ms." + MovieSessionTable.START_AT + " >= CURRENT_TIMESTAMP()";
+        return super.checkIfDataExists(query,
+                ps -> ps.setInt(1, movieId));
     }
 }

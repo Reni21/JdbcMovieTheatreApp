@@ -15,4 +15,6 @@ public interface BookingDao {
     Booking create(Booking booking);
 
     boolean isBookingForMovieSessionExist(Integer movieSessionId);
+
+    boolean isBookingForMovieExist(Integer movieId);
 }

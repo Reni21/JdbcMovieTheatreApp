@@ -3,6 +3,7 @@ package com.theatre.movie.web.command;
 import com.google.gson.Gson;
 import com.theatre.movie.dto.MovieSimpleViewDto;
 import com.theatre.movie.entity.Movie;
+import com.theatre.movie.exception.CanNotRemoveMovieException;
 import com.theatre.movie.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MovieCommand extends MultipleMethodCommand {
     private static final Logger LOG = Logger.getLogger(MovieCommand.class);
+    private static final Gson GSON = new Gson();
     private MovieService movieService;
 
     @Override
@@ -23,7 +25,6 @@ public class MovieCommand extends MultipleMethodCommand {
         if(ajax != null) {
             return performAjax();
         }
-
         request.setAttribute("activeTab", "movies");
         List<Movie> movies = movieService.getAll();
         request.setAttribute("movies", movies);
@@ -36,8 +37,15 @@ public class MovieCommand extends MultipleMethodCommand {
         if (id == null) {
             return createMovie(request);
         }
-        // todo: deleteMovie method
-        return new ErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "Something went wrong");
+        try {
+            LOG.info("Try delete movie with id=" + id);
+            movieService.deleteMovieById(Integer.parseInt(id));
+            String json = GSON.toJson("OK");
+            return new SuccessResponse(json);
+        } catch (CanNotRemoveMovieException ex) {
+            LOG.error("Failed to delete movie." + ex);
+            return new ErrorResponse(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
+        }
     }
 
     private CommandResponse createMovie(HttpServletRequest request) {
