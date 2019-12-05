@@ -1,5 +1,6 @@
 package com.theatre.movie.web.command;
 
+import com.theatre.movie.dto.BookingViewDto;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.service.BookingService;
 import com.theatre.movie.web.dto.CreateBookingRequestDto;
@@ -8,14 +9,26 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @AllArgsConstructor
-public class BookingCommand implements Command {
+public class BookingCommand extends MultipleMethodCommand {
     private static final Logger LOG = Logger.getLogger(BookingCommand.class);
     private BookingService bookingService;
 
     @Override
-    public PageResponse execute(HttpServletRequest request) {
+    protected CommandResponse performGet(HttpServletRequest request) {
+        request.setAttribute("activeTab", "tickets");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        List<BookingViewDto> bookings = bookingService.getActualUsersBookingById(user.getId());
+        LOG.info("Extracted bookings:\n" + bookings);
+        request.setAttribute("bookings" , bookings);
+        return new PageResponse(UrlConstants.USER_TICKETS_PAGE);
+    }
+
+    @Override
+    protected CommandResponse performPost(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();
         User user = (User) httpSession.getAttribute("user");
         int movieSessionId = Integer.parseInt(request.getParameter("movieSessionId"));

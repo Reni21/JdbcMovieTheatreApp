@@ -40,22 +40,22 @@
             <!-- Booking seat block -->
             <div class="content-card">
                 <div class="content-card__container">
-                    <c:set value="${movieSession}" var="session"/>
-                    <div class="page-title">${session.movieTitle}</div>
-                    <div class="hall-title">${session.getFormattedDate()} ${session.getFormattedTime()} <img
+                    <c:set value="${movieSession}" var="movie"/>
+                    <div class="page-title">${movie.movieTitle}</div>
+                    <div class="hall-title">${movie.getFormattedDate()} ${movie.getFormattedTime()} <img
                             class="clock"
                             aria-hidden="true"
                             src="static/img/clock.png"
                             alt="Italian"
-                            height="20"> ${session.movieDuration}
+                            height="20"> ${movie.movieDuration}
                         <fmt:message key="schedule.min"/></div>
                     <div class="seatSelection col-lg-12">
                         <div class="seatsChart col-lg-6">
                             <div class="screen"><p>SCREEN</p></div>
-                            <c:set value="${session.bookedSeats}" var="bookedSeats"/>
-                            <div id="session_price" value="${session.price}"></div>
+                            <c:set value="${movie.bookedSeats}" var="bookedSeats"/>
+                            <div id="session_price" value="${movie.price}"></div>
                             <form id="selectedSeats" method="post" action="booking">
-                                <input type="hidden" name="movieSessionId" value="${session.sessionId}">
+                                <input type="hidden" name="movieSessionId" value="${movie.sessionId}">
                                 <c:forEach items="${bookedSeats.entrySet()}" var="entrySetSeats">
                                     <div class="seatRow">
                                         <div class="seatRowNumber">Row ${entrySetSeats.getKey()}</div>
@@ -82,14 +82,14 @@
                                 <c:set var="user" value="${sessionScope['user']}"/>
                                 <c:choose>
                                     <c:when test="${user == null || user.getRole().toString() == 'ROLE_USER'}">
-                                        <p>Hall ${session.hallName} | Selected: <span class="seatsAmount">0 </span>
+                                        <p>Hall ${movie.hallName} | Selected: <span class="seatsAmount">0 </span>
                                             <button id="btnClear" class="btn btn-disabled">CLEAR ALL &ensp; <strong
                                                     class="btn-disabled">X</strong></button>
                                         </p>
                                     </c:when>
                                     <c:otherwise>
-                                        <p>Hall ${session.hallName} | Booked seats:
-                                            <span class="seatsAmount">${session.getBookedSeatsCount()}</span></p>
+                                        <p>Hall ${movie.hallName} | Booked seats:
+                                            <span class="seatsAmount">${movie.getBookedSeatsCount()}</span></p>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -111,7 +111,7 @@
                                 <!-- Remove movie-session button -->
                                 <input id="context" type="hidden" value="${pageContext.request.contextPath}">
                                 <button id="btnDelete" name="btnCheckout" class="btn btn-primary primary-active"
-                                        onclick="removeMovieSessionHandler('${session.sessionId}')">Delete movie session
+                                        onclick="removeMovieSessionHandler('${movie.sessionId}')">Delete movie session
                                 </button>
                             </c:when>
                             <c:otherwise>

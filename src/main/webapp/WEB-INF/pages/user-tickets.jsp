@@ -8,7 +8,7 @@
 
 <html lang="en">
     <head>
-        <title>Login Movies World</title>
+        <title>My tickets</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
         <link rel="stylesheet" type="text/css" href="static/css/schedule-admin-styles.css">
@@ -17,18 +17,8 @@
         <header>
             <!-- Common menu -->
             <c:import url="main-menu.jsp"/>
-            <!-- Second level menu -->
-            <ul class="nav__second-lvl">
-                <li class="active"><a href="#">MY TICKETS</a></li>
-            </ul>
         </header>
         <main>
-
-            <%--            <c:if test="${allPages ne null}">--%>
-            <%--                <c:forEach var="i" begin="1" end="${allPages}">--%>
-            <%--                    <li><a href="?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>--%>
-            <%--                </c:forEach>--%>
-            <%--            </c:if>--%>
             <c:set value="${requestScope['bookings']}" var="bookings"/>
             <c:if test="${bookings!= null && !bookings.isEmpty()}">
                 <c:forEach items="${bookings}" var="booking">

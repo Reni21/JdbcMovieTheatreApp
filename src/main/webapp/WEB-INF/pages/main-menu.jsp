@@ -24,17 +24,25 @@
                                 <li <c:if test="${name == 'main'}">class="active"</c:if>><a href=""><fmt:message
                                         key="main.menu.home"/></a>
                                 </li>
-                                <li <c:if test="${name == 'schedule'}">class="active"</c:if>><a
-                                        href="schedule?date=${currentDate}"><fmt:message key="main.menu.schedule"/></a>
+                                <li <c:if test="${name == 'schedule'}">class="active"</c:if>>
+                                    <a href="schedule?date=${currentDate}"><fmt:message key="main.menu.schedule"/></a>
                                 </li>
-                                <c:set var="name" value="${activeTab}"/>
+                                <c:set var="user" value="${sessionScope['user']}"/>
+                                <c:if test="${user != null && 'ROLE_ADMIN'.equals(user.getRole().toString())}">
+                                    <li <c:if test="${name == 'movies'}">class="active"</c:if>><a href="movies">MOVIES</a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${user != null && 'ROLE_USER'.equals(user.getRole().toString())}">
+                                    <li <c:if test="${name == 'tickets'}">class="active"</c:if>><a href="tickets">MY TICKETS</a>
+                                    </li>
+                                </c:if>
+
                                 <li <c:if test="${name == 'account'}">class="active"</c:if>>
-                                    <c:set var="user" value="${sessionScope['user']}"/>
                                     <a href="${user == null ? 'login' : 'account/'.concat(user.getLogin())}">
                                 <fmt:message key="main.menu.account"/></a>
                                 </li>
 
-                                <c:if test="${not empty user}">
+                                <c:if test="${user != null}">
                                     <li ><a href="logout"><fmt:message key="main.menu.logout"/></a>
                                     </li>
                                 </c:if>

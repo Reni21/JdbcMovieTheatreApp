@@ -28,7 +28,6 @@ public class ScheduleCommand extends MultipleMethodCommand {
     private static final Logger LOG = Logger.getLogger(ScheduleCommand.class);
     private MovieSessionService movieSessionService;
     private WeekScheduleDatesService weekScheduleDatesService;
-    private HallService hallService;
 
     @Override
     protected PageResponse performGet(HttpServletRequest request) {

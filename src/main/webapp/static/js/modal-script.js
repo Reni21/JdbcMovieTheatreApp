@@ -2,7 +2,7 @@ var moviesToPin = new Map();
 // When the user clicks the button, open the modal
 $('.openModalBtn').click(function () {
     // Get all movies from server
-    $.get("movies")
+    $.get("movies?ajax=true")
         .done(function (resp) {
             var movies = JSON.parse(resp);
             var count = 0;

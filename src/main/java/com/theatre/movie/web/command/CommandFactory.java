@@ -18,15 +18,15 @@ public class CommandFactory {
         getCommandMap.put("movies", new MovieCommand(ServiceFactory.getMovieService()));
         getCommandMap.put("schedule", new ScheduleCommand(
                 ServiceFactory.getMovieSessionService(),
-                ServiceFactory.getWeekScheduleDatesService(),
-                ServiceFactory.getHallService()));
+                ServiceFactory.getWeekScheduleDatesService()));
         getCommandMap.put("404", defaultCommand);
         getCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
         getCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));
-        getCommandMap.put("account", new AccountCommand(ServiceFactory.getBookingService()));
+        getCommandMap.put("account", new AccountCommand());
         getCommandMap.put("logout", new LogOutCommand());
         getCommandMap.put("movie-session", new MovieSessionCommand(
                 ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionService()));
+        getCommandMap.put("tickets", new BookingCommand(ServiceFactory.getBookingService()));
 
         postCommandMap.put("locale", new LanguageCommand());
         postCommandMap.put("delete-sessions-set", new DeleteMovieSessionsSetCommand(ServiceFactory.getMovieSessionService()));
@@ -36,8 +36,7 @@ public class CommandFactory {
         postCommandMap.put("booking", new BookingCommand(ServiceFactory.getBookingService()));
         postCommandMap.put("schedule", new ScheduleCommand(
                 ServiceFactory.getMovieSessionService(),
-                ServiceFactory.getWeekScheduleDatesService(),
-                ServiceFactory.getHallService()));
+                ServiceFactory.getWeekScheduleDatesService()));
     }
 
     private CommandFactory() {

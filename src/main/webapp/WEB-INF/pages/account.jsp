@@ -8,7 +8,7 @@
 
 <html lang="en">
     <head>
-        <title>Login Movies World</title>
+        <title>My account</title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
         <link rel="stylesheet" href="static/css/login-styles.css">
@@ -27,7 +27,7 @@
         -->
             <div class="content-card">
                 <div class="content-card__container">
-                    <div class="page-title">Hello admin</div>
+                    <div class="page-title">Hello ${sessionScope['user'].login}</div>
                     <div class="form__container">
                     </div>
                 </div>

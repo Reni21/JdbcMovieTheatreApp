@@ -41,31 +41,31 @@
                 <h2 style="text-align: center; color: gray; padding-top: 150px;">
                     No movies sessions in this date.<br> Check out it later.</h2>
             </c:if>
-            <c:forEach items="${sessions}" var="session">
+            <c:forEach items="${sessions}" var="movie">
                 <div class="movie-card">
                     <div class="movie-card__container">
-                        <a href="${session.trailerUrl}" target="_blank">
+                        <a href="${movie.trailerUrl}" target="_blank">
                             <div class="movie-cover">
                                 <img class="play-icon" src="static/img/play.png" alt="cover"/>
                                 <img class="cover-img"
-                                     src="${session.coverImgPath}"
+                                     src="${movie.coverImgPath}"
                                      alt="cover"/>
                             </div>
                         </a>
 
                         <div class="movie-card__background">
                             <img class="background-img"
-                                 src="${session.backgroundImgPath}">
+                                 src="${movie.backgroundImgPath}">
                         </div>
 
                         <div class="movie-description">
-                            <div class="movie-title">${session.title}</div>
+                            <div class="movie-title">${movie.title}</div>
                             <p class="movie-duration">
                                 <fmt:message key="schedule.duration"/>:
-                                    ${session.duration}<fmt:message key="schedule.min"/>
+                                    ${movie.duration}<fmt:message key="schedule.min"/>
                             </p>
 
-                            <c:forEach items="${session.movieSessionTimes}" var="time">
+                            <c:forEach items="${movie.movieSessionTimes}" var="time">
                                 <a class="tag" href="movie-session/${time.getMovieSessionId()}">${time.getTimeView()}</a>
                             </c:forEach>
                         </div>

@@ -1,0 +1,87 @@
+
+button {
+    display: inline-block;
+}
+
+
+.add {
+    background: black;
+    font-weight: 500;
+    border-radius: 3px 18px 18px 3px;
+    border: 0;
+    padding: 3px 15px 3px 10px;
+    font-size: 16px;
+    color: white;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+
+.add:hover {
+    color: #3cb4e7;
+    transition: 0.3s ease-in;
+}
+
+.delete {
+    border: none;
+    background: #3cb4e7;
+    font-weight: 500;
+    border-radius: 25px;
+    padding: 7px 25px;
+    font-size: 18px;
+    color: white;
+    margin-right: 10px;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+.delete:hover {
+    background: black;
+    transition: 0.3s ease-in;
+}
+
+.tag:hover {
+    /* 	background: black; */
+    transition: 0.3s ease-in;
+}
+
+.add-movie:hover {
+    color: white;
+    background: #3cb4e7;
+    transition: 0.3s ease-in;
+}
+
+.add-movie {
+    background: transparent;
+    border: 3px solid #3cb4e7;
+    color: #3cb4e7;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 15px 15px;
+    width: 452px;
+    border-radius: 35px;
+}
+
+.wrapper.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.session-form {
+    font-size: 15px;
+    font-weight: 700;
+    color: #43423E;
+}
+
+.session-field {
+    width: 40px;
+    border: 1px solid black;
+    border-radius: 2px;
+    height: 25px;
+    padding: 3px 10px;
+    margin-bottom: 15px;
+}
