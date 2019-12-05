@@ -22,4 +22,20 @@ public class MovieService {
         LOG.info("Extract all movies");
         return movieDao.getAll();
     }
+
+    public Movie createMovie(Movie movie) {
+        validateMovie(movie);
+        int id = movieDao.create(movie);
+
+        Movie createdMovie = new Movie(movie.getTitle(), movie.getDirectedBy(),movie.getDurationMinutes());
+        createdMovie.setCoverImgUrl(movie.getCoverImgUrl());
+        createdMovie.setBackgroundImgUrl(movie.getBackgroundImgUrl());
+        createdMovie.setTrailerUrl(movie.getTrailerUrl());
+        createdMovie.setMovieId(id);
+        return createdMovie;
+    }
+
+    private void validateMovie(Movie movie) {
+        // todo: throw Ex
+    }
 }

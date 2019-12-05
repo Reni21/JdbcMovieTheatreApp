@@ -149,3 +149,7 @@ button{
 	padding: 7px 10px;
 	margin-bottom: 15px;
 }
+
+.errors {
+	color: red;
+}

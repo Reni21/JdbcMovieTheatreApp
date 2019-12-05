@@ -29,7 +29,8 @@ public class CommandFactory {
         getCommandMap.put("tickets", new BookingCommand(ServiceFactory.getBookingService()));
 
         postCommandMap.put("locale", new LanguageCommand());
-        postCommandMap.put("delete-sessions-set", new DeleteMovieSessionsSetCommand(ServiceFactory.getMovieSessionService()));
+        postCommandMap.put("movie-session", new MovieSessionCommand(
+                ServiceFactory.getWeekScheduleDatesService(), ServiceFactory.getMovieSessionService()));
         postCommandMap.put("movies", new MovieCommand(ServiceFactory.getMovieService()));
         postCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
         postCommandMap.put("sign-up", new SignUpCommand(ServiceFactory.getUserService()));

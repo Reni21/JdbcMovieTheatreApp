@@ -43,7 +43,7 @@
     <!-- The Modal for movies-->
     <div id="myModal" class="modal" style="overflow-y: auto !important; padding: 0 !important;">
         <div style="height: 50px"></div>
-        <div class="content" style="min-height: 880px !important; width: 600px">
+        <div class="content" style="height: 880px !important; width: 600px">
             <div class="page-title">Create movie</div>
             <!-- Modal content -->
             <div class="modal-content" style="margin-right: 30px;">
@@ -51,27 +51,33 @@
                     <form class="form__http-properties" action="movies" method="POST">
                         <!-- Fields -->
 
-                        <p class="field-title">Movie Title</p>
-                        <input type="text" name="username" class="input" placeholder="" required=""/>
+                        <p id="name_title" class="field-title">Movie Title</p>
+                        <p id="err_title" class="errors" style="color: red;"></p>
+                        <input type="text" name="title" class="input" data-error="title"/>
 
-                        <p class="field-title">Produser</p>
-                        <input type="text" name="username" class="input" placeholder="" required=""/>
+                        <p id="name_directed" class="field-title">Directed by</p>
+                        <p id="err_directed" class="errors" style="color: red;"></p>
+                        <input type="text" name="directed" class="input" data-error="directed"/>
 
-                        <p class="field-title">Duration</p>
-                        <input type="number" name="username" class="input" placeholder="" required=""/>
+                        <p id="name_duration" class="field-title">Duration</p>
+                        <p id="err_duration" class="errors" style="color: red;"></p>
+                        <input type="number" name="duration" class="input"data-error="duration"/>
 
-                        <p class="field-title">Cover link</p>
-                        <input type="link" name="password" class="input" placeholder="" required=""/>
+                        <p id="name_cover" class="field-title">Cover link</p>
+                        <p id="err_cover" class="errors" style="color: red;"></p>
+                        <input type="link" name="cover_link" class="input"data-error="cover"/>
 
-                        <p class="field-title">Background link</p>
-                        <input type="link" name="password" class="input" placeholder="" required=""/>
+                        <p id="name_bg" class="field-title">Background link</p>
+                        <p id="err_bg" class="errors" style="color: red;"></p>
+                        <input type="link" name="bg_link" class="input"data-error="bg"/>
 
-                        <p class="field-title">Trailer link</p>
-                        <input type="link" name="password" class="input" placeholder="" required=""/>
+                        <p id="name_trailer" class="field-title">Trailer link</p>
+                        <p id="err_trailer" class="errors" style="color: red;"></p>
+                        <input type="link" name="trailer_link" class="input" data-error="trailer"/>
 
                         <!-- Buttons -->
-                        <button type="submit" class="signinbutton" style="margin-right: 0 !important; margin-left: 0 !important;">Create</button>
-                        <button class="close" style="width: 452px; margin-right: 0 !important; margin-left: 0 !important;">Cancel and Close</button>
+                        <button type="submit" class="signinbutton" style="cursor: pointer;margin-right: 0 !important; margin-left: 0 !important;">Create</button>
+                        <button type="button" class="close" style="width: 452px; margin-right: 0 !important; margin-left: 0 !important;">Cancel and Close</button>
                     </form>
                 </div>
             </div>
@@ -90,9 +96,7 @@
                 <a href="${movie.trailerUrl}" target="_blank">
                     <div class="movie-cover">
                         <img class="play-icon" src="static/img/play.png" alt="cover"/>
-                        <img class="cover-img"
-                             src="${movie.coverImgUrl}"
-                             alt="cover"/>
+                        <img class="cover-img" src="${movie.coverImgUrl}" alt="cover"/>
                     </div>
                 </a>
 
@@ -107,6 +111,8 @@
                         <fmt:message key="schedule.duration"/>:
                             ${movie.durationMinutes}<fmt:message key="schedule.min"/>
                     </p>
+                    <a class="tag" href="movie?id=${movie.movieId}"
+                       style="border-radius: 25px;padding: 10px 25px;font-size: 18px;line-height: 28px;float: right;">Remove movie</a>
                 </div>
             </div>
         </div>

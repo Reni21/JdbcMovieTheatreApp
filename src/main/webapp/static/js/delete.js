@@ -4,7 +4,7 @@ function removeMovieSessionHandler(movieSessionId) {
     console.log(JSON.stringify(sessionsIds));
     $.ajax({
         type: 'post',
-        url: 'delete-sessions-set',
+        url: 'movie-session',
         data: {sessionsIds: JSON.stringify(sessionsIds)}
     }).done(function (resp) {
         window.location.replace(path + '/schedule');
