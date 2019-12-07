@@ -41,10 +41,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public boolean isLoginExist(String login) {
+    public boolean isUserExists(String username) {
         String query = "SELECT 1 FROM `user` WHERE " + DbTablesConstants.UserTable.LOGIN + " = ?";
         return super.checkIfDataExists(query,
-                ps -> ps.setString(1, login));
+                ps -> ps.setString(1, username));
 
     }
 
@@ -56,15 +56,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public User getUserByCredential(String login, String password) {
-        LOG.info("Get User by login=" + login + " password=" + password);
-
-        String query = "SELECT * FROM `user` WHERE " + DbTablesConstants.UserTable.LOGIN + " = ? AND " + DbTablesConstants.UserTable.PASSWORD + " = ?";
+    public User getUserByUsername(String username) {
+        String query = "SELECT * FROM `user` WHERE " + DbTablesConstants.UserTable.LOGIN + " = ?";
         List<User> users = super.getAll(query,
-                ps -> {
-                    ps.setString(1, login);
-                    ps.setString(2, password);
-                },
+                ps -> ps.setString(1, username),
                 EntityMapperProvider.USER_ENTITY_MAPPER);
         if (users.isEmpty()) {
             return null;

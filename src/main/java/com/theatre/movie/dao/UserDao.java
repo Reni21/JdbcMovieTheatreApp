@@ -8,10 +8,10 @@ public interface UserDao {
 
     User getById(int id);
 
-    boolean isLoginExist(String login);
+    boolean isUserExists(String username);
 
     boolean isEmailExist(String email);
 
-    User getUserByCredential(String login, String password);
+    User getUserByUsername(String username);
 
 }

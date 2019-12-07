@@ -21,6 +21,7 @@
         <junit>4.12</junit>
         <mockito>1.10.19</mockito>
         <assertJ>3.14.0</assertJ>
+        <bcrypt>0.9.0</bcrypt>
     </properties>
 
     <dependencies>
@@ -74,7 +75,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-<!--            <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>at.favre.lib</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>${bcrypt}</version>
         </dependency>
     </dependencies>
 

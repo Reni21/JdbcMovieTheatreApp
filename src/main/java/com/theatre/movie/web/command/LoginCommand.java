@@ -28,7 +28,7 @@ public class LoginCommand extends MultipleMethodCommand {
         try {
             User user = userService.getUserByCredentials(login, password);
             if (user == null) {
-                LOG.info("Login failed. Invalid credentials: login=" + login + " password=" + password);
+                LOG.info("Login failed. Invalid credentials");
                 request.setAttribute("error", "Login or password invalid!");
                 LOG.info("Forward to: " + UrlConstants.LOGIN_PAGE);
                 return new PageResponse(UrlConstants.LOGIN_PAGE);
