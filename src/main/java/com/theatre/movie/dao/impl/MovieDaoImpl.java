@@ -6,7 +6,9 @@ import com.theatre.movie.entity.Movie;
 import com.theatre.movie.persistence.ConnectionFactory;
 import org.apache.log4j.Logger;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,12 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     }
 
     @Override
-    public List<Movie> getAll() {
-        String query = "SELECT * FROM `movie`";
-        return super.getAll(query, EntityMapperProvider.MOVIE_ENTITY_MAPPER);
+    public List<Movie> getAll(int offset, int limit) {
+        String query = "SELECT * FROM `movie` ORDER BY " + MovieTable.MOVIE_ID + " LIMIT ? OFFSET ?";
+        return super.getAll(query, ps -> {
+            ps.setInt(1, limit);
+            ps.setInt(2, offset);
+        }, EntityMapperProvider.MOVIE_ENTITY_MAPPER);
     }
 
     @Override
@@ -45,6 +50,25 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
             movieSimple.add(dto);
         });
         return movieSimple;
+    }
+
+    @Override
+    public long getMovieCount() {
+        String query = "SELECT COUNT(*) FROM `movie`";
+        long count = 0;
+
+        try (Connection conn = super.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getLong(1);
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception while try to find movies count.", e);
+        }
+        return count;
     }
 
     @Override

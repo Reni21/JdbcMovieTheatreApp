@@ -6,7 +6,7 @@ public interface CrudDao<T> {
 
     T getById(int id);
 
-    List<T> getAll();
+    List<T> getAll(int offset, int limit);
 
     int create(T entity);
 

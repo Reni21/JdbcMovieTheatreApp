@@ -3,6 +3,7 @@ package com.theatre.movie.web.command;
 import com.google.gson.Gson;
 import com.theatre.movie.dto.MovieSimpleViewDto;
 import com.theatre.movie.entity.Movie;
+import com.theatre.movie.entity.PaginatedData;
 import com.theatre.movie.exception.CanNotRemoveMovieException;
 import com.theatre.movie.service.MovieService;
 import lombok.AllArgsConstructor;
@@ -14,20 +15,28 @@ import java.util.List;
 
 @AllArgsConstructor
 public class MovieCommand extends MultipleMethodCommand {
-    private static final Logger LOG = Logger.getLogger(MovieCommand.class);
+    private static final int MOVIES_PER_PAGE = 5;
     private static final Gson GSON = new Gson();
+    private static final Logger LOG = Logger.getLogger(MovieCommand.class);
     private MovieService movieService;
 
     @Override
     protected CommandResponse performGet(HttpServletRequest request) {
         LOG.info("Start GET");
-        String ajax = request.getParameter("ajax");
-        if(ajax != null) {
+        String simpleView = request.getParameter("simpleView");
+        if (simpleView != null) {
             return performAjax();
         }
+        String pageStr = request.getParameter("page");
+        int page = pageStr == null ? 1 : Integer.valueOf(pageStr);
+
+
         request.setAttribute("activeTab", "movies");
-        List<Movie> movies = movieService.getAll();
-        request.setAttribute("movies", movies);
+        PaginatedData<Movie> paginatedMovies = movieService.getAll(page, MOVIES_PER_PAGE);
+        request.setAttribute("movies", paginatedMovies.getData());
+        request.setAttribute("pagesCount", paginatedMovies.getPagesCount());
+        request.setAttribute("currentPage", paginatedMovies.getCurrentPage());
+
         return new PageResponse(UrlConstants.ADMIN_MOVIES_PAGE);
     }
 
@@ -56,7 +65,7 @@ public class MovieCommand extends MultipleMethodCommand {
         String bg_link = request.getParameter("bg_link");
         String trailer_link = request.getParameter("trailer_link");
         try {
-            Movie movie = new Movie(title, directed,Integer.parseInt(duration));
+            Movie movie = new Movie(title, directed, Integer.parseInt(duration));
             movie.setCoverImgUrl(cover_link);
             movie.setBackgroundImgUrl(bg_link);
             movie.setTrailerUrl(trailer_link);

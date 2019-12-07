@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface MovieDao extends CrudDao<Movie> {
 
-    public List<MovieSimpleViewDto> getAllPreview();
+    List<MovieSimpleViewDto> getAllPreview();
+
+    long getMovieCount();
 }
