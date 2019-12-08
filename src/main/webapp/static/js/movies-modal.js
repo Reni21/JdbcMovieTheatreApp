@@ -133,7 +133,7 @@ $(function () {
 function deleteMovieHandler(movieId) {
     $.ajax({
         type: 'post',
-        url: 'movie?id=' + movieId
+        url: 'movies?id=' + movieId
     }).done(function (resp) {
         $('#card_' + movieId).remove();
     }).fail(function (jqXHR) {

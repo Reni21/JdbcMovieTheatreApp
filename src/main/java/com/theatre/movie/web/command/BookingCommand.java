@@ -23,7 +23,7 @@ public class BookingCommand extends MultipleMethodCommand {
         User user = (User) session.getAttribute("user");
         List<BookingViewDto> bookings = bookingService.getActualUsersBookingById(user.getId());
         LOG.info("Extracted bookings:\n" + bookings);
-        request.setAttribute("bookings" , bookings);
+        request.setAttribute("bookings", bookings);
         return new PageResponse(UrlConstants.USER_TICKETS_PAGE);
     }
 
@@ -33,15 +33,15 @@ public class BookingCommand extends MultipleMethodCommand {
         User user = (User) httpSession.getAttribute("user");
         int movieSessionId = Integer.parseInt(request.getParameter("movieSessionId"));
         String[] bookedSeatsId = request.getParameterValues("bookedSeats");
-        CreateBookingRequestDto createBookingRequest = new CreateBookingRequestDto(user.getId(),movieSessionId,bookedSeatsId);
+        CreateBookingRequestDto createBookingRequest = new CreateBookingRequestDto(user.getId(), movieSessionId, bookedSeatsId);
         try {
             bookingService.createBooking(createBookingRequest);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             LOG.info("Booking creation failed: " + ex.getMessage());
             request.setAttribute("error", ex.getMessage());
             return new PageResponse(UrlConstants.MOVIE_SESSION_PAGE);
         }
         request.setAttribute("activeTab", "account");
-        return new PageResponse(request.getContextPath()+"/account/" + user.getLogin(), true);
+        return new PageResponse(request.getContextPath() + "/tickets", true);
     }
 }

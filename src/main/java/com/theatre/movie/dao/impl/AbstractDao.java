@@ -19,8 +19,9 @@ public abstract class AbstractDao<T> {
     public T getById(String query, StatementConsumer<T> statementConsumer, EntityMapper<T> mapper) {
         T result = null;
 
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        Connection conn = getConnection();
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             statementConsumer.accept(preparedStatement);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -28,19 +29,22 @@ public abstract class AbstractDao<T> {
                     result = mapper.map(resultSet);
                 }
             }
+            LOG.info("Extracted entity:\n" + result);
 
         } catch (SQLException e) {
-            LOG.error("Exception while getting all entities", e);
+            LOG.error("Exception while get entity by id", e);
+            throw new RuntimeException(e);
+        } finally {
+            closeAutocommitConnection(conn);
         }
-        LOG.info("Extracted entity:\n" + result);
         return result;
     }
 
     public boolean checkIfDataExists(String query, StatementConsumer<T> statementConsumer) {
         int result = 0;
 
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        Connection conn = getConnection();
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             statementConsumer.accept(preparedStatement);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -50,6 +54,8 @@ public abstract class AbstractDao<T> {
             }
         } catch (SQLException e) {
             LOG.error("Exception while try to find match.", e);
+        } finally {
+            closeAutocommitConnection(conn);
         }
         LOG.info("Match result=" + result);
         return result == 1;
@@ -61,9 +67,9 @@ public abstract class AbstractDao<T> {
 
     public List<T> getAll(String query, StatementConsumer<T> statementConsumer, EntityMapper<T> mapper) {
         List<T> result = new ArrayList<>();
+        Connection conn = getConnection();
 
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             if (statementConsumer != null) {
                 statementConsumer.accept(preparedStatement);
             }
@@ -76,13 +82,16 @@ public abstract class AbstractDao<T> {
 
         } catch (SQLException e) {
             LOG.error("Exception while getting all entities.", e);
+            throw new RuntimeException(e);
+        } finally {
+            closeAutocommitConnection(conn);
         }
         return result;
     }
 
     public int create(String query, StatementConsumer<T> statementConsumer) {
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        Connection conn = getConnection();
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statementConsumer.accept(preparedStatement);
 
             int result = preparedStatement.executeUpdate();
@@ -97,14 +106,16 @@ public abstract class AbstractDao<T> {
                     LOG.info("Id for new entity record id=" + generatedId);
                     return generatedId;
                 } else {
-                    LOG.error("Creating movieSession failed, no ID obtained.");
-                    return -1;
+                    LOG.error("Creating entity failed, no ID obtained.");
+                    throw new RuntimeException("Creating entity failed, no ID obtained.");
                 }
             }
         } catch (SQLException e) {
             LOG.error("Could not create entity.", e);
+            throw new RuntimeException(e);
+        } finally {
+            closeAutocommitConnection(conn);
         }
-        return -1;
     }
 
     public boolean update(String query, StatementConsumer<T> statementConsumer) {
@@ -112,8 +123,8 @@ public abstract class AbstractDao<T> {
             return updateRemove(query, statementConsumer);
         } catch (SQLException e) {
             LOG.error("Could not update entity.", e);
+            throw new RuntimeException(e);
         }
-        return false;
     }
 
     public boolean remove(String query, StatementConsumer<T> statementConsumer) {
@@ -121,8 +132,8 @@ public abstract class AbstractDao<T> {
             return updateRemove(query, statementConsumer);
         } catch (SQLException e) {
             LOG.error("Could not remove entity.", e);
+            throw new RuntimeException(e);
         }
-        return false;
     }
 
     protected Connection getConnection() {
@@ -130,12 +141,24 @@ public abstract class AbstractDao<T> {
     }
 
     private boolean updateRemove(String query, StatementConsumer<T> statementConsumer) throws SQLException {
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        Connection conn = getConnection();
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             statementConsumer.accept(preparedStatement);
 
             int result = preparedStatement.executeUpdate();
             return result == 1;
+        } finally {
+            closeAutocommitConnection(conn);
+        }
+    }
+
+    protected void closeAutocommitConnection(Connection connection) {
+        try {
+            if (connection != null && connection.getAutoCommit()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            LOG.error("Could not close connection.", e);
         }
     }
 }

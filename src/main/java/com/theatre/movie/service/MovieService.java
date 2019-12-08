@@ -2,10 +2,12 @@ package com.theatre.movie.service;
 
 import com.theatre.movie.dao.BookingDao;
 import com.theatre.movie.dao.MovieDao;
+import com.theatre.movie.dao.MovieSessionDao;
 import com.theatre.movie.dto.MovieSimpleViewDto;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.PaginatedData;
-import com.theatre.movie.exception.CanNotRemoveMovieException;
+import com.theatre.movie.exception.MovieRemovalException;
+import com.theatre.movie.persistence.transaction.TransactionHandler;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -16,6 +18,8 @@ public class MovieService {
     private static final Logger LOG = Logger.getLogger(MovieService.class);
     private MovieDao movieDao;
     private BookingDao bookingDao;
+    private MovieSessionDao movieSessionDao;
+    private TransactionHandler transactionHandler;
 
     public List<MovieSimpleViewDto> getAllSimpleView() {
         LOG.info("Extract simple movie view data");
@@ -33,25 +37,21 @@ public class MovieService {
 
     public Movie createMovie(Movie movie) {
         validateMovie(movie);
-        int id = movieDao.create(movie);
-
-        Movie createdMovie = new Movie(movie.getTitle(), movie.getDirectedBy(), movie.getDurationMinutes());
-        createdMovie.setCoverImgUrl(movie.getCoverImgUrl());
-        createdMovie.setBackgroundImgUrl(movie.getBackgroundImgUrl());
-        createdMovie.setTrailerUrl(movie.getTrailerUrl());
-        createdMovie.setMovieId(id);
-        return createdMovie;
+        return movieDao.create(movie);
     }
 
     private void validateMovie(Movie movie) {
         // todo: throw Ex
     }
 
-    public void deleteMovieById(int movieId) throws CanNotRemoveMovieException {
-        boolean res = bookingDao.isBookingForMovieSessionExist(movieId);
-        if (res) {
-            throw new CanNotRemoveMovieException("Movie can not be deleted. Still exist booking for movie sessions with this movie.");
-        }
-        movieDao.remove(movieId);
+    public void deleteMovieAndSessions(int movieId) throws MovieRemovalException {
+        transactionHandler.runInTransaction(() -> {
+            boolean bookingExists = bookingDao.isBookingForMovieExist(movieId);
+            if (bookingExists) {
+                throw new MovieRemovalException("Movie can not be deleted. Still exist booking for movie sessions with this movie.");
+            }
+            movieSessionDao.removeAllByMovieId(movieId);
+            movieDao.remove(movieId);
+        });
     }
 }

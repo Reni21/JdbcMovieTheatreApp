@@ -49,13 +49,13 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
                 + MovieSessionTable.START_AT + ", " + MovieSessionTable.PRICE
                 + ") VALUE (?, ?, ?, ?)";
         System.out.println(query);
-        int res = super.create(query, ps -> {
+        int id = super.create(query, ps -> {
             ps.setInt(1, movieSession.getMovieId());
-            ps.setInt(2,movieSession.getHallId());
+            ps.setInt(2, movieSession.getHallId());
             ps.setTimestamp(3, Timestamp.valueOf(movieSession.getStartAt()));
             ps.setDouble(4, movieSession.getPrice());
         });
-        movieSession.setSessionId(res);
+        movieSession.setSessionId(id);
         return movieSession;
     }
 
@@ -64,6 +64,12 @@ public class MovieSessionDaoImpl extends AbstractDao<MovieSession> implements Mo
         LOG.debug("Delete movie session with id= " + id);
         String query = "DELETE FROM `movie_session` WHERE " + MovieSessionTable.SESSION_ID + " = ?";
         return super.remove(query, ps -> ps.setInt(1, id));
+    }
+
+    @Override
+    public boolean removeAllByMovieId(int movieId) {
+        String query = "DELETE FROM `movie_session` WHERE " + MovieSessionTable.MOVIE_ID + " = ?";
+        return super.remove(query, ps -> ps.setInt(1, movieId));
     }
 
 }

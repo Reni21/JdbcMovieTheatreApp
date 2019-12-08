@@ -8,7 +8,7 @@ public interface CrudDao<T> {
 
     List<T> getAll(int offset, int limit);
 
-    int create(T entity);
+    T create(T entity);
 
     boolean update(T entity);
 

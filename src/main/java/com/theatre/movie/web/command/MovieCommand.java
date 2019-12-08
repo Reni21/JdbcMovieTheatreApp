@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.theatre.movie.dto.MovieSimpleViewDto;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.PaginatedData;
-import com.theatre.movie.exception.CanNotRemoveMovieException;
+import com.theatre.movie.exception.MovieRemovalException;
 import com.theatre.movie.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ public class MovieCommand extends MultipleMethodCommand {
             return performAjax();
         }
         String pageStr = request.getParameter("page");
-        int page = pageStr == null ? 1 : Integer.valueOf(pageStr);
+        int page = pageStr == null ? 1 : Integer.parseInt(pageStr);
 
 
         request.setAttribute("activeTab", "movies");
@@ -47,11 +47,11 @@ public class MovieCommand extends MultipleMethodCommand {
             return createMovie(request);
         }
         try {
-            LOG.info("Try delete movie with id=" + id);
-            movieService.deleteMovieById(Integer.parseInt(id));
+            LOG.info("Try delete movie with id=" + id + " and all its sessions");
+            movieService.deleteMovieAndSessions(Integer.parseInt(id));
             String json = GSON.toJson("OK");
             return new SuccessResponse(json);
-        } catch (CanNotRemoveMovieException ex) {
+        } catch (MovieRemovalException ex) {
             LOG.error("Failed to delete movie." + ex);
             return new ErrorResponse(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
         }

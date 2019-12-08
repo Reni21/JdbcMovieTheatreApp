@@ -1,6 +1,5 @@
 package com.theatre.movie.dao.impl;
 
-import com.theatre.movie.dao.EntityMapper;
 import com.theatre.movie.dao.HallDao;
 import com.theatre.movie.entity.Hall;
 import com.theatre.movie.entity.Seat;
@@ -30,8 +29,9 @@ public class HallDaoImpl extends AbstractDao<Hall> implements HallDao {
                 " LEFT JOIN seat s on h." + HallTable.HALL_ID + " = s." + SeatTable.HALL_ID +
                 " WHERE h." + HallTable.HALL_ID + " = ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        Connection conn = super.getConnection();
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
 
             try (ResultSet rs = preparedStatement.executeQuery()) {
@@ -47,12 +47,10 @@ public class HallDaoImpl extends AbstractDao<Hall> implements HallDao {
             }
         } catch (SQLException e) {
             LOG.error("Exception while getting full hall entity", e);
+            throw new RuntimeException(e);
+        } finally {
+            closeAutocommitConnection(conn);
         }
-        return null;
-
-//        return super.getById(query,
-//                ps -> ps.setInt(1, id),
-//                EntityMapperProvider.HALL_ENTITY_MAPPER);
     }
 
     @Override

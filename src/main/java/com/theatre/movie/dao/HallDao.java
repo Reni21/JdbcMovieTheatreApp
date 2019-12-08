@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface HallDao {
 
-   public Hall getHallById(int id);
+    Hall getHallById(int id);
 
-   List<Hall> getAll();
+    List<Hall> getAll();
 }

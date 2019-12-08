@@ -26,9 +26,9 @@ public class BookingDaoImpl extends AbstractDao<BookingViewDto> implements Booki
         String query = "SELECT seat_id FROM `booking` WHERE " + BookingTable.MOVIE_SESSION_ID + " = ?" +
                 " AND (" + BookingTable.STATUS + " = 'BOOKED' OR " + BookingTable.STATUS + " = 'PAID')";
         Set<Integer> result = new HashSet<>();
+        Connection conn = super.getConnection();
 
-        try (Connection conn = getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setInt(1, movieSessionId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -36,11 +36,14 @@ public class BookingDaoImpl extends AbstractDao<BookingViewDto> implements Booki
                     result.add(resultSet.getInt(BookingTable.SEAT_ID));
                 }
             }
+            return result;
 
         } catch (SQLException e) {
             LOG.error("Exception while getting booked seats id.\n", e);
+            throw new RuntimeException(e);
+        } finally {
+            closeAutocommitConnection(conn);
         }
-        return result;
     }
 
 

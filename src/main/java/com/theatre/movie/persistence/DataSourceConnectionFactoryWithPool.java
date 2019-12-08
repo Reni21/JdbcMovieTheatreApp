@@ -1,5 +1,6 @@
 package com.theatre.movie.persistence;
 
+import com.theatre.movie.persistence.transaction.ConnectionHolder;
 import org.apache.log4j.Logger;
 
 import javax.naming.Context;
@@ -27,14 +28,19 @@ public class DataSourceConnectionFactoryWithPool implements ConnectionFactory {
     }
 
     public Connection getConnection() {
-        Connection connection = null;
+
+        if (ConnectionHolder.getCurrentConnection() != null) {
+            LOG.debug("Connection already exists for thread: " + Thread.currentThread().getName());
+            return ConnectionHolder.getCurrentConnection();
+        }
         try {
-            connection = dataSource.getConnection();
-            LOG.debug("Connection received " + connection + " "+ connection.hashCode());
+            Connection connection = dataSource.getConnection();
+            LOG.debug("New connection received");
+            return connection;
         } catch (SQLException e) {
             LOG.error("Some problem was occurred while getting connection to BD", e);
+            throw new RuntimeException(e);
         }
-        return connection;
     }
 
     public static DataSourceConnectionFactoryWithPool getInstance() {

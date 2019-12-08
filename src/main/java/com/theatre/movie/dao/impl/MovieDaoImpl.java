@@ -57,8 +57,9 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
         String query = "SELECT COUNT(*) FROM `movie`";
         long count = 0;
 
-        try (Connection conn = super.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        Connection conn = super.getConnection();
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -67,12 +68,15 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
             }
         } catch (SQLException e) {
             LOG.error("Exception while try to find movies count.", e);
+            throw new RuntimeException(e);
+        } finally {
+            closeAutocommitConnection(conn);
         }
         return count;
     }
 
     @Override
-    public int create(Movie entity) {
+    public Movie create(Movie entity) {
         LOG.debug("Create movie: + " + entity);
 
         String query = "INSERT INTO `movie` ("
@@ -81,7 +85,9 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
                 + MovieTable.TRAILER_URL + ", " + MovieTable.BACKGROUND_IMG_URL + ", " + MovieTable.COVER_IMG_URL
                 + ") VALUE (?, ?, ?, ?, ?, ?, ?)";
         System.out.println(query);
-        return super.create(query, ps -> fillStatementWithCommonFields(ps, entity));
+        int id = super.create(query, ps -> fillStatementWithCommonFields(ps, entity));
+        entity.setMovieId(id);
+        return entity;
     }
 
     @Override

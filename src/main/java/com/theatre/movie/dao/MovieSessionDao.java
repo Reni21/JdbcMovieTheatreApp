@@ -15,4 +15,5 @@ public interface MovieSessionDao {
 
     boolean remove(int movieSessionId);
 
+    boolean removeAllByMovieId(int movieId);
 }

@@ -1,7 +1,5 @@
 package com.theatre.movie.entity;
 
-import com.theatre.movie.entity.BookingStatus;
-import com.theatre.movie.entity.Seat;
 import lombok.*;
 
 import java.time.LocalDateTime;

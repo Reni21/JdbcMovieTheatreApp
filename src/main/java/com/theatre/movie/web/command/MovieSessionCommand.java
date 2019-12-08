@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.theatre.movie.dto.MenuDateViewDto;
 import com.theatre.movie.dto.MovieSessionViewDto;
-import com.theatre.movie.exception.CanNotRemoveMovieScheduleException;
+import com.theatre.movie.exception.MovieScheduleRemovalException;
 import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
 import lombok.AllArgsConstructor;
@@ -39,8 +39,6 @@ public class MovieSessionCommand extends MultipleMethodCommand {
 
     /**
      * Delete movie session
-     * @param request
-     * @return
      */
     @Override
     protected CommandResponse performPost(HttpServletRequest request) {
@@ -50,10 +48,10 @@ public class MovieSessionCommand extends MultipleMethodCommand {
         List<Integer> sessionsIds = GSON.fromJson(sessionsIdsJson, type);
 
         try {
-            movieSessionService.deleteMovieSessionById(sessionsIds);
+            movieSessionService.deleteMovieSessionByIds(sessionsIds);
             String json = GSON.toJson("OK");
             return new SuccessResponse(json);
-        } catch (CanNotRemoveMovieScheduleException ex) {
+        } catch (MovieScheduleRemovalException ex) {
             LOG.error("Failed to delete movie sessions set:" + ex);
             return new ErrorResponse(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
         }

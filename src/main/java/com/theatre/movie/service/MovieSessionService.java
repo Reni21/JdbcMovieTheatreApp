@@ -12,9 +12,10 @@ import com.theatre.movie.entity.Hall;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.MovieSession;
 import com.theatre.movie.entity.Seat;
-import com.theatre.movie.exception.CanNotRemoveMovieScheduleException;
 import com.theatre.movie.exception.InvalidScheduleDateException;
+import com.theatre.movie.exception.MovieScheduleRemovalException;
 import com.theatre.movie.exception.MovieSessionCreationException;
+import com.theatre.movie.persistence.transaction.TransactionHandler;
 import com.theatre.movie.web.dto.CreateMovieSessionRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -36,6 +37,7 @@ public class MovieSessionService {
     private BookingDao bookingDao;
     private HallDao hallDao;
     private MovieDao movieDao;
+    private TransactionHandler transactionHandler;
 
     public MovieSessionViewDto getMovieSessionById(int id) {
         MovieSession movieSession = movieSessionDao.getById(id);
@@ -81,6 +83,35 @@ public class MovieSessionService {
                 }).collect(Collectors.toList());
     }
 
+    public MovieSession addMovieSession(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
+        LOG.info("Create new movie session for data: " + movieSessionDto);
+        validateMovieSessionRequestDto(movieSessionDto);
+
+
+        LocalDate date = LocalDate.parse(movieSessionDto.getDate(), DateTimeFormatter.ISO_DATE);
+        LocalTime time = LocalTime.of(Integer.parseInt(movieSessionDto.getHours()), Integer.parseInt(movieSessionDto.getMinutes()));
+        LocalDateTime startAt = LocalDateTime.of(date, time);
+        MovieSession movieSession = new MovieSession(
+                Integer.parseInt(movieSessionDto.getMovieId()),
+                Integer.parseInt(movieSessionDto.getHallId()),
+                startAt,
+                Double.parseDouble(movieSessionDto.getPrice()));
+        LOG.info("Create movieSession with id=" + movieSession.getSessionId());
+        return movieSessionDao.create(movieSession);
+    }
+
+    public void deleteMovieSessionByIds(List<Integer> sessionsIds) throws MovieScheduleRemovalException {
+        transactionHandler.runInTransaction(() -> {
+            for (Integer id : sessionsIds) {
+                boolean bookingExists = bookingDao.isBookingForMovieSessionExist(id);
+                if (bookingExists) {
+                    throw new MovieScheduleRemovalException("Movie card can not be deleted. Some sessions already have reservations.");
+                }
+            }
+            sessionsIds.forEach(movieSessionDao::remove);
+        });
+    }
+
     private void checkScheduleDateInValidRange(LocalDate date) throws InvalidScheduleDateException {
         LocalDate now = LocalDate.now();
         if (date.isBefore(now) || date.isAfter(now.plusDays(7))) {
@@ -107,35 +138,9 @@ public class MovieSessionService {
         }).collect(Collectors.groupingBy(BookedSeatViewDto::getRow));
     }
 
-    public MovieSession addMovieSession(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
-        LOG.info("Create new movie session for data: " + movieSessionDto);
-        validateMovieSessionRequestDto(movieSessionDto);
-
-
-        LocalDate date = LocalDate.parse(movieSessionDto.getDate(), DateTimeFormatter.ISO_DATE);
-        LocalTime time = LocalTime.of(Integer.parseInt(movieSessionDto.getHours()), Integer.parseInt(movieSessionDto.getMinutes()));
-        LocalDateTime startAt = LocalDateTime.of(date, time);
-        MovieSession movieSession = new MovieSession(
-                Integer.parseInt(movieSessionDto.getMovieId()),
-                Integer.parseInt(movieSessionDto.getHallId()),
-                startAt,
-                Double.parseDouble(movieSessionDto.getPrice()));
-        LOG.info("Create movieSession with id=" + movieSession.getSessionId());
-        return movieSessionDao.create(movieSession);
-    }
 
     private void validateMovieSessionRequestDto(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
         //throw new MovieSessionCreationException("Oopd");
     }
 
-    // transactional
-    public void deleteMovieSessionById(List<Integer> sessionsIds) throws CanNotRemoveMovieScheduleException {
-        for (Integer id : sessionsIds) {
-            boolean res = bookingDao.isBookingForMovieSessionExist(id);
-            if(res){
-                throw new CanNotRemoveMovieScheduleException("Movie card can not be deleted. Some sessions already have reservations.");
-            }
-        }
-        sessionsIds.forEach(movieSessionDao::remove);
-    }
 }

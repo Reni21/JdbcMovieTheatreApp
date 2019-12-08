@@ -53,7 +53,6 @@ function removePinHandler(movieId) {
             return this.id;
         }).get();
 
-        var jsonData = {sessionsIds:sessionsIds};
         console.log(JSON.stringify(sessionsIds));
         $.ajax({
             type: 'post',

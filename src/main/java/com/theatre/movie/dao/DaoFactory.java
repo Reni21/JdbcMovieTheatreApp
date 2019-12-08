@@ -9,7 +9,6 @@ import lombok.Getter;
 public class DaoFactory {
     private static final ConnectionFactory CONNECTION_FACTORY = DataSourceConnectionFactoryWithPool.getInstance();
 
-
     private static final MovieDao MOVIE_DAO = new MovieDaoImpl(CONNECTION_FACTORY);
     private static final MovieSessionDao MOVIE_SESSION_DAO = new MovieSessionDaoImpl(CONNECTION_FACTORY);
     private static final UserDao USER_DAO = new UserDaoImpl(CONNECTION_FACTORY);

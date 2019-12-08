@@ -9,6 +9,8 @@ import com.theatre.movie.web.dto.CreateUserRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
+import java.util.StringJoiner;
+
 
 @AllArgsConstructor
 public class UserService {
@@ -39,10 +41,7 @@ public class UserService {
             throw new IllegalArgumentException("Required data is empty.");
         }
 
-        Passwords.ValidationResult validationResult = Passwords.validatePassword(userRequest.getPassword());
-        if (!validationResult.valid) {
-            throw new IllegalArgumentException(validationResult.errorReasons());
-        }
+        validatePassword(userRequest.getPassword());
 
         String username = userRequest.getUsername();
         if (userDao.isUserExists(username)) {
@@ -54,6 +53,29 @@ public class UserService {
         if (userDao.isEmailExist(email)) {
             LOG.warn("Find extra match for email=" + email);
             throw new UserAlreadyExistException("This email is already occupied.");
+        }
+    }
+
+    public void validatePassword(String password) {
+
+        StringJoiner errors = new StringJoiner(";\n");
+
+        if (password.length() < 8) {
+            errors.add("Password length must be greater than 8 characters");
+        }
+
+        String upperCaseChars = "(.*[A-Z].*)";
+        if (!password.matches(upperCaseChars)) {
+            errors.add("Password should contain at least one upper case alphabet");
+        }
+
+        String numbers = "(.*[0-9].*)";
+        if (!password.matches(numbers)) {
+            errors.add("Password should contain at least one number");
+        }
+
+        if (errors.length() != 0) {
+            throw new IllegalArgumentException(errors.toString());
         }
     }
 
