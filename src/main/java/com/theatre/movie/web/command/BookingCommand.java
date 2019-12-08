@@ -3,6 +3,8 @@ package com.theatre.movie.web.command;
 import com.theatre.movie.dto.BookingViewDto;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.service.BookingService;
+import com.theatre.movie.web.command.response.CommandResponse;
+import com.theatre.movie.web.command.response.PageResponse;
 import com.theatre.movie.web.dto.CreateBookingRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -31,9 +33,11 @@ public class BookingCommand extends MultipleMethodCommand {
     protected CommandResponse performPost(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();
         User user = (User) httpSession.getAttribute("user");
-        int movieSessionId = Integer.parseInt(request.getParameter("movieSessionId"));
-        String[] bookedSeatsId = request.getParameterValues("bookedSeats");
-        CreateBookingRequestDto createBookingRequest = new CreateBookingRequestDto(user.getId(), movieSessionId, bookedSeatsId);
+        CreateBookingRequestDto createBookingRequest = new CreateBookingRequestDto(
+                user.getId(),
+                request.getParameter("movieSessionId"),
+                request.getParameterValues("bookedSeats")
+        );
         try {
             bookingService.createBooking(createBookingRequest);
         } catch (Exception ex) {

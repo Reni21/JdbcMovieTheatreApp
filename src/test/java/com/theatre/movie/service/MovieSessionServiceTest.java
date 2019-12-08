@@ -105,16 +105,29 @@ public class MovieSessionServiceTest {
 
     @Test
     public void shouldAddMovieSession() throws MovieSessionCreationException {
-        CreateMovieSessionRequestDto createMovieSessionRequest = new CreateMovieSessionRequestDto(
+        CreateMovieSessionRequestDto dto = new CreateMovieSessionRequestDto(
                 "3", "4", "2019-12-14", "11", "12", "100"
         );
 
-        instance.addMovieSession(createMovieSessionRequest);
+        when(movieDao.getById(3)).thenReturn(createMovie(3));
+
+        instance.addMovieSession(dto);
 
         MovieSession expected = new MovieSession(3, 4,
                 LocalDateTime.of(LocalDate.of(2019, 12, 14), LocalTime.of(11, 12)), 100.0);
 
         verify(movieSessionDao).create(expected);
+    }
+
+    @Test
+    public void shouldFailAddMovieSessionOfNotExistingMovie() {
+        CreateMovieSessionRequestDto dto = new CreateMovieSessionRequestDto(
+                "3", "4", "2019-12-14", "11", "12", "100"
+        );
+
+        assertThatThrownBy(() -> instance.addMovieSession(dto))
+                .isInstanceOf(MovieSessionCreationException.class)
+                .hasMessageContaining("Movie with id 3 does not exist");
     }
 
 

@@ -1,6 +1,8 @@
 package com.theatre.movie.web.command;
 
 
+import com.theatre.movie.web.command.response.PageResponse;
+
 import javax.servlet.http.HttpServletRequest;
 
 

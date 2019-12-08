@@ -6,8 +6,10 @@ import com.theatre.movie.dao.MovieSessionDao;
 import com.theatre.movie.dto.MovieSimpleViewDto;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.PaginatedData;
+import com.theatre.movie.exception.MovieCreationException;
 import com.theatre.movie.exception.MovieRemovalException;
 import com.theatre.movie.persistence.transaction.TransactionHandler;
+import com.theatre.movie.web.dto.CreateMovieRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -35,13 +37,14 @@ public class MovieService {
         return new PaginatedData<>(movies, pagesCount, page);
     }
 
-    public Movie createMovie(Movie movie) {
-        validateMovie(movie);
-        return movieDao.create(movie);
-    }
+    public Movie createMovie(CreateMovieRequestDto dto) throws MovieCreationException {
+        validateCreateMovieRequest(dto);
 
-    private void validateMovie(Movie movie) {
-        // todo: throw Ex
+        Movie movie = new Movie(dto.getTitle(), dto.getDirectedBy(), Integer.parseInt(dto.getDurationMinutes()));
+        movie.setTrailerUrl(dto.getTrailerUrl());
+        movie.setCoverImgUrl(dto.getCoverImgUrl());
+        movie.setBackgroundImgUrl(dto.getBackgroundImgUrl());
+        return movieDao.create(movie);
     }
 
     public void deleteMovieAndSessions(int movieId) throws MovieRemovalException {
@@ -53,5 +56,11 @@ public class MovieService {
             movieSessionDao.removeAllByMovieId(movieId);
             movieDao.remove(movieId);
         });
+    }
+
+    private void validateCreateMovieRequest(CreateMovieRequestDto dto) throws MovieCreationException {
+        if (dto.getTitle() == null || dto.getDirectedBy() == null || dto.getDurationMinutes() == null) {
+            throw new MovieCreationException("Required fields are empty");
+        }
     }
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class CreateBookingRequestDto {
-    Integer userId;
-    int movieSessionId;
+    int userId;
+    String movieSessionId;
     String[] bookedSeatsId;
 }

@@ -9,9 +9,12 @@ import com.theatre.movie.entity.Role;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.InvalidScheduleDateException;
 import com.theatre.movie.exception.MovieSessionCreationException;
-import com.theatre.movie.service.HallService;
 import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
+import com.theatre.movie.web.command.response.CommandResponse;
+import com.theatre.movie.web.command.response.ErrorResponse;
+import com.theatre.movie.web.command.response.PageResponse;
+import com.theatre.movie.web.command.response.SuccessResponse;
 import com.theatre.movie.web.dto.CreateMovieSessionRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -65,13 +68,15 @@ public class ScheduleCommand extends MultipleMethodCommand {
 
     @Override
     protected CommandResponse performPost(HttpServletRequest request) {
-        String movieId = request.getParameter("movieId");
-        String hours = request.getParameter("hours");
-        String minutes = request.getParameter("minutes");
-        String date = request.getParameter("date");
-        String price = request.getParameter("price");
+        CreateMovieSessionRequestDto dto = new CreateMovieSessionRequestDto(
+                request.getParameter("movieId"),
+                "1",
+                request.getParameter("date"),
+                request.getParameter("hours"),
+                request.getParameter("minutes"),
+                request.getParameter("price")
+        );
         try {
-            CreateMovieSessionRequestDto dto = new CreateMovieSessionRequestDto(movieId, "1", date, hours, minutes, price);
             MovieSession movieSession = movieSessionService.addMovieSession(dto);
             MovieSessionTimeViewDto movieSessionTime = new MovieSessionTimeViewDto(
                     movieSession.getSessionId(), movieSession.getStartAt().toLocalTime());

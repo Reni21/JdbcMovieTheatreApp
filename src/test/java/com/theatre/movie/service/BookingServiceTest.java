@@ -1,6 +1,7 @@
 package com.theatre.movie.service;
 
 import com.theatre.movie.dao.BookingDao;
+import com.theatre.movie.dao.MovieSessionDao;
 import com.theatre.movie.dto.BookingViewDto;
 import com.theatre.movie.persistence.transaction.TransactionHandler;
 import org.junit.Before;
@@ -18,11 +19,12 @@ public class BookingServiceTest {
 
     private BookingService instance;
     private BookingDao bookingDao = mock(BookingDao.class);
+    private MovieSessionDao movieSessionDao = mock(MovieSessionDao.class);
     private TransactionHandler transactionHandler = mock(TransactionHandler.class);
 
     @Before
     public void setUp() {
-        instance = new BookingService(bookingDao, transactionHandler);
+        instance = new BookingService(bookingDao, movieSessionDao, transactionHandler);
     }
 
     @Test

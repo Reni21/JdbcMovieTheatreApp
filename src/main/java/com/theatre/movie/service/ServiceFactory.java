@@ -21,7 +21,7 @@ public class ServiceFactory {
     );
     private static final WeekScheduleDatesService WEEK_SCHEDULE_DATES_SERVICE = new WeekScheduleDatesService();
     private static final UserService USER_SERVICE = new UserService(DaoFactory.getUserDao());
-    private static final BookingService BOOKING_SERVICE = new BookingService(DaoFactory.getBookingDao(), TRANSACTION_HANDLER);
+    private static final BookingService BOOKING_SERVICE = new BookingService(DaoFactory.getBookingDao(), DaoFactory.getMovieSessionDao(), TRANSACTION_HANDLER);
     private static final HallService HALL_SERVICE = new HallService(DaoFactory.getHallDao());
     private static final MovieService MOVIE_SERVICE = new MovieService(
             DaoFactory.getMovieDao(),

@@ -4,8 +4,14 @@ import com.google.gson.Gson;
 import com.theatre.movie.dto.MovieSimpleViewDto;
 import com.theatre.movie.entity.Movie;
 import com.theatre.movie.entity.PaginatedData;
+import com.theatre.movie.exception.MovieCreationException;
 import com.theatre.movie.exception.MovieRemovalException;
 import com.theatre.movie.service.MovieService;
+import com.theatre.movie.web.command.response.CommandResponse;
+import com.theatre.movie.web.command.response.ErrorResponse;
+import com.theatre.movie.web.command.response.PageResponse;
+import com.theatre.movie.web.command.response.SuccessResponse;
+import com.theatre.movie.web.dto.CreateMovieRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
@@ -58,23 +64,22 @@ public class MovieCommand extends MultipleMethodCommand {
     }
 
     private CommandResponse createMovie(HttpServletRequest request) {
-        String title = request.getParameter("title");
-        String directed = request.getParameter("directed");
-        String duration = request.getParameter("duration");
-        String cover_link = request.getParameter("cover_link");
-        String bg_link = request.getParameter("bg_link");
-        String trailer_link = request.getParameter("trailer_link");
-        try {
-            Movie movie = new Movie(title, directed, Integer.parseInt(duration));
-            movie.setCoverImgUrl(cover_link);
-            movie.setBackgroundImgUrl(bg_link);
-            movie.setTrailerUrl(trailer_link);
 
-            Movie createdMovie = movieService.createMovie(movie);
+        CreateMovieRequestDto dto = new CreateMovieRequestDto(
+                request.getParameter("title"),
+                request.getParameter("directed"),
+                request.getParameter("duration"),
+                request.getParameter("trailer_link"),
+                request.getParameter("bg_link"),
+                request.getParameter("cover_link")
+        );
+
+        try {
+            Movie createdMovie = movieService.createMovie(dto);
             Gson gson = new Gson();
             String json = gson.toJson(createdMovie);
             return new SuccessResponse(json);
-        } catch (Exception ex) {
+        } catch (MovieCreationException ex) {
             LOG.error("Failed to create new movie session:" + ex);
             return new ErrorResponse(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
         }

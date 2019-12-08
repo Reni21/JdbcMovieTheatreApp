@@ -2,6 +2,7 @@ package com.theatre.movie.web.command;
 
 import com.theatre.movie.entity.User;
 import com.theatre.movie.service.UserService;
+import com.theatre.movie.web.command.response.PageResponse;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 

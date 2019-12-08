@@ -27,11 +27,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class MovieSessionService {
     private static final Logger LOG = Logger.getLogger(MovieSessionService.class);
+    private static final int BREAK_DURATION = 15;
 
     private MovieSessionDao movieSessionDao;
     private BookingDao bookingDao;
@@ -85,12 +87,10 @@ public class MovieSessionService {
 
     public MovieSession addMovieSession(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
         LOG.info("Create new movie session for data: " + movieSessionDto);
-        validateMovieSessionRequestDto(movieSessionDto);
+        validateMovieSessionRequest(movieSessionDto);
 
+        LocalDateTime startAt = getSessionStartAt(movieSessionDto);
 
-        LocalDate date = LocalDate.parse(movieSessionDto.getDate(), DateTimeFormatter.ISO_DATE);
-        LocalTime time = LocalTime.of(Integer.parseInt(movieSessionDto.getHours()), Integer.parseInt(movieSessionDto.getMinutes()));
-        LocalDateTime startAt = LocalDateTime.of(date, time);
         MovieSession movieSession = new MovieSession(
                 Integer.parseInt(movieSessionDto.getMovieId()),
                 Integer.parseInt(movieSessionDto.getHallId()),
@@ -139,8 +139,56 @@ public class MovieSessionService {
     }
 
 
-    private void validateMovieSessionRequestDto(CreateMovieSessionRequestDto movieSessionDto) throws MovieSessionCreationException {
-        //throw new MovieSessionCreationException("Oopd");
+    private void validateMovieSessionRequest(CreateMovieSessionRequestDto dto) throws MovieSessionCreationException {
+
+        if (dto.getMovieId() == null
+                || dto.getHallId() == null
+                || dto.getDate() == null
+                || dto.getHours() == null
+                || dto.getMinutes() == null
+                || dto.getPrice() == null) {
+            throw new MovieSessionCreationException("Required fields are empty");
+        }
+        Movie movie = movieDao.getById(Integer.parseInt(dto.getMovieId()));
+        if (movie == null) {
+            throw new MovieSessionCreationException("Movie with id " + dto.getMovieId() + " does not exist");
+        }
+
+
+        validateMovieSessionTimeRange(dto, movie.getDurationMinutes());
+    }
+
+    private void validateMovieSessionTimeRange(CreateMovieSessionRequestDto dto, int newMovieDuration) throws MovieSessionCreationException {
+        LocalDateTime newMovieStartAt = getSessionStartAt(dto);
+
+        LocalDateTime from = newMovieStartAt.toLocalDate().atStartOfDay();
+        LocalDateTime to = newMovieStartAt.plusMinutes(newMovieDuration + BREAK_DURATION);
+
+        List<MovieSession> movieSessions = movieSessionDao.getAllInRange(from, to);
+
+        StringJoiner errors = new StringJoiner(";");
+
+        for (MovieSession movieSession : movieSessions) {
+            int movieDuration = movieDao.getById(movieSession.getMovieId()).getDurationMinutes();
+            LocalDateTime movieStartAt = movieSession.getStartAt();
+
+            if (movieStartAt.isEqual(newMovieStartAt)
+                    || (newMovieStartAt.isAfter(movieStartAt) && newMovieStartAt.isBefore(movieStartAt.plusMinutes(movieDuration + BREAK_DURATION)))
+                    || (newMovieStartAt.isBefore(movieStartAt) && newMovieStartAt.plusMinutes(newMovieDuration + BREAK_DURATION).isAfter(movieStartAt))) {
+                errors.add(String.format("%s duration %d", movieStartAt.format(DateTimeFormatter.ofPattern("HH:mm")), movieDuration));
+            }
+        }
+
+        if (errors.length() != 0) {
+            throw new MovieSessionCreationException("Conflict session times: " + errors.toString());
+        }
+
+    }
+
+    private LocalDateTime getSessionStartAt(CreateMovieSessionRequestDto dto) {
+        LocalDate date = LocalDate.parse(dto.getDate(), DateTimeFormatter.ISO_DATE);
+        LocalTime time = LocalTime.of(Integer.parseInt(dto.getHours()), Integer.parseInt(dto.getMinutes()));
+        return LocalDateTime.of(date, time);
     }
 
 }

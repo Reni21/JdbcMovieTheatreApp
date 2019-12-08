@@ -1,6 +1,11 @@
 package com.theatre.movie.web;
 
-import com.theatre.movie.web.command.*;
+import com.theatre.movie.web.command.Command;
+import com.theatre.movie.web.command.CommandFactory;
+import com.theatre.movie.web.command.response.CommandResponse;
+import com.theatre.movie.web.command.response.ErrorResponse;
+import com.theatre.movie.web.command.response.PageResponse;
+import com.theatre.movie.web.command.response.SuccessResponse;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

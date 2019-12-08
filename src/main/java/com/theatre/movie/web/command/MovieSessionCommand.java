@@ -7,6 +7,10 @@ import com.theatre.movie.dto.MovieSessionViewDto;
 import com.theatre.movie.exception.MovieScheduleRemovalException;
 import com.theatre.movie.service.MovieSessionService;
 import com.theatre.movie.service.WeekScheduleDatesService;
+import com.theatre.movie.web.command.response.CommandResponse;
+import com.theatre.movie.web.command.response.ErrorResponse;
+import com.theatre.movie.web.command.response.PageResponse;
+import com.theatre.movie.web.command.response.SuccessResponse;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 

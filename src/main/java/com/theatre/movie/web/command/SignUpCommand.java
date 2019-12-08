@@ -3,6 +3,7 @@ package com.theatre.movie.web.command;
 import com.theatre.movie.entity.User;
 import com.theatre.movie.exception.UserAlreadyExistException;
 import com.theatre.movie.service.UserService;
+import com.theatre.movie.web.command.response.PageResponse;
 import com.theatre.movie.web.dto.CreateUserRequestDto;
 import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
@@ -26,10 +27,11 @@ public class SignUpCommand extends MultipleMethodCommand {
     protected PageResponse performPost(HttpServletRequest request) {
         request.setAttribute("activeTab", "account");
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        CreateUserRequestDto userRequest = new CreateUserRequestDto(login, password, email);
+        CreateUserRequestDto userRequest = new CreateUserRequestDto(
+                request.getParameter("login"),
+                request.getParameter("password"),
+                request.getParameter("email")
+        );
         try {
             User user = userService.addUser(userRequest);
             if (user == null) {
