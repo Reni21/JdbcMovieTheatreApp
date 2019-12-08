@@ -9,6 +9,7 @@ function pinMovie(form, event, moviesToPin, submitFormHandler) {
     var date = path_param.split('=')[1];
     $.each(movieIds, function (index, value) {
         var movie = moviesToPin.get(parseInt(value));
+        var formId = '#session-form_' + value;
         var link = '<div id="' + value + '"><div class="wrapper">' +
             '<div id="errors_' + value + '" class="errors" style="font-size: 15px;color: red;margin: 0 auto;position: relative;"></div>' +
             '</div>' +
@@ -38,7 +39,7 @@ function pinMovie(form, event, moviesToPin, submitFormHandler) {
             '</div>' +
             '</div>';
         $('main').append($(link));
-        $('form').submit(submitFormHandler);
+        $(formId).submit(submitFormHandler);
     });
     //reject default handler for submit button
     event.preventDefault();
