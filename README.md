@@ -21,7 +21,7 @@ Tема: "Система Кинотеатр"
 3. Run create_schema.sql from resources/script folder
 4. Run insert_into_schema.sql from resources/script folder
 5. Set required number of additional days to correct the movie session dates in movie_session table in update_schema.sql file from resources/script folder and run script.
-5. Update DB login and password in db.properties
+5. Update DB username and password in src/main/webapp/META_INF/context.xml (and in file db.properties if you want use connections without pool)
 6. Run in terminal command "mvn clean tomcat7:run"
 7. Go to link localhost:8080/theatre
 
