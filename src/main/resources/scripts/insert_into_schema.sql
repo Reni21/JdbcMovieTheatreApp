@@ -1,9 +1,9 @@
 USE movie_theatre;
 
 INSERT INTO user (username, password, role, email)
-VALUES ('admin', 'admin', 'ROLE_ADMIN', 'admin@gmail.com'),
-       ('reni', 'reni', 'ROLE_USER', 'reni@gmail.com'),
-       ('test', 'test', 'ROLE_USER', 'test@gmail.com');
+VALUES ('admin', '$2a$12$5JtCXmg8uG2q9ONOWpe1m.NNcen71StlJF6hMcm4i28pZbRRsDM8K', 'ROLE_ADMIN', 'admin@gmail.com'),
+       ('reni', '$2a$12$x5PPRAeu7Q3waMFci7gAb.JXRX/sRCmOfYdgF4/nmBY8BBh4m1uUq', 'ROLE_USER', 'reni@gmail.com'),
+       ('test', '$2a$12$9ZkXUOxheiPzR0fqQvYh2OW.o8Topk0wDXfFSLiRINelISI81fpA6', 'ROLE_USER', 'test@gmail.com');
 
 INSERT INTO hall (name)
 VALUES ('1');
@@ -67,16 +67,16 @@ VALUES ('Lobster', 'Yorgos Lanthimos', 116,
         'https://upload.wikimedia.org/wikipedia/ru/thumb/a/af/Eternal_Sunshine_of_the_Spotless_Mind.jpg/269px-Eternal_Sunshine_of_the_Spotless_Mind.jpg');
 
 INSERT INTO movie_session (movie_id, hall_id, start_at, price)
-VALUES (1, 1, '2019-11-29 10:30:00', 60),
-       (1, 1, '2019-11-29 13:00:00', 80),
-       (1, 1, '2019-11-29 16:30:00', 80),
-       (2, 1, '2019-11-29 15:00:00', 80),
-       (2, 1, '2019-11-29 19:00:00', 120),
+VALUES (1, 1, '2019-12-15 10:30:00', 60),
+       (1, 1, '2019-12-15 13:00:00', 80),
+       (1, 1, '2019-12-15 16:30:00', 80),
+       (2, 1, '2019-12-15 15:00:00', 80),
+       (2, 1, '2019-12-15 19:00:00', 120),
 
-       (1, 1, '2019-11-28 10:30:00', 60),
-       (1, 1, '2019-11-28 13:00:00', 80),
-       (2, 1, '2019-11-28 15:00:00', 80),
-       (2, 1, '2019-11-28 19:00:00', 120);
+       (1, 1, '2019-12-14 10:30:00', 60),
+       (1, 1, '2019-12-14 13:00:00', 80),
+       (2, 1, '2019-12-14 15:00:00', 80),
+       (2, 1, '2019-12-14 19:00:00', 120);
 
 
 
