@@ -1,6 +1,6 @@
 USE movie_theatre;
 
-INSERT INTO user (login, password, role, email)
+INSERT INTO user (username, password, role, email)
 VALUES ('admin', 'admin', 'ROLE_ADMIN', 'admin@gmail.com'),
        ('reni', 'reni', 'ROLE_USER', 'reni@gmail.com'),
        ('test', 'test', 'ROLE_USER', 'test@gmail.com');

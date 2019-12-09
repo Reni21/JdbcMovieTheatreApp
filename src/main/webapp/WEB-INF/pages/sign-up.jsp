@@ -40,7 +40,7 @@
                             <!-- Fields -->
 
                             <p class="field-title">Username*</p>
-                            <input type="text" name="login" class="input" placeholder="" maxlength="15" required=""/>
+                            <input type="text" name="username" class="input" placeholder="" maxlength="15" required=""/>
 
                             <p class="field-title">Password*</p>
                             <input type="password" name="password" class="input" placeholder="" maxlength="15" required=""/>

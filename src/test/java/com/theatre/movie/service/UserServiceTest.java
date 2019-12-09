@@ -33,7 +33,7 @@ public class UserServiceTest {
         verify(userDao).create(userCaptor.capture());
         User actualUser = userCaptor.getValue();
 
-        assertThat(actualUser.getLogin()).isEqualTo("john");
+        assertThat(actualUser.getUsername()).isEqualTo("john");
         assertThat(actualUser.getEmail()).isEqualTo("john@gmail.com");
         assertThat(actualUser.getPassword()).isNotBlank();
         assertThat(actualUser.getRole()).isEqualTo(Role.ROLE_USER);
@@ -42,7 +42,6 @@ public class UserServiceTest {
 
     @Test
     public void shouldNotAddUserWithInvalidPassword() {
-
         CreateUserRequestDto createUserRequest = new CreateUserRequestDto("john", "john", "john@gmail.com");
 
         assertThatThrownBy(() -> instance.addUser(createUserRequest))
@@ -50,6 +49,28 @@ public class UserServiceTest {
                 .hasMessageContaining("Password length must be greater than 8 characters;\n" +
                         "Password should contain at least one upper case alphabet;\n" +
                         "Password should contain at least one number");
+
+        verifyZeroInteractions(userDao);
+    }
+
+    @Test
+    public void shouldNotAddUserWithEmptyEmail() {
+        CreateUserRequestDto createUserRequest = new CreateUserRequestDto("john", "John1234", "");
+
+        assertThatThrownBy(() -> instance.addUser(createUserRequest))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Required data is empty.");
+
+        verifyZeroInteractions(userDao);
+    }
+
+    @Test
+    public void shouldNotAddUserWithInvalidUsername() {
+        CreateUserRequestDto createUserRequest = new CreateUserRequestDto("1111", "John1234", "john@gmail.com");
+
+        assertThatThrownBy(() -> instance.addUser(createUserRequest))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Username must be alphanumeric");
 
         verifyZeroInteractions(userDao);
     }

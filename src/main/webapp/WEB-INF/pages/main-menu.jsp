@@ -38,7 +38,7 @@
                                 </c:if>
 
                                 <li <c:if test="${name == 'account'}">class="active"</c:if>>
-                                    <a href="${user == null ? 'login' : 'account/'.concat(user.getLogin())}">
+                                    <a href="${user == null ? 'login' : 'account/'.concat(user.getUsername())}">
                                 <fmt:message key="main.menu.account"/></a>
                                 </li>
 

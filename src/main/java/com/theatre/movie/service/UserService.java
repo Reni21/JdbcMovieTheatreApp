@@ -15,6 +15,7 @@ import java.util.StringJoiner;
 @AllArgsConstructor
 public class UserService {
     private static final Logger LOG = Logger.getLogger(UserService.class);
+    private static final String ALPHA_NUMERIC = "^(?!\\d+$)[a-zA-Z0-9]+$";
     private UserDao userDao;
 
     public User getUserByCredentials(String username, String password) {
@@ -31,14 +32,18 @@ public class UserService {
 
     public User addUser(CreateUserRequestDto userRequest) throws UserAlreadyExistException {
         validateCreateUserRequest(userRequest);
-        String hashedPass = Passwords.hash(userRequest.getPassword());
-        User user = new User(userRequest.getUsername(), hashedPass, userRequest.getEmail(), Role.ROLE_USER);
+        String hashedPass = Passwords.hash(userRequest.getPassword().trim());
+        User user = new User(userRequest.getUsername().trim(), hashedPass, userRequest.getEmail(), Role.ROLE_USER);
         return userDao.create(user);
     }
 
     private void validateCreateUserRequest(CreateUserRequestDto userRequest) throws UserAlreadyExistException {
         if (isEmpty(userRequest.getUsername()) || isEmpty(userRequest.getPassword()) || isEmpty(userRequest.getEmail())) {
             throw new IllegalArgumentException("Required data is empty.");
+        }
+
+        if (!userRequest.getUsername().matches(ALPHA_NUMERIC)) {
+            throw new IllegalArgumentException("Username must be alphanumeric");
         }
 
         validatePassword(userRequest.getPassword());
@@ -56,7 +61,7 @@ public class UserService {
         }
     }
 
-    public void validatePassword(String password) {
+    private void validatePassword(String password) {
 
         StringJoiner errors = new StringJoiner(";\n");
 
@@ -80,7 +85,7 @@ public class UserService {
     }
 
     private boolean isEmpty(String string) {
-        return string == null || string.isEmpty();
+        return string == null || string.trim().isEmpty();
     }
 
 }

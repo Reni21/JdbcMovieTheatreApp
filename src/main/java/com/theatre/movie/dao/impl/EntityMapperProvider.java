@@ -48,7 +48,7 @@ public class EntityMapperProvider {
 
     public static final EntityMapper<User> USER_ENTITY_MAPPER = rs -> {
         User user = new User(
-                rs.getString(UserTable.LOGIN),
+                rs.getString(UserTable.USERNAME),
                 rs.getString(UserTable.PASSWORD),
                 rs.getString(UserTable.EMAIL),
                 Role.valueOf(rs.getString(UserTable.ROLE)));

@@ -19,11 +19,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         LOG.debug("Create user: + " + entity);
 
         String query = "INSERT INTO `user` ("
-                + DbTablesConstants.UserTable.LOGIN + ", " + DbTablesConstants.UserTable.PASSWORD + ", "
+                + DbTablesConstants.UserTable.USERNAME + ", " + DbTablesConstants.UserTable.PASSWORD + ", "
                 + DbTablesConstants.UserTable.ROLE + ", " + DbTablesConstants.UserTable.EMAIL
                 + ") VALUE (?, ?, ?, ?)";
         int id = super.create(query, ps -> {
-            ps.setString(1, entity.getLogin());
+            ps.setString(1, entity.getUsername());
             ps.setString(2, entity.getPassword());
             ps.setString(3, entity.getRole().toString());
             ps.setString(4, entity.getEmail());
@@ -42,10 +42,9 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public boolean isUserExists(String username) {
-        String query = "SELECT 1 FROM `user` WHERE " + DbTablesConstants.UserTable.LOGIN + " = ?";
+        String query = "SELECT 1 FROM `user` WHERE " + DbTablesConstants.UserTable.USERNAME + " = ?";
         return super.checkIfDataExists(query,
                 ps -> ps.setString(1, username));
-
     }
 
     @Override
@@ -57,7 +56,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User getUserByUsername(String username) {
-        String query = "SELECT * FROM `user` WHERE " + DbTablesConstants.UserTable.LOGIN + " = ?";
+        String query = "SELECT * FROM `user` WHERE " + DbTablesConstants.UserTable.USERNAME + " = ?";
         List<User> users = super.getAll(query,
                 ps -> ps.setString(1, username),
                 EntityMapperProvider.USER_ENTITY_MAPPER);

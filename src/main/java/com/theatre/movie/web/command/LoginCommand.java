@@ -22,12 +22,12 @@ public class LoginCommand extends MultipleMethodCommand {
 
     @Override
     protected PageResponse performPost(HttpServletRequest request) {
-        String login = request.getParameter("login");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         request.setAttribute("activeTab", "account");
 
         try {
-            User user = userService.getUserByCredentials(login, password);
+            User user = userService.getUserByCredentials(username, password);
             if (user == null) {
                 LOG.info("Login failed. Invalid credentials");
                 request.setAttribute("error", "Login or password invalid!");
@@ -37,9 +37,9 @@ public class LoginCommand extends MultipleMethodCommand {
             HttpSession session = request.getSession(true);
             LOG.info("Login successful for user: " + user);
             session.setAttribute("user", user);
-            return new PageResponse(request.getContextPath()+"/account/" + user.getLogin(), true);
+            return new PageResponse(request.getContextPath() + "/account/" + user.getUsername(), true);
 
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             LOG.info("Login failed: " + ex.getMessage());
             request.setAttribute("error", ex.getMessage());
             LOG.info("Forward to" + UrlConstants.LOGIN_PAGE);

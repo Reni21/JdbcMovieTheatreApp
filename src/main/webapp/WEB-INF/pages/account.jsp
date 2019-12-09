@@ -27,7 +27,7 @@
         -->
             <div class="content-card">
                 <div class="content-card__container">
-                    <div class="page-title">Hello ${sessionScope['user'].login}</div>
+                    <div class="page-title">Hello ${sessionScope['user'].username}</div>
                     <div class="form__container">
                     </div>
                 </div>

@@ -28,7 +28,7 @@ public class SignUpCommand extends MultipleMethodCommand {
         request.setAttribute("activeTab", "account");
 
         CreateUserRequestDto userRequest = new CreateUserRequestDto(
-                request.getParameter("login"),
+                request.getParameter("username"),
                 request.getParameter("password"),
                 request.getParameter("email")
         );
