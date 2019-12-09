@@ -56,7 +56,7 @@
     <!-- - - - - - - - The Modal for movies - - - - - - - -->
 
     <c:forEach items="${sessions}" var="movie">
-        <div id="#${movie.movieId}">
+        <div id="${movie.movieId}">
             <div class="wrapper">
                 <div id="errors_${movie.movieId}" class="errors"
                      style="font-size: 15px;color: red;margin: 0 auto;position: relative;"></div>
