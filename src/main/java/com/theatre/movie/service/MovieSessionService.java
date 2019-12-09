@@ -172,7 +172,7 @@ public class MovieSessionService {
             int movieDuration = movieDao.getById(movieSession.getMovieId()).getDurationMinutes();
             LocalDateTime movieStartAt = movieSession.getStartAt();
 
-            if (movieStartAt.isEqual(newMovieStartAt)
+            if (newMovieStartAt.isEqual(movieStartAt)
                     || (newMovieStartAt.isAfter(movieStartAt) && newMovieStartAt.isBefore(movieStartAt.plusMinutes(movieDuration + BREAK_DURATION)))
                     || (newMovieStartAt.isBefore(movieStartAt) && newMovieStartAt.plusMinutes(newMovieDuration + BREAK_DURATION).isAfter(movieStartAt))) {
                 errors.add(String.format("%s duration %d", movieStartAt.format(DateTimeFormatter.ofPattern("HH:mm")), movieDuration));

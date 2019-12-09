@@ -22,6 +22,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -78,7 +79,7 @@ public class MovieSessionServiceTest {
         LocalDateTime from = date.atStartOfDay();
         LocalDateTime to = date.atTime(LocalTime.MAX);
 
-        int movieId = 4;
+        int movieId = 3;
         MovieSession movieSession = createMovieSession(3, from);
         List<MovieSession> movieSessions = Collections.singletonList(movieSession);
 
@@ -130,6 +131,34 @@ public class MovieSessionServiceTest {
                 .hasMessageContaining("Movie with id 3 does not exist");
     }
 
+    @Test
+    public void shouldFailAddMovieSessionOfWrongTimeRange() {
+        Movie movie = createMovie(3);
+        when(movieDao.getById(3)).thenReturn(movie);
+
+        List<MovieSession> movieSessions = Arrays.asList(
+                createMovieSession(1, startAt("7:45")),
+                createMovieSession(2, startAt("7:46")),
+                createMovieSession(3, startAt("8:30")),
+                createMovieSession(4, startAt("10:00")),
+                createMovieSession(5, startAt("11:15")),
+                createMovieSession(6, startAt("12:14")),
+                createMovieSession(7, startAt("12:15"))
+        );
+
+        LocalDateTime from = startAt("00:00");
+        LocalDateTime to = startAt("12:15");
+        when(movieSessionDao.getAllInRange(from, to)).thenReturn(movieSessions);
+
+        CreateMovieSessionRequestDto dto = new CreateMovieSessionRequestDto(
+                "3", "4", "2019-12-14", "10", "00", "100"
+        );
+
+        assertThatThrownBy(() -> instance.addMovieSession(dto))
+                .isInstanceOf(MovieSessionCreationException.class)
+                .hasMessageContaining("Conflict session times: 07:46 duration 120;" +
+                        "08:30 duration 120;10:00 duration 120;11:15 duration 120;12:14 duration 120");
+    }
 
     private MovieSessionViewDto expectedMovieSessionViewDto(MovieSession movieSession) {
         Map<Integer, List<BookedSeatViewDto>> bookedSeatsDto = new HashMap<>();
@@ -152,7 +181,7 @@ public class MovieSessionServiceTest {
     }
 
     private MovieSession createMovieSession(int movieSessionId, LocalDateTime startAt) {
-        MovieSession movieSession = new MovieSession(4, 5, startAt, 100.0);
+        MovieSession movieSession = new MovieSession(3, 5, startAt, 100.0);
         movieSession.setSessionId(movieSessionId);
         return movieSession;
     }
@@ -168,5 +197,12 @@ public class MovieSessionServiceTest {
         );
         scheduleDto.setMovieSessionTimes(timeDtos);
         return Collections.singletonList(scheduleDto);
+    }
+
+    private LocalDateTime startAt(String time) {
+        return LocalDateTime.of(
+                LocalDate.of(2019, 12, 14),
+                LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"))
+        );
     }
 }
