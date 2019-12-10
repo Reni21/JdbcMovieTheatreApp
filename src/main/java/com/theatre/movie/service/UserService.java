@@ -66,7 +66,8 @@ public class UserService {
      * represented by {@link com.theatre.movie.web.dto.CreateUserRequestDto} class
      *
      * @param userRequest - is used for data transfer for create new user request
-     * @throws UserAlreadyExistException if any of required field are invalid
+     * @throws IllegalArgumentException if any of required field are invalid
+     * @throws UserAlreadyExistException if <tt>username</tt> or <tt>email</tt> already exist in db
      */
     private void validateCreateUserRequest(CreateUserRequestDto userRequest) throws UserAlreadyExistException {
         if (isEmpty(userRequest.getUsername()) || isEmpty(userRequest.getPassword()) || isEmpty(userRequest.getEmail())) {

@@ -21,12 +21,12 @@ Tема: "Система Кинотеатр"
 3. Run create_schema.sql from src/main/resources/scripts folder
 4. Run insert_into_schema.sql from src/main/resources/script folder
 5. Correct the movie session dates in movie_session table with help of update_schema.sql file from src/main/resources/scripts folder.
-5. Update DB login and password in db.properties from src/main/resources folder
-6. Start mysql service with 'service mysql start' (http://www.mysqltutorial.org/mysql-adminsitration/start-mysql/)
-6. Go to project root ../JdbcMovieTheatreApp directory and run in terminal command 'mvn clean tomcat7:run' or 'mvn tomcat7:run -f pom.xml'
-7. Go to link localhost:8080/theatre and have fan (use username:admin password:admin to check up admin functional)
-8. Use Ctrl+C command in command line to force quit and kill all app process
-9. Stop mysql service with 'service mysql stop' or 'mysql.service stop' (http://www.mysqltutorial.org/mysql-adminsitration/stop-mysql/)
+6. Update DB login and password in db.properties from src/main/resources folder
+7. Start mysql service with 'service mysql start' (http://www.mysqltutorial.org/mysql-adminsitration/start-mysql/)
+8. Go to project root ../JdbcMovieTheatreApp directory and run in terminal command 'mvn clean tomcat7:run' or 'mvn tomcat7:run -f pom.xml'
+9. Go to link localhost:8080/theatre and have fan (use username:admin password:admin to check up admin functional)
+10. Use Ctrl+C command in command line to force quit and kill all app process
+11. Stop mysql service with 'service mysql stop' or 'mysql.service stop' (http://www.mysqltutorial.org/mysql-adminsitration/stop-mysql/)
 
 ## Доступный функционал
 

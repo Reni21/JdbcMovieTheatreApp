@@ -47,6 +47,13 @@ public class MovieService {
         return movieDao.getAllPreview();
     }
 
+    /**
+     * The method extract movies for display on required <tt>page</tt>
+     *
+     * @param page          - number of current page
+     * @param moviesPerPage - number of movies card per page
+     * @return - store extracted movies for required <tt>page</tt>
+     */
     public PaginatedData<Movie> getAll(int page, int moviesPerPage) {
         LOG.info("Extract all movies");
         List<Movie> movies = movieDao.getAll((page - 1) * moviesPerPage, moviesPerPage);
