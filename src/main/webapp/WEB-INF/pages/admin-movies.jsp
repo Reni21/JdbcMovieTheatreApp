@@ -92,11 +92,6 @@
         <div style="height: 50px"></div>
     </div>
 
-    <!--
-    ===============================================================================================
-    1я карточка с фильмами
-    ===============================================================================================
--->
     <c:forEach items="${movies}" var="movie">
         <div id="card_${movie.movieId}" class="movie-card">
             <div class="movie-card__container">
@@ -128,8 +123,8 @@
     </c:forEach>
 
 </main>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script src="static/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="static/js/jquery/jquery.validate.min.js"></script>
 <script type="text/javascript" src="static/js/movie-creation-modal.js"></script>
 </body>
 </html>

@@ -20,11 +20,6 @@
             <!-- Second level menu -->
         </header>
         <main>
-            <!--
-            ===============================================================================================
-            Форма для заполения
-            ===============================================================================================
-        -->
             <div class="content-card">
                 <div class="content-card__container">
                     <div class="page-title">Hello ${sessionScope['user'].username}</div>

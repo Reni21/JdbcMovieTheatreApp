@@ -32,11 +32,6 @@
         </header>
 
         <main>
-            <!--
-            ===============================================================================================
-            Movie card
-            ===============================================================================================
-        -->
             <c:if test="${sessions.size() == 0}">
                 <h2 style="text-align: center; color: gray; padding-top: 150px;">
                     No movies sessions in this date.<br> Check out it later.</h2>

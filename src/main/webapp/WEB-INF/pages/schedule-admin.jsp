@@ -101,10 +101,13 @@
         </div>
     </c:forEach>
 </main>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script src="static/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="static/js/jquery/jquery.validate.min.js"></script>
 <script type="text/javascript" src="static/js/pin-movie-schedule.js"></script>
 <script type="text/javascript" src="static/js/movies-modal-session-creation.js"></script>
+
+
+
 <script type="text/javascript">
     var errorsDictionary = new Map([
         ["hoursRequired", "<fmt:message key='error.hours.required'/>"],
