@@ -130,7 +130,7 @@
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-<script type="text/javascript" src="static/js/movies-modal.js"></script>
+<script type="text/javascript" src="static/js/movie-creation-modal.js"></script>
 </body>
 </html>
 

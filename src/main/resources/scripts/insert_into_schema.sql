@@ -78,7 +78,7 @@ VALUES ('Lobster', 'Yorgos Lanthimos', 116,
 
        ('Bird Box', 'Susanne Bier', 124,
         'https://www.youtube.com/watch?v=o2AsIXSh2xo',
-        'http://hd-kino.net/uploads/posts/2015-11/1447508640_5.jpg',
+        'https://cdnb.artstation.com/p/assets/images/images/015/835/357/large/aaron-sims-creative-asc-birdbox-creature-dsn-v009.jpg?1558635527',
         'https://upload.wikimedia.org/wikipedia/en/thumb/b/bd/Bird_Box_%28film%29.png/220px-Bird_Box_%28film%29.png'),
 
        ('Eternal Sunshine of the Spotless Mind', 'Michel Gondry', 108,

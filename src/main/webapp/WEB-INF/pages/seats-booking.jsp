@@ -129,9 +129,9 @@
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <c:if test="${user == null || user.getRole().toString() == 'ROLE_USER'}">
-            <script type="text/javascript" src="static/js/script.js"></script>
+            <script type="text/javascript" src="static/js/booking-script.js"></script>
         </c:if>
-        <script type="text/javascript" src="static/js/delete.js"></script>
+        <script type="text/javascript" src="static/js/delete-movie-session.js"></script>
     </body>
 </html>
 

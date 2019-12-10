@@ -65,8 +65,8 @@ public class UserService {
 
         StringJoiner errors = new StringJoiner(";\n");
 
-        if (password.length() < 8) {
-            errors.add("Password length must be greater than 8 characters");
+        if (password.length() < 5) {
+            errors.add("Password length must be greater than 5 characters");
         }
 
         String upperCaseChars = "(.*[A-Z].*)";
