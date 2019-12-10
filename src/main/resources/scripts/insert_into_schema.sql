@@ -61,6 +61,26 @@ VALUES ('Lobster', 'Yorgos Lanthimos', 116,
         'https://s3.amazonaws.com/bncore/wp-content/uploads/2016/06/288350.jpg',
         'https://bookshelf.ca/i/size/o/media--0665557f-463f-e93c-f1ed-ee05bae19537/w/600'),
 
+       ('The Hobbit', 'Peter Jackson', 462,
+        'https://www.youtube.com/watch?v=JTSoD4BBCJc',
+        'https://www.xtrafondos.com/wallpapers/resized/bilbo-baggins-en-el-hobbit-3-99.jpg?s=large',
+        'https://is1-ssl.mzstatic.com/image/thumb/Video69/v4/f4/28/dc/f428dca5-5b1d-172e-71f3-e129dd679ac5/pr_source.lsr/268x0w.png'),
+
+       ('Calvary', 'John Michael McDonagh', 100,
+        'https://www.youtube.com/watch?v=LGM5rq_vX4U',
+        'https://img03.rl0.ru/afisha/c1500x600i/daily.afisha.ru/uploads/images/5/4f/54fa152f06c7433eba285a421638e51f.jpg',
+        'https://upload.wikimedia.org/wikipedia/ru/thumb/4/48/McDonagh%27_Calvary.jpg/272px-McDonagh%27_Calvary.jpg'),
+
+       ('Eat Pray Love', 'Ryan Murphy', 133,
+        'https://www.youtube.com/watch?v=mjay5vgIwt4',
+        'https://budsvetomprod.s3.amazonaws.com/system/redactor_assets//pictures/4792/content_252427_original.jpg',
+        'https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Eat_pray_love_ver2.jpg/220px-Eat_pray_love_ver2.jpg'),
+
+       ('Bird Box', 'Susanne Bier', 124,
+        'https://www.youtube.com/watch?v=o2AsIXSh2xo',
+        'http://hd-kino.net/uploads/posts/2015-11/1447508640_5.jpg',
+        'https://upload.wikimedia.org/wikipedia/en/thumb/b/bd/Bird_Box_%28film%29.png/220px-Bird_Box_%28film%29.png'),
+
        ('Eternal Sunshine of the Spotless Mind', 'Michel Gondry', 108,
         'https://www.youtube.com/watch?v=07-QBnEkgXU',
         'http://hd-kino.net/uploads/posts/2015-11/1447508640_5.jpg',

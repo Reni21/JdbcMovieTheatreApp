@@ -116,7 +116,7 @@
                             </c:when>
                             <c:otherwise>
                                 <!-- Book ticket button -->
-                                <button id="btnCheckout" name="btnCheckout" class="btn btn-primary primary-active"
+                                <button id="btnCheckout" name="btnCheckout" class="btn btn-primary btn-disabled"
                                         type="submit" form="selectedSeats">
                                     Book tickets
                                 </button>

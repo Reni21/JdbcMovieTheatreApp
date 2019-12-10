@@ -29,7 +29,7 @@
                                 </li>
                                 <c:set var="user" value="${sessionScope['user']}"/>
                                 <c:if test="${user != null && 'ROLE_ADMIN'.equals(user.getRole().toString())}">
-                                    <li <c:if test="${name == 'movies'}">class="active"</c:if>><a href="movies">MOVIES</a>
+                                    <li <c:if test="${name == 'movies'}">class="active"</c:if>><a href="movies?page=1">MOVIES</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${user != null && 'ROLE_USER'.equals(user.getRole().toString())}">

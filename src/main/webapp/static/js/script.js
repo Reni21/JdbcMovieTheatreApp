@@ -20,6 +20,10 @@ $(".seatNumber").click(
                     $("#btnClear").removeClass("btn-disabled");
                     $("#btnClear strong").removeClass("btn-disabled");
                 }
+                if ($("#btnCheckout").hasClass("btn-disabled")) {
+                    $("#btnCheckout").removeClass("btn-disabled");
+                    $("#btnCheckout").addClass("primary-active");
+                }
                 // else, select it
                 // getting values from Seat
                 var thisId = $(this).attr('id');
@@ -112,6 +116,8 @@ function setDisabledClass() {
     if (selectedSeats === 0) {
         $("#btnClear").addClass("btn-disabled");
         $("#btnClear strong").addClass("btn-disabled");
+        $("#btnCheckout").addClass("btn-disabled");
+        $("#btnCheckout").removeClass("primary-active");
     }
 
 }

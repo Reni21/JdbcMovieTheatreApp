@@ -87,6 +87,10 @@ function submitFormHandler(event) {
 }
 
 function createAndDisplayNewMovie(form, event) {
+    let params = (new URL(document.location)).searchParams;
+    let p = params.get("page");
+    var page = parseInt(p);
+
     $.ajax({
         type: form.attr('method'),
         url: form.attr('action'),
@@ -116,7 +120,7 @@ function createAndDisplayNewMovie(form, event) {
             '</div>' +
             '</div>';
         $('main').append($(link));
-        $('#myModal').css('display', 'none');
+        location.href = "movies?page=" + page;
     }).fail(function (jqXHR) {
         var msg = jqXHR.responseText;
         alert("Can not create movie. " + msg);
@@ -131,11 +135,21 @@ $(function () {
 });
 
 function deleteMovieHandler(movieId) {
+    let params = (new URL(document.location)).searchParams;
+    let p = params.get("page");
+    var page = parseInt(p);
     $.ajax({
         type: 'post',
         url: 'movies?id=' + movieId
     }).done(function (resp) {
         $('#card_' + movieId).remove();
+        var movie_card = parseInt($(".movie-card").length);
+        if (movie_card === 0) {
+            page = page === 1 ? 1 : page - 1;
+            location.href = "movies?page=" + page;
+        } else {
+            location.href = "movies?page=" + page;
+        }
     }).fail(function (jqXHR) {
         var msg = jqXHR.responseText;
         alert(msg);

@@ -20,6 +20,10 @@
         </header>
         <main>
             <c:set value="${requestScope['bookings']}" var="bookings"/>
+            <c:if test="${bookings == null || bookings.isEmpty()}">
+                <h2 style="text-align: center; color: gray; padding-top: 150px;">
+                    You have no booked tickets</h2>
+            </c:if>
             <c:if test="${bookings!= null && !bookings.isEmpty()}">
                 <c:forEach items="${bookings}" var="booking">
                     <div class="movie-card">

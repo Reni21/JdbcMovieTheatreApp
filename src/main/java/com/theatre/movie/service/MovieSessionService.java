@@ -90,6 +90,9 @@ public class MovieSessionService {
         validateMovieSessionRequest(movieSessionDto);
 
         LocalDateTime startAt = getSessionStartAt(movieSessionDto);
+        if(startAt.isBefore(LocalDateTime.now())){
+            throw new MovieSessionCreationException("Required time already passed.");
+        }
 
         MovieSession movieSession = new MovieSession(
                 Integer.parseInt(movieSessionDto.getMovieId()),
