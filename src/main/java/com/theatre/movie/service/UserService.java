@@ -11,11 +11,35 @@ import org.apache.log4j.Logger;
 
 import java.util.StringJoiner;
 
+/**
+ * The {@code UserService} class provides methods for manage information about users
+ * represented by {@link com.theatre.movie.entity.User} class
+ * Properties: <b>userDao</b>, <b>UserService.ALPHA_NUMERIC</b>,
+ *
+ * @author Hlushchenko Renata
+ * @see com.theatre.movie.dao.UserDao
+ */
 
 @AllArgsConstructor
 public class UserService {
     private static final Logger LOG = Logger.getLogger(UserService.class);
-    private static final String ALPHA_NUMERIC = "^(?!\\d+$)[a-zA-Z0-9]+$";
+    /**
+     * Regex for validation <tt>username</tt> from {@link com.theatre.movie.web.dto.CreateUserRequestDto}
+     * It should contains only english alphabets or numbers
+     */
+    private static final String ALPHA_NUMERIC_REGEX = "^(?!\\d+$)[a-zA-Z0-9]+$";
+
+    /**
+     * Regex for validation <tt>password</tt> from {@link com.theatre.movie.web.dto.CreateUserRequestDto}
+     * It should contains at least one uppercase letter
+     */
+    private static final String UPPERCASE_CHAR_REGEX_ = "(.*[A-Z].*)";
+
+    /**
+     * Regex for validation <tt>password</tt> from {@link com.theatre.movie.web.dto.CreateUserRequestDto}
+     * It should contains at least one number
+     */
+    private static final String NUMBER_REGEX = "(.*[0-9].*)";
     private UserDao userDao;
 
     public User getUserByCredentials(String username, String password) {
@@ -37,12 +61,19 @@ public class UserService {
         return userDao.create(user);
     }
 
+    /**
+     * The method validate all required data for new user creation
+     * represented by {@link com.theatre.movie.web.dto.CreateUserRequestDto} class
+     *
+     * @param userRequest - is used for data transfer for create new user request
+     * @throws UserAlreadyExistException if any of required field are invalid
+     */
     private void validateCreateUserRequest(CreateUserRequestDto userRequest) throws UserAlreadyExistException {
         if (isEmpty(userRequest.getUsername()) || isEmpty(userRequest.getPassword()) || isEmpty(userRequest.getEmail())) {
             throw new IllegalArgumentException("Required data is empty.");
         }
 
-        if (!userRequest.getUsername().matches(ALPHA_NUMERIC)) {
+        if (!userRequest.getUsername().matches(ALPHA_NUMERIC_REGEX)) {
             throw new IllegalArgumentException("Username must be alphanumeric");
         }
 
@@ -69,13 +100,11 @@ public class UserService {
             errors.add("Password length must be greater than 5 characters");
         }
 
-        String upperCaseChars = "(.*[A-Z].*)";
-        if (!password.matches(upperCaseChars)) {
+        if (!password.matches(UPPERCASE_CHAR_REGEX_)) {
             errors.add("Password should contain at least one upper case alphabet");
         }
 
-        String numbers = "(.*[0-9].*)";
-        if (!password.matches(numbers)) {
+        if (!password.matches(NUMBER_REGEX)) {
             errors.add("Password should contain at least one number");
         }
 

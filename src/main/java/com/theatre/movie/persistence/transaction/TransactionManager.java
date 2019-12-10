@@ -7,6 +7,15 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * The {@code TransactionManager} class provide util methods
+ * for {@link com.theatre.movie.persistence.transaction.TransactionHandler} class
+ * Properties: <b>connectionFactory</b>
+ *
+ * @author Hlushchenko Renata
+ * @see com.theatre.movie.persistence.ConnectionFactory
+ */
+
 @AllArgsConstructor
 public class TransactionManager {
     private static final Logger LOG = Logger.getLogger(TransactionManager.class);

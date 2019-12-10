@@ -4,6 +4,15 @@ import lombok.AllArgsConstructor;
 
 import java.util.function.Supplier;
 
+/**
+ * The {@code TransactionHandler} class manages and control the steps of transaction
+ * with help of wrapper pattern
+ * Properties: <b>transactionManager</b>
+ *
+ * @author Hlushchenko Renata
+ * @see com.theatre.movie.persistence.transaction.TransactionManager
+ */
+
 @AllArgsConstructor
 public class TransactionHandler {
     private final TransactionManager transactionManager;

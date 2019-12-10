@@ -10,44 +10,47 @@ Tема: "Система Кинотеатр"
 Уровни доступа: аноним, USER, ADMIN.
 
 ## Технологии
-- DB - MySql
-- Java version up 8.
+- DB - MySql 8.x
+- Java version 8 or higher
 - Maven
 
 ## Установка и запуск проекта
 
-1. Clone project with "git clone" command
-2. Install plugin for Lombok library
-3. Run create_schema.sql from resources/script folder
-4. Run insert_into_schema.sql from resources/script folder
-5. Set required number of additional days to correct the movie session dates in movie_session table in update_schema.sql file from resources/script folder and run script.
-5. Update DB login and password in db.properties
-6. Run in terminal command "mvn clean tomcat7:run"
-7. Go to link localhost:8080/theatre
+1. Clone project with 'git clone' command from command line
+2. Install plugin for Lombok library in your IDEA
+3. Run create_schema.sql from src/main/resources/scripts folder
+4. Run insert_into_schema.sql from src/main/resources/script folder
+5. Correct the movie session dates in movie_session table with help of update_schema.sql file from src/main/resources/scripts folder.
+5. Update DB login and password in db.properties from src/main/resources folder
+6. Start mysql service with 'service mysql start' (http://www.mysqltutorial.org/mysql-adminsitration/start-mysql/)
+6. Go to project root ../JdbcMovieTheatreApp directory and run in terminal command 'mvn clean tomcat7:run' or 'mvn tomcat7:run -f pom.xml'
+7. Go to link localhost:8080/theatre and have fan (use username:admin password:admin to check up admin functional)
+8. Use Ctrl+C command in command line to force quit and kill all app process
+9. Stop mysql service with 'service mysql stop' or 'mysql.service stop' (http://www.mysqltutorial.org/mysql-adminsitration/stop-mysql/)
 
 ## Доступный функционал
 
 - #### Уровень доступа - любой:
 
-1.  Стартовая страница (HomeCommand) +
-2.  Расписание сеансов (ScheduleCommand) - уникальное view для администратора ++
-3.  Просмотр заполненности зала на определенный сеанс (MovieSessionCommand) +
-4.  Вход (LoginCommand Post/Get) ++
-5.  Регистрация (SignUpCommand Post/Get) ++
-6.  Смена языка (LanguageCommand) +
+1.  Стартовая страница
+2.  Расписание сеансов (уникальное view для администратора)
+3.  Просмотр заполненности зала на определенный сеанс
+4.  Вход в систему
+5.  Регистрация
+6.  Смена языка
 
 - #### Уровень доступа - любой пользователь вошедший в систему:
 
-7.  Возможномть выйти из системы (LogOutCommand) +
+7.  Возможномть выйти из системы
 
 - #### Уровень доступа - USER:
 
-8.  Аккаунт со списком актуальных купленных сеансов (AccountCommand) +
-9.  При просмотре зала возможность купить билеты (BookTicketsCommand) +
+8.  Список актуальных купленных сеансов
+9.  При просмотре зала возможность купить билеты
 
 - #### Уровень доступа - ADMIN:
 
-10.  Просмотр зала без интерактива (MovieSessionCommand) +
-11.  Возможность добавить/удалить новый фильм в систему (PostCommand) -
-12.  Возможность прикрепить/открепить фильм к определенному дню (PostCommand) -
-13.  Возможность добавить/удалить новый сеанс для фильма (зал + время показа) (PostCommand) -
+10.  Просмотр зала без интерактива
+11.  Возможность добавить/удалить новый фильм в систему
+12.  Возможность прикрепить/открепить фильм к определенному дню
+13.  Возможность добавить/удалить новый сеанс для фильма

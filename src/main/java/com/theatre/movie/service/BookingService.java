@@ -13,6 +13,17 @@ import org.apache.log4j.Logger;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * The {@code BookingService} class provides methods for manage user bookings/tickets purchases
+ * represented by {@link com.theatre.movie.entity.Booking} class
+ * Properties: <b>bookingDao</b>, <b>movieSessionDao</b>, <b>transactionHandler</b>
+ *
+ * @author Hlushchenko Renata
+ * @see com.theatre.movie.dao.BookingDao
+ * @see com.theatre.movie.dao.MovieSessionDao
+ * @see com.theatre.movie.persistence.transaction.TransactionHandler
+ */
+
 @AllArgsConstructor
 public class BookingService {
     private static final Logger LOG = Logger.getLogger(BookingService.class);
@@ -20,6 +31,11 @@ public class BookingService {
     private MovieSessionDao movieSessionDao;
     private TransactionHandler transactionHandler;
 
+    /**
+     * @param dto - is used for data transfer for book tickets request
+     *            represented by {@link com.theatre.movie.web.dto.CreateBookingRequestDto} class
+     * @see TransactionHandler#runInTransaction(Runnable runnable)
+     */
     public void createBooking(CreateBookingRequestDto dto) {
         validateCreateBookingRequest(dto);
         transactionHandler.runInTransaction(() -> {
@@ -36,6 +52,14 @@ public class BookingService {
         });
     }
 
+    /**
+     * Return information about all users purchases, which has movie session
+     * {@link com.theatre.movie.entity.MovieSession} with startAt property >= current time now
+     *
+     * @param userId - user id, is used for search data in db
+     * @return list of Dtos - stores information about booking which will be displayed
+     * for registered user on user-tickets.jsp
+     */
     public List<BookingViewDto> getActualUsersBookingById(int userId) {
         LOG.info("Get actual booking for user id=" + userId);
         return bookingDao.getAllActualBookingByUserId(userId);

@@ -1,33 +1,46 @@
 package com.theatre.movie.service;
 
 import com.theatre.movie.dao.DaoFactory;
-import com.theatre.movie.persistence.DataSourceConnectionFactoryWithPool;
-import com.theatre.movie.persistence.transaction.TransactionHandler;
-import com.theatre.movie.persistence.transaction.TransactionManager;
 
+/**
+ * The {@code ServiceFactory} class provides methods for provide
+ * services for working with DAO
+ * Properties: <b>ServiceFactory.MOVIE_SESSION_SERVICE</b>, <b>ServiceFactory.WEEK_SCHEDULE_DATES_SERVICE</b>,
+ * <b>ServiceFactory.USER_SERVICE</b>, <b>ServiceFactory.BOOKING_SERVICE</b>,
+ * <b>ServiceFactory.HALL_SERVICE</b>, <b>ServiceFactory.MOVIE_SERVICE</b>
+ *
+ * @author Hlushchenko Renata
+ * @see com.theatre.movie.service.MovieSessionService
+ * @see com.theatre.movie.service.WeekScheduleDatesService
+ * @see com.theatre.movie.service.UserService
+ * @see com.theatre.movie.service.BookingService
+ * @see com.theatre.movie.service.HallService
+ * @see com.theatre.movie.service.MovieService
+ */
 
 public class ServiceFactory {
-    private static final TransactionManager TRANSACTION_MANAGER = new TransactionManager(
-            DataSourceConnectionFactoryWithPool.getInstance()
-    );
-    private static final TransactionHandler TRANSACTION_HANDLER = new TransactionHandler(TRANSACTION_MANAGER);
 
     private static final MovieSessionService MOVIE_SESSION_SERVICE = new MovieSessionService(
             DaoFactory.getMovieSessionDao(),
             DaoFactory.getBookingDao(),
             DaoFactory.getHallDao(),
             DaoFactory.getMovieDao(),
-            TRANSACTION_HANDLER
+            TransactionHandlerFactory.getTransactionHandler()
     );
     private static final WeekScheduleDatesService WEEK_SCHEDULE_DATES_SERVICE = new WeekScheduleDatesService();
-    private static final UserService USER_SERVICE = new UserService(DaoFactory.getUserDao());
-    private static final BookingService BOOKING_SERVICE = new BookingService(DaoFactory.getBookingDao(), DaoFactory.getMovieSessionDao(), TRANSACTION_HANDLER);
-    private static final HallService HALL_SERVICE = new HallService(DaoFactory.getHallDao());
+    private static final UserService USER_SERVICE = new UserService(
+            DaoFactory.getUserDao());
+    private static final BookingService BOOKING_SERVICE = new BookingService(
+            DaoFactory.getBookingDao(),
+            DaoFactory.getMovieSessionDao(),
+            TransactionHandlerFactory.getTransactionHandler());
+    private static final HallService HALL_SERVICE = new HallService(
+            DaoFactory.getHallDao());
     private static final MovieService MOVIE_SERVICE = new MovieService(
             DaoFactory.getMovieDao(),
             DaoFactory.getBookingDao(),
             DaoFactory.getMovieSessionDao(),
-            TRANSACTION_HANDLER
+            TransactionHandlerFactory.getTransactionHandler()
     );
 
     public static MovieSessionService getMovieSessionService() {

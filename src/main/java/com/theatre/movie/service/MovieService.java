@@ -15,6 +15,19 @@ import org.apache.log4j.Logger;
 
 import java.util.List;
 
+/**
+ * The {@code MovieService} class provides methods for manage information about all  movies
+ * represented by {@link com.theatre.movie.entity.Movie} class
+ * Properties: <b>movieDao</b>, <b>bookingDao</b>,
+ * <b>movieSessionDao</b>, <b>transactionHandler</b>
+ *
+ * @author Hlushchenko Renata
+ * @see com.theatre.movie.dao.MovieDao
+ * @see com.theatre.movie.dao.BookingDao
+ * @see com.theatre.movie.dao.MovieSessionDao
+ * @see com.theatre.movie.persistence.transaction.TransactionHandler
+ */
+
 @AllArgsConstructor
 public class MovieService {
     private static final Logger LOG = Logger.getLogger(MovieService.class);
@@ -23,6 +36,12 @@ public class MovieService {
     private MovieSessionDao movieSessionDao;
     private TransactionHandler transactionHandler;
 
+    /**
+     * Return part of data about movie. Will be displaying
+     * for admin-user on admin-movies.jsp
+     *
+     * @return list of Dtos - stores part of information about all movies
+     */
     public List<MovieSimpleViewDto> getAllSimpleView() {
         LOG.info("Extract simple movie view data");
         return movieDao.getAllPreview();
@@ -37,6 +56,11 @@ public class MovieService {
         return new PaginatedData<>(movies, pagesCount, page);
     }
 
+    /**
+     * @param dto - is used for data transfer for create new movie request
+     *            represented by {@link com.theatre.movie.web.dto.CreateMovieRequestDto} class
+     * @return {@link com.theatre.movie.entity.Movie}
+     */
     public Movie createMovie(CreateMovieRequestDto dto) throws MovieCreationException {
         validateCreateMovieRequest(dto);
 
@@ -47,6 +71,13 @@ public class MovieService {
         return movieDao.create(movie);
     }
 
+    /**
+     * The method delete required movie and all movie sessions which mapped on it
+     *
+     * @param movieId - movie id, is used for search data in db
+     * @throws MovieRemovalException if some actual movie sessions which has mapped for
+     *                               required movie has booking
+     */
     public void deleteMovieAndSessions(int movieId) throws MovieRemovalException {
         transactionHandler.runInTransaction(() -> {
             boolean bookingExists = bookingDao.isBookingForMovieExist(movieId);
@@ -58,6 +89,11 @@ public class MovieService {
         });
     }
 
+    /**
+     * @param dto - is used for data transfer for create new movie request
+     *            represented by {@link com.theatre.movie.web.dto.CreateMovieRequestDto} class
+     * @throws MovieCreationException if the binding fields is <tt>null</tt>
+     */
     private void validateCreateMovieRequest(CreateMovieRequestDto dto) throws MovieCreationException {
         if (dto.getTitle() == null || dto.getDirectedBy() == null || dto.getDurationMinutes() == null) {
             throw new MovieCreationException("Required fields are empty");
