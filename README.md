@@ -20,8 +20,8 @@ Tема: "Система Кинотеатр"
 2. Install plugin for Lombok library in your IDEA
 3. Run create_schema.sql from src/main/resources/scripts folder
 4. Run insert_into_schema.sql from src/main/resources/script folder
-5. Correct the movie session dates in movie_session table with help of update_schema.sql file from src/main/resources/scripts folder.
-6. Update DB login and password in db.properties from src/main/resources folder
+5. Correct the movie session start-at column in movie_session table with help of update_schema.sql file from src/main/resources/scripts folder
+6. Update DB username and password in scr/main/webapp/META_INF/context.xml (and in db.properties from src/main/resources folder)
 7. Start mysql service with 'service mysql start' (http://www.mysqltutorial.org/mysql-adminsitration/start-mysql/)
 8. Go to project root ../JdbcMovieTheatreApp directory and run in terminal command 'mvn clean tomcat7:run' or 'mvn tomcat7:run -f pom.xml'
 9. Go to link localhost:8080/theatre and have fan 
