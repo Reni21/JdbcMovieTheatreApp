@@ -33,7 +33,7 @@
                                 <h2 class="booking_number">№${booking.bookingId}</h2>
                             </div>
                             <div class="movie-title">${booking.movieName}</div>
-                            <p class="movie-duration"><fmt:message key="tickets.duration" />: ${booking.movieDuration}min</p>
+                            <p class="movie-duration"><fmt:message key="tickets.duration" />: ${booking.movieDuration}<fmt:message key="schedule.min" /></p>
                             <h3>| <fmt:message key="tickets.date" />: ${booking.getFormattedDate()} &nbsp;&nbsp;&nbsp;&nbsp;| <fmt:message key="tickets.start" />: ${booking.getTimeView()} &nbsp;&nbsp;&nbsp;&nbsp;| <fmt:message key="tickets.hall" />: ${booking.hallName} &nbsp;&nbsp;&nbsp;&nbsp;| <fmt:message key="tickets.row" />: ${booking.row}&nbsp;&nbsp;&nbsp;&nbsp;| <fmt:message key="tickets.seat" />: ${booking.place}</h3>
                         </div>
                     </div>
