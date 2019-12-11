@@ -24,9 +24,10 @@ Tема: "Система Кинотеатр"
 6. Update DB login and password in db.properties from src/main/resources folder
 7. Start mysql service with 'service mysql start' (http://www.mysqltutorial.org/mysql-adminsitration/start-mysql/)
 8. Go to project root ../JdbcMovieTheatreApp directory and run in terminal command 'mvn clean tomcat7:run' or 'mvn tomcat7:run -f pom.xml'
-9. Go to link localhost:8080/theatre and have fan (use username:admin password:admin to check up admin functional)
-10. Use Ctrl+C command in command line to force quit and kill all app process
-11. Stop mysql service with 'service mysql stop' or 'mysql.service stop' (http://www.mysqltutorial.org/mysql-adminsitration/stop-mysql/)
+9. Go to link localhost:8080/theatre and have fan 
+10. Use username:admin password:admin to check up admin functional, username:test password:test for user functional (or create your own account)
+11. Use Ctrl+C command in command line to force quit and kill all app process
+12. Stop mysql service with 'service mysql stop' or 'mysql.service stop' (http://www.mysqltutorial.org/mysql-adminsitration/stop-mysql/)
 
 ## Доступный функционал
 
