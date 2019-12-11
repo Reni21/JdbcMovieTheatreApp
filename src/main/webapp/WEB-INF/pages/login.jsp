@@ -7,7 +7,7 @@
 
 <html lang="en">
     <head>
-        <title>Login Movies World</title>
+        <title><fmt:message key="login.label" /></title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
         <link rel="stylesheet" href="static/css/login-styles.css">
@@ -18,27 +18,22 @@
             <c:import url="main-menu.jsp"/>
             <!-- Second level menu -->
             <ul class="nav__second-lvl">
-                <li class="active"><a href="login">LOGIN</a></li>
-                <li><a href="sign-up">SIGN UP</a></li>
+                <li class="active"><a href="login"><fmt:message key="second.menu.login" /></a></li>
+                <li><a href="sign-up"><fmt:message key="second.menu.signup" /></a></li>
             </ul>
         </header>
         <main>
-            <!--
-            ===============================================================================================
-            Форма для заполения
-            ===============================================================================================
-        -->
             <div class="content-card">
                 <div class="content-card__container">
-                    <div class="page-title">Login</div>
+                    <div class="page-title"><fmt:message key="login.label" /></div>
                     <div class="form__container">
                         <form class="form__http-properties" name="loginForm" action="login" method="POST" onsubmit="return validateLoginForm()">
                             <!-- Fields -->
-                            <p class="field-title">Username*</p>
+                            <p class="field-title"><fmt:message key="login.username.title" />*</p>
                             <input type="text" name="username" class="input" placeholder="" maxlength="15" required=""/>
 
 
-                            <p class="field-title">Password*</p>
+                            <p class="field-title"><fmt:message key="login.password.title" />*</p>
                             <input type="password" name="password" class="input" placeholder="" maxlength="15" required=""/>
 
                             <c:if test="${not empty error}">
@@ -46,7 +41,7 @@
                             </c:if>
 
                             <!-- Button -->
-                            <button type="submit" class="signinbutton" value="login">Login</button>
+                            <button type="submit" class="signinbutton" value="login"><fmt:message key="login.label" /></button>
                         </form>
                     </div>
                 </div>

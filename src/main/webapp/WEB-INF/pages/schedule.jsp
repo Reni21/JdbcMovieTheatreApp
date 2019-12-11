@@ -10,7 +10,7 @@
 
 <html lang="en">
     <head>
-        <title>Movies schedule</title>
+        <title><fmt:message key="schedule.label" /></title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
         <link rel="stylesheet" type="text/css" href="static/css/schedule-styles.css">
@@ -34,7 +34,7 @@
         <main>
             <c:if test="${sessions.size() == 0}">
                 <h2 style="text-align: center; color: gray; padding-top: 150px;">
-                    No movies sessions in this date.<br> Check out it later.</h2>
+                    <fmt:message key="schedule.empty.msg.part.one" /><br> <fmt:message key="schedule.empty.msg.part.two" /></h2>
             </c:if>
             <c:forEach items="${sessions}" var="movie">
                 <div class="movie-card">

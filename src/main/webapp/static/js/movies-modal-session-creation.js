@@ -19,7 +19,7 @@ $('.openModalBtn').click(function () {
                 }
             });
             if (count === 0) {
-                var html = '<p style="text-align: center; margin-top: 150px; color: grey; font-weight: 600">All movies are already pined</p>';
+                var html = '<p style="text-align: center; margin-top: 150px; color: grey; font-weight: 600">' + msgDictionary.get('empty') + '</p>';
                 $('#selectedMovies').append($(html));
             }
         })

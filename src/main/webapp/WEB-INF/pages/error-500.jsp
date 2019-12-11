@@ -9,7 +9,7 @@
 
 <html lang="en">
     <head>
-        <title>Error</title>
+        <title><fmt:message key="server.label" /></title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
         <link rel="stylesheet" href="static/css/login-styles.css">
@@ -22,13 +22,13 @@
             <div style="z-index: 1;">
                 <div style="margin: 0 auto;width: 960px;height: auto;position: relative;">
                     <div class="page-title" style="font-size: 125px;margin-bottom: 35px">500</div>
-                    <div class="page-title">SORRY! Something went wrong</div>
+                    <div class="page-title"><fmt:message key="error.server.title" /></div>
                     <div class="form__container">
                         <p class="error-msg" style="font-size: 18px;font-weight: 600;color: grey;text-align: center;">
-                            Error message for 500 page is here
+                            <fmt:message key="error.server.msg" />
                         </p>
                         <a href="">
-                            <button class="signinbutton">Home page</button>
+                            <button class="signinbutton"><fmt:message key="error.button" /></button>
                         </a>
                     </div>
                 </div>

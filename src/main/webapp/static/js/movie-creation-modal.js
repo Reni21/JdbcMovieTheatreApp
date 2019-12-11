@@ -113,9 +113,9 @@ function createAndDisplayNewMovie(form, event) {
             '</div>' +
             '<div class="movie-description">' +
             '<div class="movie-title">' + movie.title + '</div>' +
-            '<p class="movie-duration">' + 'Duration:' + movie.durationMinutes + 'min</p>' +
+            '<p class="movie-duration">' + msgDictionary.get('duration') + ':' + movie.durationMinutes + msgDictionary.get('min') + '</p>' +
             '<a class="tag" href="movie?id=' + movie.movieId + '" onclick="deleteMovieHandler(' + movie.movieId + ')"' +
-            ' style="border-radius: 25px;padding: 10px 25px;font-size: 18px;line-height: 28px;float: right;">Remove movie</a>' +
+            ' style="border-radius: 25px;padding: 10px 25px;font-size: 18px;line-height: 28px;float: right;">' + msgDictionary.get('remove') + '</a>' +
             '</div>' +
             '</div>' +
             '</div>';

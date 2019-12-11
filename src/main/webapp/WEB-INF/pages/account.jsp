@@ -8,7 +8,7 @@
 
 <html lang="en">
     <head>
-        <title>My account</title>
+        <title><fmt:message key="account.label" /></title>
         <c:import url="head-data.jsp"/>
         <!-- Unique css -->
         <link rel="stylesheet" href="static/css/login-styles.css">
@@ -22,7 +22,7 @@
         <main>
             <div class="content-card">
                 <div class="content-card__container">
-                    <div class="page-title">Hello ${sessionScope['user'].username}</div>
+                    <div class="page-title"><fmt:message key="account.hello" /> ${sessionScope['user'].username}</div>
                     <div class="form__container">
                     </div>
                 </div>

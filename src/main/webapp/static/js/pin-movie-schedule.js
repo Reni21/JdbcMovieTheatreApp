@@ -17,22 +17,22 @@ function pinMovie(form, event, moviesToPin, submitFormHandler) {
             '<div class="movie-card">' +
             '<div class="movie-card__container" style="margin-bottom: 10px;">' +
             '<div class="movie-cover">' +
-            '<button class="btn delete" onclick="removePinHandler(' + value + ')">Remove movie</button>' +
+            '<button class="btn delete" onclick="removePinHandler(' + value + ')">' + msgDictionary.get('unpin') + '</button>' +
             '</div>' +
 
             '<div id="movie_' + value + '" class="movie-description">' +
             '<div class="movie-title">' + movie.title + '</div>' +
-            '<p class="movie-duration">Duration: ' + movie.duration + ' min</p>' +
+            '<p class="movie-duration">' + msgDictionary.get('duration') + ': ' + movie.duration + ' ' + msgDictionary.get('min') + '</p>' +
             '<form action="schedule?date=' + date + '"' +
             ' class="session-form" name="session-form" id="session-form_' + value + '" method="post">' +
             '<input id="movieId_' + value + '" type="hidden" name="movieId" value="' + value + '"/>' +
             '<input id="hours_' + value + '" class="session-field" type="number" name="hours"' +
-            ' placeholder="hh" min="9" max="22" style="padding: 8px 5px; margin-right: 4px;">' +
+            ' placeholder="' + msgDictionary.get('hh') + '" min="9" max="22" style="padding: 8px 5px; margin-right: 4px;">' +
             '<input id="minutes_' + value + '" class="session-field" type="number" name="minutes"' +
-            ' placeholder="mm" min="0" max="59" style="padding: 8px 5px; margin-right: 4px;">' +
+            ' placeholder="' + msgDictionary.get('mm') + '" min="0" max="59" style="padding: 8px 5px; margin-right: 4px;">' +
             '<input class="session-field" type="text" name="price"' +
-            ' placeholder="Price 0.0" style="padding: 8px 5px; margin-right: 4px;">' +
-            '<input type="submit" value="Add session" class="add">' +
+            ' placeholder="' + msgDictionary.get('price') + ' 0.0" style="padding: 8px 5px; margin-right: 4px;">' +
+            '<input type="submit" value="' + msgDictionary.get('session') + '" class="add">' +
             '</form>' +
             '</div>' +
             '</div>' +

@@ -9,7 +9,7 @@
 
 <html lang="en">
 <head>
-    <title>Movies schedule</title>
+    <title><fmt:message key="schedule.label" /></title>
     <c:import url="head-data.jsp"/>
     <!-- Unique css -->
     <link rel="stylesheet" type="text/css" href="static/css/schedule-admin-styles.css">
@@ -39,7 +39,7 @@
     <!-- - - - - - - - The Modal for movies - - - - - - - -->
     <div id="myModal" class="modal">
         <div class="content">
-            <div class="page-title">Login</div>
+            <div class="page-title"><fmt:message key="schedule.admin.modal.title" /></div>
             <!-- Modal content -->
             <div class="modal-content">
                 <form id="selectedMovies" method="post">
@@ -48,9 +48,9 @@
 
             <!-- Modal buttons -->
             <button id="btnCheckout" name="confirm" class="signinbutton" type="submit" form="selectedMovies">
-                Confirm
+                <fmt:message key="schedule.admin.modal.select" />
             </button>
-            <button class="close">Cancel and close</button>
+            <button class="close"><fmt:message key="schedule.admin.modal.close" /></button>
         </div>
     </div>
     <!-- - - - - - - - The Modal for movies - - - - - - - -->
@@ -66,10 +66,9 @@
                     <div class="movie-cover">
                         <!-- Delete pin movie button -->
                         <button class="btn delete" onclick="removePinHandler('${movie.movieId}')">
-                            Remove movie
+                            <fmt:message key="schedule.admin.unpin.movie" />
                         </button>
                     </div>
-
 
                     <div id="movie_${movie.movieId}" class="movie-description">
                         <div class="movie-title">${movie.title}</div>
@@ -105,9 +104,6 @@
 <script src="static/js/jquery/jquery.validate.min.js"></script>
 <script type="text/javascript" src="static/js/pin-movie-schedule.js"></script>
 <script type="text/javascript" src="static/js/movies-modal-session-creation.js"></script>
-
-
-
 <script type="text/javascript">
     var errorsDictionary = new Map([
         ["hoursRequired", "<fmt:message key='error.hours.required'/>"],
@@ -121,6 +117,16 @@
         ["priceRequired", "<fmt:message key='error.price.required'/>"],
         ["priceNumber", "<fmt:message key='error.price.number'/>"],
         ["priceMin", "<fmt:message key='error.price.min'/>"]
+    ]);
+    var msgDictionary = new Map([
+        ["duration", "<fmt:message key="schedule.duration"/>"],
+        ["min", "<fmt:message key="schedule.min"/>"],
+        ["mm", "<fmt:message key="admin.input.mm"/>"],
+        ["hh", "<fmt:message key="admin.input.hh"/>"],
+        ["price", "<fmt:message key="admin.input.price"/>"],
+        ["session", "<fmt:message key="admin.add.session"/>"],
+        ["empty", "<fmt:message key="admin.movies.modal.empty"/>"],
+        ["unpin", "<fmt:message key="schedule.admin.unpin.movie"/>"]
     ]);
 </script>
 </body>
